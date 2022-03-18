@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './qs-user-account.component.html',
   styleUrls: ['./qs-user-account.component.scss'],
 })
-export class QS_UserAccountComponent {
+export class UserAccountComponent {
   title = "qs-user-account";
   editAccount(){console.log("fields now open to edit");}
 }

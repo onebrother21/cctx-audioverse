@@ -6,6 +6,6 @@ import { Component,ViewEncapsulation } from '@angular/core';
   styleUrls: ['./qs-footer-two.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
-export class QS_FooterTwoComponent {
+export class FooterTwoComponent {
   title = "qs-footer-two";
 }

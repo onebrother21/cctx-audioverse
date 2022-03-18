@@ -1,28 +1,28 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { QS_SessionComment, QS_SessionRoomPreview } from '@qs-state';
-import { QS_SessionsCommentsService } from '../qs-messages-reply.service';
-import { QS_SessionsService } from '../qs-messages.service';
+import { SessionComment, SessionRoomPreview } from '@qs-state';
+import { SessionsCommentsService } from '../qs-messages-reply.service';
+import { SessionsService } from '../qs-messages.service';
 
 @Component({
   selector: 'qs-session-room',
   templateUrl: './qs-session-room.component.html',
   styleUrls: ['./qs-session-room.component.scss'],
 })
-export class QS_SessionRoomComponent {
+export class SessionRoomComponent {
   title = "qs-session-room";
   sessionId?:string|null;
-  room?:QS_SessionRoomPreview;
-  newComments:QS_SessionComment[] = [];
+  room?:SessionRoomPreview;
+  newComments:SessionComment[] = [];
   blank = {type:"comment",body:"",user:"Jackswift"};
   @ViewChild('videoPlayer') videoplayer:ElementRef = {} as ElementRef;
   toggleVideo(event:any) {this.videoplayer.nativeElement.play();}
   sessionChatForm:FormGroup;
   constructor(
     private route:ActivatedRoute,
-    private sessions:QS_SessionsService,
-    private comments:QS_SessionsCommentsService,
+    private sessions:SessionsService,
+    private comments:SessionsCommentsService,
     private fb:FormBuilder){
     this.sessionId = this.route.snapshot.paramMap.get('id');
     this.room = this.sessions.rooms.find(s => s.id == this.sessionId);

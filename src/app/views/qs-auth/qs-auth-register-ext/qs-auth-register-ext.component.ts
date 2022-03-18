@@ -7,14 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { minSelectedCheckboxes } from '@shared';
-import { QS_AuthService } from '../qs-auth.service';
+import { AuthService } from '../qs-auth.service';
 
 @Component({
   selector: 'qs-auth-register-ext',
   templateUrl: './qs-auth-register-ext.component.html',
   styleUrls: ['./qs-auth-register-ext.component.scss'],
 })
-export class QS_AuthRegisterExtComponent {
+export class AuthRegisterExtComponent {
   title = "qs-auth-register-ext";
   registerForm:FormGroup;
   loading = false;
@@ -22,7 +22,7 @@ export class QS_AuthRegisterExtComponent {
   tastes = ["Country","Jazz","HipHop & Rap","Pop","Rock","Indie"];
   roles = ["Producer","Engineer","Writer","Vocalist","Rapper","Instrumentalist","Industry Rep","Fan"];
   uses = ["Create new music","Browse new music","Learn from others","Socialize with others"];
-  constructor(private auth:QS_AuthService,private fb:FormBuilder){
+  constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading.subscribe(loading => this.loading = loading);
     this.registerForm = this.fb.group({
       action:['register-ext',Validators.required],

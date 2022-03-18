@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
-import { QS_Ad, QS_Room } from '@qs-state';
-import { QS_RoomsService } from '../qs-rooms.service';
+import { Ad, Room } from '@qs-state';
+import { RoomsService } from '../qs-rooms.service';
 
 @Component({
   selector: 'qs-room-previews',
   templateUrl: './qs-room-previews.component.html',
   styleUrls: ['./qs-room-previews.component.scss'],
 })
-export class QS_RoomPreviewsComponent {
+export class RoomPreviewsComponent {
   title = "qs-room-previews";
-  previews:QS_Room[] = this.rooms.previews;
-  ads:QS_Ad[] = this.rooms.ads;
+  previews:Room[] = this.rooms.previews;
+  ads:Ad[] = this.rooms.ads;
   previewCt:number = 12;
   adIds:number[] = [];
   previewIds:number[] = [];
-  constructor(private rooms:QS_RoomsService){}
+  constructor(private rooms:RoomsService){}
   ngOnInit(){this.compileAds();}
   compileAds(){
     for(let i=0,l=11;i<l;i++){

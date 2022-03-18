@@ -1,27 +1,27 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { QS_RoomPreviewComponent } from './qs-room-preview.component';
+import { RoomPreviewComponent } from './qs-room-preview.component';
 
-describe('QS_RoomPreviewComponent', () => {
+describe('RoomPreviewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
       declarations: [
-        QS_RoomPreviewComponent
+        RoomPreviewComponent
       ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(QS_RoomPreviewComponent);
+    const fixture = TestBed.createComponent(RoomPreviewComponent);
     const comp = fixture.componentInstance;
     expect(comp).toBeTruthy();
   });
 
   it(`should have as title 'qs-room-preview'`, () => {
-    const fixture = TestBed.createComponent(QS_RoomPreviewComponent);
+    const fixture = TestBed.createComponent(RoomPreviewComponent);
     const comp = fixture.componentInstance;
     expect(comp.title).toEqual('qs-room-preview');
   });

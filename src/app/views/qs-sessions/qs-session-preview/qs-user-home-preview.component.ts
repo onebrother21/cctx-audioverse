@@ -1,5 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
-import { QS_SessionRoomPreview } from '@qs-state';
+import { SessionRoomPreview } from '@qs-state';
 
 
 
@@ -8,9 +8,9 @@ import { QS_SessionRoomPreview } from '@qs-state';
   templateUrl: './qs-user-home-preview.component.html',
   styleUrls: ['./qs-user-home-preview.component.scss'],
 })
-export class QS_UserHomePreviewComponent {
+export class UserHomePreviewComponent {
   title = "qs-user-home-preview";
-  @Input() preview:QS_SessionRoomPreview = {
+  @Input() preview:SessionRoomPreview = {
     id:"00",
     name:"",
     img:"",

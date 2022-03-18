@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import { AppComponent } from './qs.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'cctx-apps'`, () => {
+  it(`should have as title 'qs'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('cctx-apps');
+    expect(comp.title).toEqual('qs');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('cctx-apps app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('qs app is running!');
   });
 });

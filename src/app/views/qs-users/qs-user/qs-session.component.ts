@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './qs-session.component.html',
   styleUrls: ['./qs-session.component.scss'],
 })
-export class QS_SessionComponent {
+export class SessionComponent {
   title = "qs-session";
 }

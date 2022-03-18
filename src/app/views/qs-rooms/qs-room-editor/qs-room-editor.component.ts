@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { QS_RoomsService } from '../qs-rooms.service';
+import { RoomsService } from '../qs-rooms.service';
 
 @Component({
   selector: 'qs-room-editor',
   templateUrl: './qs-room-editor.component.html',
   styleUrls: ['./qs-room-editor.component.scss'],
 })
-export class QS_RoomEditorComponent {
+export class RoomEditorComponent {
   title = "qs-room-editor";
   roomEditorForm:FormGroup;
   loading:boolean = false;
-  constructor(private rooms:QS_RoomsService,private fb:FormBuilder){
+  constructor(private rooms:RoomsService,private fb:FormBuilder){
     this.rooms.loading.subscribe(loading => this.loading = loading);
     this.roomEditorForm = this.fb.group({
       //action:['roomEditor',Validators.required],

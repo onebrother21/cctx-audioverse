@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QS_HomeComponent } from './qs-home';
+import { HomeComponent } from './qs-home';
 
 const routes: Routes = [
-  {path:"",component:QS_HomeComponent},
+  {path:"",component:HomeComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class QS_HomeRoutingModule { }
+export class HomeRoutingModule { }
 export const COMPONENTS = [
-  QS_HomeComponent,
+  HomeComponent,
 ];

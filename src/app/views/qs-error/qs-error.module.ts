@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { COMPONENTS ,QS_ErrorRoutingModule } from './qs-error-routing.module';
-import { QS_ErrorService } from './qs-error.service';
+import { COMPONENTS ,ErrorRoutingModule } from './qs-error-routing.module';
+import { ErrorService } from './qs-error.service';
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    QS_ErrorRoutingModule
+    ErrorRoutingModule
   ],
   exports:[...COMPONENTS],
-  providers:[QS_ErrorService],
+  providers:[ErrorService],
 })
-export class QS_ErrorModule { }
+export class ErrorModule { }

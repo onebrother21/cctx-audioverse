@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './qs-header.component.html',
   styleUrls: ['./qs-header.component.scss'],
 })
-export class QS_HeaderComponent {
+export class HeaderComponent {
   title = "qs-header";
 }

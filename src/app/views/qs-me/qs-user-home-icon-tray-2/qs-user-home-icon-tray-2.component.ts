@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './qs-user-home-icon-tray-2.component.html',
   styleUrls: ['./qs-user-home-icon-tray-2.component.scss'],
 })
-export class QS_UserHomeIconTrayTwoComponent {
+export class UserHomeIconTrayTwoComponent {
   title = "qs-user-home-icon-tray-2";
 }

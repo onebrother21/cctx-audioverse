@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { QS_AuthService } from '../qs-auth.service';
+import { AuthService } from '../qs-auth.service';
 
 @Component({
   selector: 'qs-auth-update-pin',
   templateUrl: './qs-auth-update-pin.component.html',
   styleUrls: ['./qs-auth-update-pin.component.scss'],
 })
-export class QS_AuthUpdatePinComponent {
+export class AuthUpdatePinComponent {
   title = "qs-auth-update-pin";
   greeting = "Create A Pin";
   confirm:string = "";
@@ -16,7 +16,7 @@ export class QS_AuthUpdatePinComponent {
     masked:true
   };
   loading:boolean = false;
-  constructor(private auth:QS_AuthService){
+  constructor(private auth:AuthService){
     this.auth.loading.subscribe(loading => this.loading = loading);
   }
   submitPin(pin:string){

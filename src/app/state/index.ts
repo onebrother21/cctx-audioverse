@@ -31,8 +31,10 @@ export const metaReducers:MetaReducer<AppState>[] = !env.prod?[storeFreeze]:[];
 })
 
 export class AppStateModule { }
-export * from "./actions";
 export * from "./models";
 export * from "./states";
-export * from "./services";
 export * from "./selectors";
+export * from "./actions";
+export * from "./effects";
+export * from "./services";
+export * from "./reducers";

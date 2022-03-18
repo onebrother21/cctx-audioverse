@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 import {
-  QS_Session,
-  QS_SessionRoomPreview,
+  Session,
+  SessionRoomPreview,
 } from "@qs-state";
 
 @Injectable()
-export class QS_SessionsService {
-  items:QS_Session[] = [
+export class SessionsService {
+  items:Session[] = [
     {
       id:"01",
       name:"Creamy Crack",
@@ -59,7 +59,7 @@ export class QS_SessionsService {
       members:[{name:"Jackswift"}]
     },*/
   ];
-  rooms:QS_SessionRoomPreview[] = [
+  rooms:SessionRoomPreview[] = [
     {
       id:'01',
       name:"smokebaby",

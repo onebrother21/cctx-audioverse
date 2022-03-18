@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { QS_Icon } from '@qs-state';
+import { Icon } from '@qs-state';
 import { Subject } from "rxjs";
 
 @Injectable()
@@ -7,7 +7,7 @@ export class LayoutService {
   private servicesAction = new Subject<any>();
   servicesAction$ = this.servicesAction.asObservable();
   send(change:any){this.servicesAction.next(change);}
-  menu:QS_Icon[] = [
+  menu:Icon[] = [
     {
       label:"FAQ",
       text:"Got a question? Check here first.",

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { QS_SharedModule } from '@qs-shared';
-import { COMPONENTS ,QS_ServicesRoutingModule } from './qs-services-routing.module';
-import { QS_ServicesService } from './qs-services.service';
+import { SharedModule } from '@qs-shared';
+import { COMPONENTS ,ServicesRoutingModule } from './qs-services-routing.module';
+import { ServicesService } from './qs-services.service';
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    QS_ServicesRoutingModule,
-    QS_SharedModule,
+    ServicesRoutingModule,
+    SharedModule,
   ],
   exports:[...COMPONENTS],
-  providers:[QS_ServicesService],
+  providers:[ServicesService],
 })
-export class QS_ServicesModule { }
+export class ServicesModule { }

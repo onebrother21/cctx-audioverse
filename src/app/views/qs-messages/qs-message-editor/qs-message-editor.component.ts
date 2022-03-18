@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { QS_SessionComment } from '@qs-state';
-import { QS_SessionsCommentsService } from '../qs-messages-reply.service';
-import { QS_SessionsService } from '../qs-messages.service';
+import { SessionComment } from '@qs-state';
+import { SessionsCommentsService } from '../qs-messages-reply.service';
+import { SessionsService } from '../qs-messages.service';
 
 @Component({
   selector: 'qs-session-editor',
   templateUrl: './qs-session-editor.component.html',
   styleUrls: ['./qs-session-editor.component.scss'],
 })
-export class QS_SessionEditorComponent {
+export class SessionEditorComponent {
   title = "qs-session-editor";
-  newComments:QS_SessionComment[] = [];
+  newComments:SessionComment[] = [];
   blank = {type:"comment",body:"",user:"Jackswift"};
   sessionEditorForm:FormGroup;
   constructor(
-    private sessions:QS_SessionsService,
-    private comments:QS_SessionsCommentsService,
+    private sessions:SessionsService,
+    private comments:SessionsCommentsService,
     private fb:FormBuilder){
     this.comments.newComment$.subscribe(comment => {
       this.newComments.push(comment);

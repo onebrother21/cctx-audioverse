@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './qs-user-home.component.html',
   styleUrls: ['./qs-user-home.component.scss'],
 })
-export class QS_UserHomeComponent {
+export class UserHomeComponent {
   title = "qs-user-home";
 }

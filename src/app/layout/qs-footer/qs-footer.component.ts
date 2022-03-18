@@ -6,7 +6,7 @@ import { Component,ViewEncapsulation } from '@angular/core';
   styleUrls: ['./qs-footer.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
-export class QS_FooterComponent {
+export class FooterComponent {
   title = "qs-footer";
   footer = {
     text:

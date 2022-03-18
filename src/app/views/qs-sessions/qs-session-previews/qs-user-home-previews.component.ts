@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
-import { QS_Ad, QS_SessionRoomPreview } from '@qs-state';
-import { QS_UserService } from '../../qs-me/qs-user.service';
+import { Ad, SessionRoomPreview } from '@qs-state';
+import { UserService } from '../../qs-me/qs-user.service';
 
 @Component({
   selector: 'qs-user-home-previews',
   templateUrl: './qs-user-home-previews.component.html',
   styleUrls: ['./qs-user-home-previews.component.scss'],
 })
-export class QS_UserHomePreviewsComponent {
+export class UserHomePreviewsComponent {
   title = "qs-user-home-previews";
-  previews:QS_SessionRoomPreview[] = this.user.previews;
-  ads:QS_Ad[] = this.user.ads;
+  previews:SessionRoomPreview[] = this.user.previews;
+  ads:Ad[] = this.user.ads;
   previewCt:number = 12;
   adIds:number[] = [];
   previewIds:number[] = [];
-  constructor(private user:QS_UserService){}
+  constructor(private user:UserService){}
   ngOnInit(){this.compileAds();}
   compileAds(){
     for(let i=0,l=11;i<l;i++){

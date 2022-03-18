@@ -1,4 +1,3 @@
-import { Params, Data } from "@angular/router";
 export type Constructor<T> = new (...args:any[]) => T;
 export type Keys<T> = keyof T;
 export type Method<T> = (...params:any[]) => T;
@@ -56,19 +55,7 @@ export type ValueMethods = Methods<KnownType>;
 export type MiscInfo = Values;
 export type EnumInfo<K extends string> = EnumMap<K,Values>;
 export type Status<K> = {name:K;time:Date;info:MiscInfo;};
-export type NavItem = Partial<{
-  link:string;
-  label:string;
-  title:string;
-  class:string;
-  icon:string;
-  img:string;
-  menu:NavItem[];
-}>;
-export type AppRoute = {url:string;} & Partial<{
-  query:Params;
-  params:Params;
-  data:Data;}>;
+
 export interface LocaleDateOpts {
   weekday?: string;
   month?: string;

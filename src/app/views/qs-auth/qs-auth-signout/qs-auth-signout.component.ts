@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './qs-auth-signout.component.html',
   styleUrls: ['./qs-auth-signout.component.scss'],
 })
-export class QS_AuthSignOutComponent {
+export class AuthSignOutComponent {
   title = "qs-auth-signout";
 }

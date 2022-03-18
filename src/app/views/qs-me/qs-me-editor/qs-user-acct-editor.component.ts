@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { QS_UserService } from '../qs-user.service';
+import { UserService } from '../qs-user.service';
 
 @Component({
   selector: 'qs-user-acct-editor',
@@ -8,11 +8,11 @@ import { QS_UserService } from '../qs-user.service';
   styleUrls: ['./qs-user-acct-editor.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
-export class QS_UserAccountEditorComponent {
+export class UserAccountEditorComponent {
   title = "qs-user-acct-editor";
   updateAcctForm:FormGroup;
   loading:boolean = false;
-  constructor(private user:QS_UserService,private fb:FormBuilder){
+  constructor(private user:UserService,private fb:FormBuilder){
     this.user.loading.subscribe(loading => this.loading = loading);
     this.updateAcctForm = this.fb.group({
       action:['update',Validators.required],

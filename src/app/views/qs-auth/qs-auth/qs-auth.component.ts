@@ -6,6 +6,6 @@ import { Component } from "@angular/core";
   templateUrl: './qs-auth.component.html',
   styleUrls: ['./qs-auth.component.scss'],
 })
-export class QS_AuthComponent {
+export class AuthComponent {
   title = "qs-auth";
 }

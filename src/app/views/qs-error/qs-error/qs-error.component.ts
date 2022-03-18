@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './qs-error.component.html',
   styleUrls: ['./qs-error.component.scss'],
 })
-export class QS_ErrorComponent {
+export class ErrorComponent {
   title = "qs-error";
   errors = {
     notFound:"Looks like you're a bit lost...click here to go back",

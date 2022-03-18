@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import {
-  QS_SessionComment,
+  SessionComment,
 } from "@qs-state";
 import { Observable, Subject } from "rxjs";
 
 @Injectable()
-export class QS_SessionsCommentsService {
-  private newComment = new Subject<QS_SessionComment>();
+export class SessionsCommentsService {
+  private newComment = new Subject<SessionComment>();
   newComment$ = this.newComment.asObservable();
   msgs:string[] = [
     "Ten random sentences",
@@ -26,7 +26,7 @@ export class QS_SessionsCommentsService {
     "DavidDavidDavid","Brenda","Felicia","Linda","Leticia",
     "Dawn","Arnez","Yolanda","Wanda"
   ];
-  send(o:QS_SessionComment){
+  send(o:SessionComment){
     this.newComment.next(o);
     //this.app.do(Navigation.go(o));
   }
@@ -38,7 +38,7 @@ export class QS_SessionsCommentsService {
     const rndTime = this.randomIntFromInterval(0,times.length - 1);
     const comment = {user:this.authors[rndAuthor],body:this.msgs[rndMsg]};
     const delay = times[rndTime];
-    this.newComment.next(comment as QS_SessionComment);
+    this.newComment.next(comment as SessionComment);
     setTimeout(() => this.addRandomComment(),delay);
   }
 }

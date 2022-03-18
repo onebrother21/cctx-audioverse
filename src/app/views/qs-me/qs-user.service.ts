@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 import {
-  QS_Icon,
-  QS_Ad,
-  QS_SessionRoomPreview,
+  Icon,
+  Ad,
+  SessionRoomPreview,
   ContactUsActions as ContactUs,ContactUsMsg,contactUsMsg$,
   NavigationActions as Navigation,
   userLoading$,
@@ -11,8 +11,8 @@ import {
 import { Observable } from "rxjs";
 
 @Injectable()
-export class QS_UserService {
-  menu:QS_Icon[] = [
+export class UserService {
+  menu:Icon[] = [
     {
       label:"Launch Session",
       text:"Let's get to it!",
@@ -35,7 +35,7 @@ export class QS_UserService {
       type:"lock",
     },
   ];
-  previews:QS_SessionRoomPreview[] = [
+  previews:SessionRoomPreview[] = [
     {
       id:'01',
       name:"smokebaby",
@@ -98,7 +98,7 @@ export class QS_UserService {
       vid:"20220304_225731.mp4",
     },
   ];
-  ads:QS_Ad[] = [
+  ads:Ad[] = [
     {
       type:"ad",
       header:"I am an ad, please accidentally click me.",

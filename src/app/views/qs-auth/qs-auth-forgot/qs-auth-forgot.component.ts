@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { QS_AuthService } from '../qs-auth.service';
+import { AuthService } from '../qs-auth.service';
 
 @Component({
   selector: 'qs-auth-forgot',
@@ -8,11 +8,11 @@ import { QS_AuthService } from '../qs-auth.service';
   styleUrls: ['./qs-auth-forgot.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
-export class QS_AuthForgotComponent {
+export class AuthForgotComponent {
   title = "qs-auth-forgot";
   forgotForm:FormGroup;
   loading:boolean = false;
-  constructor(private auth:QS_AuthService,private fb:FormBuilder){
+  constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading.subscribe(loading => this.loading = loading);
     this.forgotForm = this.fb.group({
       type:['forgot',Validators.required],

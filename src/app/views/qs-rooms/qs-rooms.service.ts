@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 import {
-  QS_Room,
+  Room,
 } from "@qs-state";
 
 @Injectable()
-export class QS_RoomsService {
-  items:QS_Room[] = [
+export class RoomsService {
+  items:Room[] = [
     {
       id:"01",
       name:"Creamy Crack",
@@ -58,7 +58,7 @@ export class QS_RoomsService {
       members:[{name:"Jackswift"}]
     },*/
   ];
-  rooms:QS_Room[] = [
+  rooms:Room[] = [
     {
       id:'01',
       name:"smokebaby",

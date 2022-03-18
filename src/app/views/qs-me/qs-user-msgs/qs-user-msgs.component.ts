@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './qs-user-msgs.component.html',
   styleUrls: ['./qs-user-msgs.component.scss'],
 })
-export class QS_UserMessagesComponent {
+export class UserMessagesComponent {
   title = "qs-user-msgs";
 }

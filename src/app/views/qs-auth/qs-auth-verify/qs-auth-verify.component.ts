@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { QS_AuthService } from '../qs-auth.service';
+import { AuthService } from '../qs-auth.service';
 
 @Component({
   selector: 'qs-auth-verify',
   templateUrl: './qs-auth-verify.component.html',
   styleUrls: ['./qs-auth-verify.component.scss'],
 })
-export class QS_AuthVerifyComponent {
+export class AuthVerifyComponent {
   title = "qs-auth-verify";
   verifyForm:FormGroup;
   loading:boolean = false;
-  constructor(private auth:QS_AuthService,private fb:FormBuilder){
+  constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading.subscribe(loading => this.loading = loading);
     this.verifyForm = this.fb.group({
       action:['verify',Validators.required],

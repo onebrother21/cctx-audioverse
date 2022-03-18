@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { QS_Room } from '@qs-state';
-import { QS_RoomsService } from '../qs-rooms.service';
+import { Room } from '@qs-state';
+import { RoomsService } from '../qs-rooms.service';
 
 @Component({
   selector: 'qs-room-list',
   templateUrl: './qs-room-list.component.html',
   styleUrls: ['./qs-room-list.component.scss'],
 })
-export class QS_RoomListComponent {
+export class RoomListComponent {
   title = "qs-room-list";
-  items:QS_Room[] = this.rooms.items;
-  constructor(private rooms:QS_RoomsService){}
-  selectItem(item:QS_Room){console.log(item);}
+  items:Room[] = this.rooms.items;
+  constructor(private rooms:RoomsService){}
+  selectItem(item:Room){console.log(item);}
 }

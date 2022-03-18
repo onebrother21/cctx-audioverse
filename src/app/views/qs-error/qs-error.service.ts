@@ -2,6 +2,6 @@ import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 
 @Injectable()
-export class QS_ErrorService {
+export class ErrorService {
   constructor(private app:AppService){}
 }

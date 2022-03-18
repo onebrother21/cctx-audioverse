@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 import {
-  QS_AuthenticationActions as AUTH,
+  AuthenticationActions as AUTH,
   authLoading$
 } from "@qs-state";
 import { Observable } from "rxjs";
 
 @Injectable()
-export class QS_AuthService {
+export class AuthService {
   loading:Observable<boolean> = new Observable();
   constructor(private app:AppService){
     this.loading = this.app.select(authLoading$);

@@ -1,5 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
-import { QS_Room } from '@qs-state';
+import { Room } from '@qs-state';
 
 
 
@@ -8,9 +8,9 @@ import { QS_Room } from '@qs-state';
   templateUrl: './qs-room-preview.component.html',
   styleUrls: ['./qs-room-preview.component.scss'],
 })
-export class QS_RoomPreviewComponent {
+export class RoomPreviewComponent {
   title = "qs-room-preview";
-  @Input() preview:QS_Room = {
+  @Input() preview:Room = {
     id:"00",
     name:"",
     img:"",

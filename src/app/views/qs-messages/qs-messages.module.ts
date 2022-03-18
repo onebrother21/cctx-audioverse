@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { QS_SharedModule } from '@qs-shared';
-import { QS_SessionsCommentsService } from './qs-messages-reply.service';
-import { COMPONENTS ,QS_SessionsRoutingModule } from './qs-messages-routing.module';
-import { QS_SessionsService } from './qs-messages.service';
+import { SharedModule } from '@qs-shared';
+import { SessionsCommentsService } from './qs-messages-reply.service';
+import { COMPONENTS ,SessionsRoutingModule } from './qs-messages-routing.module';
+import { SessionsService } from './qs-messages.service';
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    QS_SessionsRoutingModule,
-    QS_SharedModule,
+    SessionsRoutingModule,
+    SharedModule,
   ],
   exports:[...COMPONENTS],
-  providers:[QS_SessionsService,QS_SessionsCommentsService],
+  providers:[SessionsService,SessionsCommentsService],
 })
-export class QS_SessionsModule { }
+export class SessionsModule { }

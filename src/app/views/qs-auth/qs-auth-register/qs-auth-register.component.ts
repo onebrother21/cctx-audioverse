@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { QS_AuthService } from '../qs-auth.service';
+import { AuthService } from '../qs-auth.service';
 
 @Component({
   selector: 'qs-auth-register',
@@ -8,11 +8,11 @@ import { QS_AuthService } from '../qs-auth.service';
   styleUrls: ['./qs-auth-register.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
-export class QS_AuthRegisterComponent {
+export class AuthRegisterComponent {
   title = "qs-auth-register";
   registerForm:FormGroup;
   loading:boolean = false;
-  constructor(private auth:QS_AuthService,private fb:FormBuilder){
+  constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading.subscribe(loading => this.loading = loading);
     this.registerForm = this.fb.group({
       action:['register',Validators.required],

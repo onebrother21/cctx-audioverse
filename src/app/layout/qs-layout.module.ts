@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { QS_SharedModule } from '@qs-shared';
-import { COMPONENTS,QS_LayoutRoutingModule } from "./qs-layout-routing.module";
+import { SharedModule } from '@qs-shared';
+import { COMPONENTS,LayoutRoutingModule } from "./qs-layout-routing.module";
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    QS_SharedModule,
-    QS_LayoutRoutingModule,
+    SharedModule,
+    LayoutRoutingModule,
   ],
   exports:[...COMPONENTS],
 })
 
-export class QS_LayoutModule { }
+export class LayoutModule { }
