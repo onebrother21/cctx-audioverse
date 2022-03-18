@@ -6,7 +6,6 @@ import { COMPONENTS,LayoutRoutingModule } from "./layout-routing.module";
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    SharedModule,
     LayoutRoutingModule,
   ],
   exports:[...COMPONENTS],
