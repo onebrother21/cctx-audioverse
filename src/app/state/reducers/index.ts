@@ -1,6 +1,6 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { routerReducer } from "@ngrx/router-store";
 import { AppState } from "../states";
+import { routerReducer } from "@ngrx/router-store";
 import { LayoutReducer } from "./layout.reducer";
 import { NavigationReducer } from "./navigation.reducer";
 import { ContactUsReducer } from "./contact-us.reducer";
@@ -19,10 +19,10 @@ export const REDUCERS = {
   auth:AuthenticationReducer,
   me:MeReducer,
   //uploads:UploadsReducers,
-  //users:UsersReducer,
-  //sessions:SessionsReducer,
-  //rooms:RoomsReducer,
-  //msgs:ChatMessagesReducer,
-  //contactUs:ContactUsReducer,
-  //tasks:TasksReducer,
+  users:UsersReducer,
+  sessions:SessionsReducer,
+  rooms:RoomsReducer,
+  msgs:ChatMessagesReducer,
+  contactUs:ContactUsReducer,
+  tasks:TasksReducer,
 } as ActionReducerMap<AppState>;

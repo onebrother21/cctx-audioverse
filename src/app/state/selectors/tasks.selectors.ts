@@ -1,7 +1,7 @@
-import {createSelector} from "@ngrx/store";
-import {qs$} from "./app.selectors";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
+import { TasksState } from "../states";
 
-export const tasksState$ = createSelector(qs$,s => s.tasks);
+export const tasksState$ = createFeatureSelector<TasksState>("tasks");
 export const tasks$ = createSelector(tasksState$,s => s.items);
 export const selectedTask$ = createSelector(tasksState$,s => s.selected);
 export const tasksLoading$ = createSelector(tasksState$,s => s.loading);

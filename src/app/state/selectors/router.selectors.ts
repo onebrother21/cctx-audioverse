@@ -1,4 +1,4 @@
-import {createFeatureSelector,createSelector} from "@ngrx/store";
+import {createSelector} from "@ngrx/store";
 import {AppState} from "../states";
 
 export const router$ = (s:AppState) => s.router;

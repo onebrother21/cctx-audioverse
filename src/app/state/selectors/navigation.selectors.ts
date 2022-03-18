@@ -1,7 +1,7 @@
-import {createSelector} from "@ngrx/store";
-import {qs$} from "./app.selectors";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
+import { NavigationState } from "../states";
 
-export const navigation$ = createSelector(qs$,s => s.navigation);
+export const navigation$ = createFeatureSelector<NavigationState>("navigation");
 export const navigationLoading$ = createSelector(navigation$,s => s.loading);
 export const navigationErr$ = createSelector(navigation$,s => s.error);
 export const pageTitle$ = createSelector(navigation$,s => s.page);

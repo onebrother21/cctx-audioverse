@@ -1,7 +1,7 @@
-import {createSelector} from "@ngrx/store";
-import {qs$} from "./app.selectors";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
+import { LayoutState } from "../states";
 
-export const layout$ = createSelector(qs$,s => s.layout);
+export const layout$ = createFeatureSelector<LayoutState>("layout");
 export const layoutLoading$ = createSelector(layout$,s => s.loading);
 export const layoutErr$ = createSelector(layout$,s => s.error);
 

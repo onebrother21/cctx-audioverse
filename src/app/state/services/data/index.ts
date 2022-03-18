@@ -2,7 +2,7 @@ export * from "./layout.service";
 export * from "./navigation.service";
 export * from "./auth.service";
 export * from "./me.service";
-//export * from "./uploads.service";
+export * from "./uploads.service";
 export * from "./users.service";
 export * from "./sessions.service";
 export * from "./rooms.service";

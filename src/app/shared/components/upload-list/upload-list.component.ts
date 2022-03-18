@@ -12,7 +12,7 @@ export class UploadListComponent implements OnInit {
   constructor(private uploadService:UploadService) { }
   ngOnInit(): void {
     this.uploadService.getFiles(6).snapshotChanges().pipe(
-      map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+      map(changes => changes.map(c => ({key:c.payload.key,...c.payload.val()}))))
       .subscribe(fileUploads => this.fileUploads = fileUploads);
   }
 }

@@ -11,26 +11,33 @@ import { Observable } from "rxjs";
 export class MeService {
   menu:Icon[] = [
     {
-      label:"Launch Session",
-      text:"Let's get to it!",
-      url:"/qs/sessions/new",
-      type:`code`,
+      label:"Create New",
+      text:"Types: Session, Room, Forum, Survey",
+      url:"/sessions/new",
+      type:`fa`,
+      class:"fa fa-plus"
     },{
-      label:"Recent Sessions",
+      label:"Recent Files",
       text:`Creamy Crack,\n Project Anywhere,\n 8 more`,
-      url:"/qs/sessions",
+      url:"/sessions",
       type:`stack`,
     },{
       label:"Me Community",
       text:"See what's going on (eyeballs)...",
-      url:"/qs/me/hm2",
+      url:"/me/hm2",
       type:"users",
     },{
       label:"Account and Settings",
       text:"View or update my account details.",
-      url:"/qs/me/acct",
+      url:"/me/acct",
       type:"lock",
-    },
+    },{
+      label:"Help & Support",
+      text:"We're here to help",
+      url:"/services",
+      type:`fa`,
+      class:"fa fa-question"
+    }
   ];
   rooms:Room[] = [
     {
