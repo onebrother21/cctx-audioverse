@@ -16,7 +16,7 @@ export class LayoutService {
       class:"fa fa-question-circle"
     },{
       label:"Live Chat",
-      text:"Chat with our support team now...",
+      text:"Chat with our support team now.",
       url:"/qs/services/chat",
       type:"fa",
       class:"fa fa-comment-dots"
