@@ -1,4 +1,4 @@
-import { CommonState,initializeCommonState } from "@state";
+import { CommonState,initializeCommonState } from "./common.state";
 import { User } from "../models";
 
 export interface MeState extends CommonState,Partial<User>{}

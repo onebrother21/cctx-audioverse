@@ -1,12 +1,11 @@
-import { CommonState,initializeCommonState,Entity,AppRoute } from "@state";
+import { CommonState,initializeCommonState } from "./common.state";
+import { Entity,AppRoute } from "../models";
 
 export interface NavigationState extends CommonState<AppRoute & Entity> {
-  baseref:string;
   page:string;
   requested?:AppRoute;
 }
 export const initializeNavigation = ():NavigationState => ({
   ...initializeCommonState(true),
-  baseref:"/qs",
   page:"",
 });

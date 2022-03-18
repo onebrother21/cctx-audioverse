@@ -1,4 +1,5 @@
-import { CommonState,initializeCommonState,Entity } from "@state";
+import { CommonState,initializeCommonState } from "./common.state";
+import { Entity } from "../models";
 import { Session } from "../models";
 
 export interface SessionsState extends CommonState<Session & Entity> {latest:Session[];}

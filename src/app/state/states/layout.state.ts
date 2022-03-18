@@ -1,4 +1,5 @@
-import { CommonState,initializeCommonState } from "@state";
+import { CommonState,initializeCommonState } from "./common.state";
+import { Entity } from "../models";
 import { Layout } from "../models";
 
 export interface LayoutState extends CommonState,Layout {}

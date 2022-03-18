@@ -12,7 +12,6 @@ import { map,tap,mergeMap,withLatestFrom,filter } from 'rxjs/operators';
 import { AppService,route$ } from "@state";
 import { NavigationActions as NAV } from '../actions';
 import { NavigationService } from '../services';
-import { home$ } from '../selectors';
 
 @Injectable()
 export class NavigationEffects {
@@ -34,25 +33,14 @@ export class NavigationEffects {
     mergeMap(o => ([NAV.update(o)]))));
   PageNotFound$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(NAV.notFound),
-    withLatestFrom(this.app.select(home$)),
-    map(([o,home]) => ({
-      badurl:o.payload,
-      errUrl:home == "/"?"":home + "/error"
-    })),
-    mergeMap(({badurl,errUrl})=> ([NAV.navigate({url:errUrl,query:{badurl}})]))));
+    tap(o => this.router.navigate(["/error",{queryParams:o.payload}]))),{dispatch:false});
   Go$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(NAV.go),
-    withLatestFrom(this.app.select(home$)),
-    mergeMap(([o,home]) => ([NAV.navigate({url:home + o.payload.url})]))));
+    tap(o => this.router.navigate([o.payload.url]))),{dispatch:false});
   Back$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(NAV.back),
-    withLatestFrom(this.app.select(home$)),
-    mergeMap(([o,home]) => ([NAV.navigate({url:home + o.payload.url})]))));
+    tap(o => this.router.navigate([o.payload.url]))),{dispatch:false});
   Forward$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(NAV.forward),
-    withLatestFrom(this.app.select(home$)),
-    mergeMap(([o,home]) => ([NAV.navigate({url:home + o.payload.url})]))));
-  DoNavigation$:Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(NAV.navigate),
-    tap(o => this.router.navigate([o.payload.url,{queryParams:o.payload.query}]))),{dispatch:false});
+    tap(o => this.router.navigate([o.payload.url]))),{dispatch:false});
 }

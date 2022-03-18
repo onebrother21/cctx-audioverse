@@ -1,17 +1,14 @@
 import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 import {
-  Icon,
-  Ad,
-  Room,
-  ContactUsActions as ContactUs,ContactUsMsg,contactUsMsg$,
+  Icon,Ad,Room,
   NavigationActions as Navigation,
   userLoading$,
 } from "@state";
 import { Observable } from "rxjs";
 
 @Injectable()
-export class UserService {
+export class MeService {
   menu:Icon[] = [
     {
       label:"Launch Session",
@@ -24,7 +21,7 @@ export class UserService {
       url:"/qs/sessions",
       type:`stack`,
     },{
-      label:"User Community",
+      label:"Me Community",
       text:"See what's going on (eyeballs)...",
       url:"/qs/me/hm2",
       type:"users",
@@ -35,7 +32,7 @@ export class UserService {
       type:"lock",
     },
   ];
-  previews:Room[] = [
+  rooms:Room[] = [
     {
       id:'01',
       name:"smokebaby",
@@ -106,28 +103,23 @@ export class UserService {
   ];
   ads:Ad[] = [
     {
-      type:"ad",
       header:"I am an ad, please accidentally click me.",
       content:"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
     },{
-      type:"ad",
       header:"I am an ad, please accidentally click me.",
       content:"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
     },{
-      type:"ad",
       header:"I am an ad, please accidentally click me.",
       content:"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
     },{
-      type:"ad",
       header:"I am an ad, please accidentally click me.",
       content:"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
     },
   ];
   loading:Observable<boolean> = new Observable();
   constructor(private app:AppService){this.loading = this.app.select(userLoading$);}
-  send(o:any){this.app.do(Navigation.go({url:this.getNextUserPage(o.type)}));}
-  randomIntFromInterval(min:number,max:number){return Math.floor(Math.random() * (max - min + 1) + min);}
-  getNextUserPage(type:string){
+  send(o:any){this.app.do(Navigation.go({url:this.getNextMePage(o.type)}));}
+  getNextMePage(type:string){
     switch(type){
       case "signup":return "/secur01/verify";
       case "verify":return "/secur01/register";

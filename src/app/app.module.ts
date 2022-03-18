@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { SharedModule } from './shared';
-import { LayoutModule } from "@layout";
+import { LayoutModule } from "./layout";
 import { AppStateModule } from './state';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

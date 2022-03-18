@@ -7,15 +7,17 @@ import { MeEffects } from './me.effects';
 import { AuthenticationEffects } from './auth.effects';
 import { SessionsEffects } from './sessions.effects';
 import { RoomsEffects } from './rooms.effects';
+import { UsersEffects } from './users.effects';
 
 export const EFFECTS = [
   LayoutEffects,
   NavigationEffects,
-  ContactUsEffects,
-  TasksEffects,
-  ChatMessagesEffects,
-  MeEffects,
   AuthenticationEffects,
-  SessionsEffects,
-  RoomsEffects,
+  MeEffects,
+  //SessionsEffects,
+  //RoomsEffects,
+  //UsersEffects,
+  //ChatMessagesEffects,
+  //ContactUsEffects,
+  //TasksEffects,
 ];

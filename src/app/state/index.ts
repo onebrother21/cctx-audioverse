@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from "@shared";
 
 import { StoreModule,MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,7 +17,6 @@ export const metaReducers:MetaReducer<AppState>[] = !env.prod?[storeFreeze]:[];
 
 @NgModule({
   imports: [
-    SharedModule,
     StoreModule.forRoot(REDUCERS,{metaReducers}),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot(EFFECTS),
@@ -38,3 +36,4 @@ export * from "./actions";
 export * from "./effects";
 export * from "./services";
 export * from "./reducers";
+export * from "./utils";

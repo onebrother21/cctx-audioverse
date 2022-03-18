@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { COMPONENTS ,UserRoutingModule } from './me-routing.module';
-import { UserService } from './me.service';
+import { COMPONENTS ,MeRoutingModule } from './me-routing.module';
+import { MeService } from './me.service';
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    UserRoutingModule,
+    MeRoutingModule,
     SharedModule,
   ],
   exports:[...COMPONENTS],
-  providers:[UserService],
+  providers:[MeService],
 })
-export class UserModule { }
+export class MeModule { }

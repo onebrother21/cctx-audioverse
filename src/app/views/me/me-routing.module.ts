@@ -1,37 +1,37 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDashComponent } from './me-dash';
-import { UserAccountComponent } from './me-account';
-import { UserHomeComponent } from './me-home';
-import { UserMessagesComponent } from './me-msgs';
-import { UserAccountEditorComponent } from './me-editor';
-import { UserHomeIconTrayOneComponent } from './me-notifications';
-import { UserHomeIconTrayTwoComponent } from './me-home-icon-tray-2';
-import { UserHomeAltComponent } from './me-home-alt';
+import { MeDashComponent } from './me-dash';
+import { MeAccountComponent } from './me-acct';
+import { MeHomeComponent } from './me-home';
+import { MeMessagesComponent } from './me-msgs';
+import { MeAccountEditorComponent } from './me-acct-editor';
+import { MeNotificationsComponent } from './me-notifications';
+import { MeNotifications2Component } from './me-notifications-2';
+import { MeHomeAltComponent } from './me-home-alt';
 
 const routes: Routes = [
   {path:"",redirectTo:"hm",pathMatch:"full"},
-  {path:"hm",component:UserHomeComponent},
-  {path:"hm2",component:UserHomeAltComponent},
-  {path:"dash",component:UserDashComponent},
-  {path:"acct",component:UserAccountComponent},
-  {path:"edit",component:UserAccountEditorComponent},
-  {path:"upgrade",component:UserAccountComponent},
-  {path:"msgs",component:UserMessagesComponent},
+  {path:"hm",component:MeHomeComponent},
+  {path:"hm2",component:MeHomeAltComponent},
+  {path:"dash",component:MeDashComponent},
+  {path:"acct",component:MeAccountComponent},
+  {path:"edit",component:MeAccountEditorComponent},
+  {path:"upgrade",component:MeAccountComponent},
+  {path:"msgs",component:MeMessagesComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class MeRoutingModule { }
 export const COMPONENTS = [
-  UserDashComponent,
-  UserAccountComponent,
-  UserHomeComponent,
-  UserHomeAltComponent,
-  UserMessagesComponent,
-  UserAccountEditorComponent,
-  UserHomeIconTrayOneComponent,
-  UserHomeIconTrayTwoComponent,
+  MeDashComponent,
+  MeAccountComponent,
+  MeHomeComponent,
+  MeHomeAltComponent,
+  MeMessagesComponent,
+  MeAccountEditorComponent,
+  MeNotificationsComponent,
+  MeNotifications2Component,
 ];

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { UserService } from '../me.service';
+import { MeService } from '../me.service';
 
 @Component({
-  selector: 'qs-user-acct-editor',
-  templateUrl: './user-acct-editor.component.html',
-  styleUrls: ['./user-acct-editor.component.scss'],
+  selector: 'qs-me-acct-editor',
+  templateUrl: './me-acct-editor.component.html',
+  styleUrls: ['./me-acct-editor.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
-export class UserAccountEditorComponent {
-  title = "user-acct-editor";
+export class MeAccountEditorComponent {
+  title = "me-acct-editor";
   updateAcctForm:FormGroup;
   loading:boolean = false;
-  constructor(private user:UserService,private fb:FormBuilder){
+  constructor(private user:MeService,private fb:FormBuilder){
     this.user.loading.subscribe(loading => this.loading = loading);
     this.updateAcctForm = this.fb.group({
       action:['update',Validators.required],

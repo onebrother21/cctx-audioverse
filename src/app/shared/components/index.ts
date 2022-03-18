@@ -10,6 +10,8 @@ import { UploadComponent } from './upload';
 import { UploadDetailsComponent } from './upload-details';
 import { UploadListComponent } from './upload-list';
 import { UploadsComponent } from './uploads';
+import { PreviewListComponent } from './preview-list';
+import { PreviewRoomComponent } from './preview-room';
 
 export const COMPONENTS = [
   UploadComponent,
@@ -23,4 +25,6 @@ export const COMPONENTS = [
   NumberPadComponent,
   LoadingIndicatorComponent,
   ReactionsComponent,
+  PreviewListComponent,
+  PreviewRoomComponent,
 ];

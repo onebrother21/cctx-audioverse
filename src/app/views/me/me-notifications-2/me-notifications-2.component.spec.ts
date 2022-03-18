@@ -1,28 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserAccountEditorComponent } from './me-editor.component';
+import { MeNotifications2Component } from './me-notifications-2.component';
 
-describe('UserAccountEditorComponent', () => {
+describe('MeNotifications2Component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
       declarations: [
-        UserAccountEditorComponent
+        MeNotifications2Component
       ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(UserAccountEditorComponent);
+    const fixture = TestBed.createComponent(MeNotifications2Component);
     const comp = fixture.componentInstance;
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'meacct-editor'`, () => {
-    const fixture = TestBed.createComponent(UserAccountEditorComponent);
+  it(`should have as title 'me-notifications-2'`, () => {
+    const fixture = TestBed.createComponent(MeNotifications2Component);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('meacct-editor');
+    expect(comp.title).toEqual('me-notifications-2');
   });
 });

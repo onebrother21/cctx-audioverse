@@ -16,12 +16,12 @@ export interface AppState {
   navigation:NavigationState;
   auth:AuthenticationState;
   me:MeState;
-  users:UsersState;
-  sessions:SessionsState;
-  rooms:RoomsState; 
-  msgs:ChatMessagesState;
-  contactUs:ContactUsState;
-  tasks:TasksState;
+  //users:UsersState;
+  //sessions:SessionsState;
+  //rooms:RoomsState; 
+  //msgs:ChatMessagesState;
+  //contactUs:ContactUsState;
+  //tasks:TasksState;
 }
 
 export * from "./common.state";
@@ -30,10 +30,10 @@ export * from "./layout.state";
 export * from "./navigation.state";
 export * from "./auth.state";
 export * from "./me.state";
-export * from "./users.state";
-export * from "./sessions.state";
-export * from "./rooms.state";
-export * from "./chat-msgs.state";
-export * from "./contact-us.state";
-export * from "./tasks.state";
+//export * from "./users.state";
+//export * from "./sessions.state";
+//export * from "./rooms.state";
+//export * from "./chat-msgs.state";
+//export * from "./contact-us.state";
+//export * from "./tasks.state";
 //add some stat type, exp pts for clients taking classes, show on leaderboard

@@ -1,4 +1,5 @@
-import { CommonState,initializeCommonState,Entity } from "@state";
+import { CommonState,initializeCommonState } from "./common.state";
+import { Entity } from "../models";
 import { Task } from "../models";
 
 export interface TasksState extends CommonState<Task & Entity> {latest:Task[];}

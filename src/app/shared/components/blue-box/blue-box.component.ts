@@ -8,6 +8,6 @@ import { Ad } from '@state';
 })
 export class BlueBoxComponent {
   title = "blue-box";
-  @Input() bluebox:Ad = {type:"ad",header:"",content:""};
+  @Input() bluebox:Ad = {header:"",content:""};
   @Output() select:EventEmitter<any> = new EventEmitter();
 }

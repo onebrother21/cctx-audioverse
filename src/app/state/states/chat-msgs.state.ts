@@ -1,4 +1,5 @@
-import { CommonState,initializeCommonState,Entity } from "@state";
+import { CommonState,initializeCommonState } from "./common.state";
+import { Entity } from "../models";
 import { ChatMsg } from "../models";
 
 export interface ChatMessagesState extends CommonState<ChatMsg & Entity> {latest:ChatMsg[];}

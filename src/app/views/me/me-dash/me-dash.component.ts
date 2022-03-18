@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Icon } from '@state';
-import { UserService } from '../me.service';
+import { MeService } from '../me.service';
 
 @Component({
-  selector: 'qs-user-dash',
-  templateUrl: './user-dash.component.html',
-  styleUrls: ['./user-dash.component.scss'],
+  selector: 'qs-me-dash',
+  templateUrl: './me-dash.component.html',
+  styleUrls: ['./me-dash.component.scss'],
 })
-export class UserDashComponent {
-  title = "user-dash";
+export class MeDashComponent {
+  title = "me-dash";
   menu:Icon[] = this.user.menu;
-  constructor(private user:UserService){}
+  constructor(private user:MeService){}
   selectItem(item:Icon){console.log(item);}
 }
