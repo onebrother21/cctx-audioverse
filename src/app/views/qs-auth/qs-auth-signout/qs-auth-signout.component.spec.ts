@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthSignOutComponent } from './qs-auth-signout.component';
+import { AuthSignOutComponent } from './auth-signout.component';
 
 describe('AuthSignOutComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('AuthSignOutComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-auth-signout'`, () => {
+  it(`should have as title 'auth-signout'`, () => {
     const fixture = TestBed.createComponent(AuthSignOutComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-auth-signout');
+    expect(comp.title).toEqual('auth-signout');
   });
 });

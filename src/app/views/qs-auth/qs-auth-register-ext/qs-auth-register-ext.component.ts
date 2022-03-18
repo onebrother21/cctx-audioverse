@@ -7,15 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { minSelectedCheckboxes } from '@shared';
-import { AuthService } from '../qs-auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-register-ext',
-  templateUrl: './qs-auth-register-ext.component.html',
-  styleUrls: ['./qs-auth-register-ext.component.scss'],
+  templateUrl: './auth-register-ext.component.html',
+  styleUrls: ['./auth-register-ext.component.scss'],
 })
 export class AuthRegisterExtComponent {
-  title = "qs-auth-register-ext";
+  title = "auth-register-ext";
   registerForm:FormGroup;
   loading = false;
   isSubmitted = false;

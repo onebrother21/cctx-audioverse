@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IconComponent } from './qs-icon.component';
+import { IconComponent } from './icon.component';
 
 describe('IconComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('IconComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-user-dash'`, () => {
+  it(`should have as title 'user-dash'`, () => {
     const fixture = TestBed.createComponent(IconComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-user-dash');
+    expect(comp.title).toEqual('user-dash');
   });
 });

@@ -2,8 +2,8 @@ import { Component,Output,EventEmitter,Input } from "@angular/core";
 
 @Component({
   selector:"qs-numpad",
-  templateUrl: "./qs-numpad.component.html",
-  styleUrls:["qs-numpad.component.scss"]
+  templateUrl: "./numpad.component.html",
+  styleUrls:["numpad.component.scss"]
 })
 
 export class NumberPadComponent {

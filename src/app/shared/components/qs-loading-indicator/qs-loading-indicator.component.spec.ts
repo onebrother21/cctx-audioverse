@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LoadingIndicatorComponent } from './qs-loading-indicator.component';
+import { LoadingIndicatorComponent } from './loading-indicator.component';
 
 describe('LoadingIndicatorComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('LoadingIndicatorComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-loading-indicator'`, () => {
+  it(`should have as title 'loading-indicator'`, () => {
     const fixture = TestBed.createComponent(LoadingIndicatorComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-loading-indicator');
+    expect(comp.title).toEqual('loading-indicator');
   });
 });

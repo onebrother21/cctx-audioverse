@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'qs-large-card-list',
-  templateUrl: './qs-large-card-list.component.html',
-  styleUrls: ['./qs-large-card-list.component.scss'],
+  templateUrl: './large-card-list.component.html',
+  styleUrls: ['./large-card-list.component.scss'],
 })
 export class LargeCardListComponent {
-  title = "qs-large-card-list";
+  title = "large-card-list";
 }

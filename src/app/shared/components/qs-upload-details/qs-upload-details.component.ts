@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { FileUpload, FileUploadService } from '@qs-state';
+import { Upload,UploadService } from '@state';
 
 @Component({
   selector: 'qs-upload-details',
-  templateUrl: './qs-upload-details.component.html',
-  styleUrls: ['./qs-upload-details.component.scss']
+  templateUrl: './upload-details.component.html',
+  styleUrls: ['./upload-details.component.scss']
 })
 export class UploadDetailsComponent {
-  @Input() fileUpload?:FileUpload;
-  constructor(private uploadService: FileUploadService) { }
-  deleteFileUpload(file?:FileUpload): void {file?this.uploadService.deleteFile(file):null;}
+  @Input() fileUpload?:Upload;
+  constructor(private uploadService:UploadService) { }
+  deleteFileUpload(file?:Upload): void {file?this.uploadService.deleteFile(file):null;}
 }

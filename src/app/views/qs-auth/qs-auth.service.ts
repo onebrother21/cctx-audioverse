@@ -3,7 +3,7 @@ import { AppService } from "@state";
 import {
   AuthenticationActions as AUTH,
   authLoading$
-} from "@qs-state";
+} from "@state";
 import { Observable } from "rxjs";
 
 @Injectable()

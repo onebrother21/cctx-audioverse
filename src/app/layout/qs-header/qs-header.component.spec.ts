@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HeaderComponent } from './qs-header.component';
+import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
   beforeEach(async () => {

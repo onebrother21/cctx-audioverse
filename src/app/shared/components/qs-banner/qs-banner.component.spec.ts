@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BannerComponent } from './qs-banner.component';
+import { BannerComponent } from './banner.component';
 
 describe('BannerComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('BannerComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-banner'`, () => {
+  it(`should have as title 'banner'`, () => {
     const fixture = TestBed.createComponent(BannerComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-banner');
+    expect(comp.title).toEqual('banner');
   });
 });

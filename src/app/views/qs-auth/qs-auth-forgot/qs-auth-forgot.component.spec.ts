@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthForgotComponent } from './qs-auth-forgot.component';
+import { AuthForgotComponent } from './auth-forgot.component';
 
 describe('AuthForgotComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('AuthForgotComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-auth-forgot'`, () => {
+  it(`should have as title 'auth-forgot'`, () => {
     const fixture = TestBed.createComponent(AuthForgotComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-auth-forgot');
+    expect(comp.title).toEqual('auth-forgot');
   });
 });

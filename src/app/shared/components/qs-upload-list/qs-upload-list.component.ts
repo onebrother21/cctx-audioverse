@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FileUploadService } from '@qs-state';
+import { UploadService } from '@state';
 import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'qs-upload-list',
-  templateUrl: './qs-upload-list.component.html',
-  styleUrls: ['./qs-upload-list.component.scss']
+  templateUrl: './upload-list.component.html',
+  styleUrls: ['./upload-list.component.scss']
 })
 export class UploadListComponent implements OnInit {
   fileUploads:any[] = [];
-  constructor(private uploadService: FileUploadService) { }
+  constructor(private uploadService:UploadService) { }
   ngOnInit(): void {
     this.uploadService.getFiles(6).snapshotChanges().pipe(
       map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))

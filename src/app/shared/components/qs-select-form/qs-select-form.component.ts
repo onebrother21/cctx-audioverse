@@ -9,11 +9,11 @@ import {
 
 @Component({
   selector: 'qs-select-form',
-  templateUrl: './qs-select-form.component.html',
-  styleUrls: ['./qs-select-form.component.scss'],
+  templateUrl: './select-form.component.html',
+  styleUrls: ['./select-form.component.scss'],
 })
 export class SelectFormComponent {
-  title = "qs-select-form";
+  title = "select-form";
   registerForm:FormGroup;
   loading = false;
   isSubmitted = false;

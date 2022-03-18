@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../qs-auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-login',
-  templateUrl: './qs-auth-login.component.html',
-  styleUrls: ['./qs-auth-login.component.scss'],
+  templateUrl: './auth-login.component.html',
+  styleUrls: ['./auth-login.component.scss'],
 })
 export class AuthLoginComponent {
-  title = "qs-auth-login";
+  title = "auth-login";
   greeting = "Enter Your Pin";
   pinConfig = {
     minlength:4,

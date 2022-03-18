@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Icon } from '@qs-state';
+import { Icon } from '@state';
 import { Subject } from "rxjs";
 
 @Injectable()

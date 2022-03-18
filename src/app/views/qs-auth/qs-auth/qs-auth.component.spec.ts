@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthComponent } from './qs-auth.component';
+import { AuthComponent } from './auth.component';
 
 describe('AuthComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('AuthComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-auth'`, () => {
+  it(`should have as title 'auth'`, () => {
     const fixture = TestBed.createComponent(AuthComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-auth');
+    expect(comp.title).toEqual('auth');
   });
 });

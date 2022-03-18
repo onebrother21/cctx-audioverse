@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthRegisterExtComponent } from './qs-auth-register-ext.component';
+import { AuthRegisterExtComponent } from './auth-register-ext.component';
 
 describe('AuthRegisterExtComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('AuthRegisterExtComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-auth-register-ext'`, () => {
+  it(`should have as title 'auth-register-ext'`, () => {
     const fixture = TestBed.createComponent(AuthRegisterExtComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-auth-register-ext');
+    expect(comp.title).toEqual('auth-register-ext');
   });
 });

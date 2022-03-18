@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { AuthService } from '../qs-auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-register',
-  templateUrl: './qs-auth-register.component.html',
-  styleUrls: ['./qs-auth-register.component.scss'],
+  templateUrl: './auth-register.component.html',
+  styleUrls: ['./auth-register.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
 export class AuthRegisterComponent {
-  title = "qs-auth-register";
+  title = "auth-register";
   registerForm:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){

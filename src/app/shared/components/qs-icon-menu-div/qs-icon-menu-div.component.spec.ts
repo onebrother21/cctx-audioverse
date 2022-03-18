@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IconMenuDivComponent } from './qs-icon-menu-div.component';
+import { IconMenuDivComponent } from './icon-menu-div.component';
 
 describe('IconMenuDivComponent', () => {
   beforeEach(async () => {

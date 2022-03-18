@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
-import { Upload,UploadService } from '@qs-state';
+import { Upload,UploadService } from '@state';
 
 @Component({
   selector: 'qs-upload',
-  templateUrl: './qs-upload.component.html',
-  styleUrls: ['./qs-upload.component.scss'],
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent {
-  title = 'qs-upload';
+  title = 'upload';
   selectedFiles?:FileList;
   currentUpload?:Upload;
   percentage?:number;

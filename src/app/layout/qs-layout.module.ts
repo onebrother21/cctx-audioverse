@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { SharedModule } from '@qs-shared';
-import { COMPONENTS,LayoutRoutingModule } from "./qs-layout-routing.module";
+import { SharedModule } from '@shared';
+import { COMPONENTS,LayoutRoutingModule } from "./layout-routing.module";
 
 @NgModule({
   declarations: [...COMPONENTS],

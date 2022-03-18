@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthUpdatePinComponent } from './qs-auth-update-pin.component';
+import { AuthUpdatePinComponent } from './auth-update-pin.component';
 
 describe('AuthUpdatePinComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('AuthUpdatePinComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-auth-update-pin'`, () => {
+  it(`should have as title 'auth-update-pin'`, () => {
     const fixture = TestBed.createComponent(AuthUpdatePinComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-auth-update-pin');
+    expect(comp.title).toEqual('auth-update-pin');
   });
 });

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { AuthService } from '../qs-auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-signup',
-  templateUrl: './qs-auth-signup.component.html',
-  styleUrls: ['./qs-auth-signup.component.scss'],
+  templateUrl: './auth-signup.component.html',
+  styleUrls: ['./auth-signup.component.scss'],
 })
 export class AuthSignUpComponent {
-  title = "qs-auth-signup";
+  title = "auth-signup";
   signupForm:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){

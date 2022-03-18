@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { AuthService } from '../qs-auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-forgot',
-  templateUrl: './qs-auth-forgot.component.html',
-  styleUrls: ['./qs-auth-forgot.component.scss'],
+  templateUrl: './auth-forgot.component.html',
+  styleUrls: ['./auth-forgot.component.scss'],
   //encapsulation:ViewEncapsulation.None
 })
 export class AuthForgotComponent {
-  title = "qs-auth-forgot";
+  title = "auth-forgot";
   forgotForm:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){

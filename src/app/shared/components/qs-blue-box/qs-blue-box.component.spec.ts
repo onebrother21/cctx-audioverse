@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BlueBoxComponent } from './qs-blue-box.component';
+import { BlueBoxComponent } from './blue-box.component';
 
 describe('BlueBoxComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('BlueBoxComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-blue-box'`, () => {
+  it(`should have as title 'blue-box'`, () => {
     const fixture = TestBed.createComponent(BlueBoxComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-blue-box');
+    expect(comp.title).toEqual('blue-box');
   });
 });

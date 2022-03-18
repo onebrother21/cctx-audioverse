@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FooterTwoComponent } from './qs-footer-two.component';
+import { FooterTwoComponent } from './footer-two.component';
 
 describe('FooterTwoComponent', () => {
   beforeEach(async () => {
@@ -20,16 +20,16 @@ describe('FooterTwoComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-11'`, () => {
+  it(`should have as title '11'`, () => {
     const fixture = TestBed.createComponent(FooterTwoComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-11');
+    expect(comp.title).toEqual('11');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(FooterTwoComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('qs-11 app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('11 app is running!');
   });
 });

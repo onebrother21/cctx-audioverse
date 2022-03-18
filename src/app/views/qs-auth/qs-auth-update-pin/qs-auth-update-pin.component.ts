@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../qs-auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-update-pin',
-  templateUrl: './qs-auth-update-pin.component.html',
-  styleUrls: ['./qs-auth-update-pin.component.scss'],
+  templateUrl: './auth-update-pin.component.html',
+  styleUrls: ['./auth-update-pin.component.scss'],
 })
 export class AuthUpdatePinComponent {
-  title = "qs-auth-update-pin";
+  title = "auth-update-pin";
   greeting = "Create A Pin";
   confirm:string = "";
   pinConfig = {

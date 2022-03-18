@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SmallCardListComponent } from './qs-small-card-list.component';
+import { SmallCardListComponent } from './small-card-list.component';
 
 describe('SmallCardListComponent', () => {
   beforeEach(async () => {
@@ -20,9 +20,9 @@ describe('SmallCardListComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'qs-small-card-list'`, () => {
+  it(`should have as title 'small-card-list'`, () => {
     const fixture = TestBed.createComponent(SmallCardListComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('qs-small-card-list');
+    expect(comp.title).toEqual('small-card-list');
   });
 });

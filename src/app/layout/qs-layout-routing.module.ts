@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderComponent } from './qs-header';
-import { FooterComponent } from './qs-footer';
-import { FooterTwoComponent } from './qs-footer-two';
+import { HeaderComponent } from './header';
+import { FooterComponent } from './footer';
+import { FooterTwoComponent } from './footer-two';
 
 const routes: Routes = [];
 

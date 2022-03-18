@@ -1,1 +1,1 @@
-export * from "./qs-layout.module";
+export * from "./layout.module";

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SinglePageComponent } from './qs-single-page.component';
+import { SinglePageComponent } from './single-page.component';
 
 describe('SinglePageComponent', () => {
   beforeEach(async () => {
