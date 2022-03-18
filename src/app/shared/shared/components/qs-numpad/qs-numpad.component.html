@@ -1,0 +1,11 @@
+<div class="numpad">
+  <div class="num-container">
+    <!--input readonly="true" type="text" placeholder="" [value]="config.masked?mask:val"/-->
+    <div #pinMask style="display:flex;justify-content:center;">
+      <div *ngFor="let char of mask" 
+      style="float:left;width:15px;height:15px;margin-right:20px;" 
+      class="u-palette-1-base u-shape u-shape-circle"></div>
+    </div>
+    <ul><li *ngFor="let o of nums" (click)="updateVal(o)">{{o}}</li></ul>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<section class="u-align-center u-clearfix u-section-4" id="carousel_4504">
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <div class="u-shape u-shape-svg u-text-grey-40 u-shape-1">
+      <qs-icon [item]="{label:'',type:'grey-ball'}"></qs-icon>
+    </div>
+    <div class="u-palette-1-base u-preserve-proportions u-shape u-shape-circle u-shape-2"></div>
+    <!--img class="u-image u-image-default u-image-1" data-image-width="900" data-image-height="635" src="/assets/images/01.jpg"-->
+    <video controls playsinline loop autoplay [muted]="false"
+    class="u-image u-image-default u-image-1" 
+    data-image-width="900" data-image-height="635"
+    src="/assets/vids/{{room?.vid}}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="u-align-left u-container-style u-grey-10 u-group u-group-1">
+      <div class="u-container-layout u-valign-middle u-container-layout-1">
+        <h2 class="u-text u-text-1"> {{room?.name}}</h2>
+        <p *ngFor="let comment of newComments" class="u-text u-text-chat">
+          <strong>{{comment.user}}</strong> {{comment.body}}<br>
+        </p>
+        <form [formGroup]="sessionChatForm" (ngSubmit)="submitForm()">
+          <div class="u-form-email u-form-group u-form-group-2">
+            <label for="email-3b9a" class="u-form-control-hidden u-label">Comment</label>
+            <!--input type="text" placeholder="Enter comment" id="email-3b9a" name="comment" formControlName="body" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-text-chat" 
+            style="float:left;width:78%;" required=""-->
+            <textarea placeholder="Enter comment" rows="1" cols="50" id="message-3b9a" name="comment"
+            formControlName="body" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-text-chat" 
+            style="float:left;width:78%;" required=""></textarea>
+            <button type="submit" 
+            class="u-active-grey-90 u-border-none u-btn u-btn-round u-button-style u-hover-grey-90 u-palette-1-base u-radius-8 u-text-active-white u-text-body-alt-color u-text-hover-white u-btn-2"
+            style="float:left;width:13%;height:50%;
+            margin-left:7px;
+            margin-top:10px;display:flex;justify-content:center;">
+              <!--qs-icon [item]="{label:'',type:'download'}"></qs-icon>&nbsp;-->
+              <i class="fa fa-share"></i>
+            </button>
+          </div>
+        </form><br>
+        <qs-reactions (react)="react($event)"></qs-reactions>
+      </div>
+    </div>
+    <div class="u-shape u-shape-svg u-text-palette-5-light-1 u-shape-3">
+      <qs-icon [item]="{label:'',type:'grey-ring'}"></qs-icon>
+    </div>
+  </div>
+</section>

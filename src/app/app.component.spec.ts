@@ -16,20 +16,20 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    const comp = fixture.componentInstance;
+    expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'cctx-audioverse'`, () => {
+  it(`should have as title 'cctx-apps'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('cctx-audioverse');
+    const comp = fixture.componentInstance;
+    expect(comp.title).toEqual('cctx-apps');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('cctx-audioverse app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('cctx-apps app is running!');
   });
 });

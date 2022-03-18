@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cctx-audioverse": {
+      "hosting": {
+        "cctx-audioverse": [
+          "cctx-audioverse"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cctx-audioverse"
+  }
+}

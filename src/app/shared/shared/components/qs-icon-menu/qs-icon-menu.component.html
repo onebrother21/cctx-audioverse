@@ -1,0 +1,9 @@
+<div class="u-list u-list-1">
+  <div class="u-repeater u-repeater-1">
+    <ng-container *ngFor="let item of items;let i = index">
+      <div class="u-container-style u-list-item u-repeater-item">
+        <qs-icon-menu-item [item]="item" (select)="select.emit(item)"></qs-icon-menu-item>
+      </div>
+    </ng-container>
+  </div>
+</div>

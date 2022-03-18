@@ -1,0 +1,1 @@
+export * from "./qs-icon.component";

@@ -1,0 +1,18 @@
+<div class="u-clearfix u-gutter-18 u-layout-wrap u-layout-wrap-1">
+  <div class="u-gutter-0 u-layout">
+    <div class="u-layout-row">
+      <ng-container *ngFor="let previewIdx of previewIds;let i = index">
+        <ng-container *ngIf="adIds[i] !== -1">
+          <div class="u-align-left u-container-style u-layout-cell u-palette-1-base u-shape-rectangle u-size-15 u-size-30-md u-layout-cell-1">
+            <qs-blue-box [bluebox]="ads[adIds[i]]"></qs-blue-box>
+          </div>
+        </ng-container>
+        <div class="u-align-center u-container-style u-layout-cell u-shape-rectangle u-size-15 u-size-30-md u-white u-layout-cell-3">
+          <div class="u-container-layout u-container-layout-2">
+            <qs-user-home-preview [preview]="previews[previewIdx]"></qs-user-home-preview>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<section class="img-overlay-wrap">
+  <!--input type="file" accept="image/*" capture="camera" id="cameraInput" name="cameraInput"-->
+  <section class="camera">
+    <canvas #sensor class="camera-sensor"></canvas>
+    <video #view class="camera-view" autoplay playsinline></video>
+    <img src="//:0" alt="" class="camera-output" #output>
+    <svg viewBox="0 0 200 200">
+      <circle cx="75" cy="75" r="10" fill="rebeccapurple"/>
+      <circle cx="175" cy="75" r="10" fill="rebeccapurple"/>
+      <circle cx="75" cy="175" r="10" fill="rebeccapurple"/>
+      <circle cx="175" cy="175" r="10" fill="rebeccapurple"/>
+    </svg>
+    <button #trigger class="camera-trigger" (click)="capture()">{{
+      permission == "granted"?"Take a picture":"Camera disabled"}}</button>
+  </section>
+</section>

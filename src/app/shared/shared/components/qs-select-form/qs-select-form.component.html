@@ -1,0 +1,34 @@
+<div class="u-layout-row">
+  <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-1">
+    <div class="u-container-layout u-container-layout-1">
+      <h2 class="u-text u-text-grey-70 u-text-1">Tell Us About Yourself</h2>
+    </div>
+  </div>
+  <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
+    <div class="u-container-layout u-valign-middle u-container-layout-2">
+      <div class="u-expanded-width u-form u-form-1">
+        <form [formGroup]="registerForm" (ngSubmit)="submitForm()"
+        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" name="form">
+          <input type="hidden" id="siteId" name="siteId" value="745822">
+          <input type="hidden" id="pageId" name="pageId" value="749340">
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">First Name</label>
+            <select (change)="changeCity($event)" formControlName="cityName"
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right 
+            u-border-no-top u-input u-input-rectangle u-input-1">
+              <option [ngValue]="null" hidden selected [disabled]="true">Choose City</option>
+              <option *ngFor="let city of City" [ngValue]="city">{{ city }}</option>
+            </select>
+          </div>
+          <div class="u-align-left u-form-group u-form-submit u-form-group-4">
+            <input type="submit" value="submit" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">
+            <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
+          </div>
+          <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+          <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+          <input type="hidden" value="" name="recaptchaResponse">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
