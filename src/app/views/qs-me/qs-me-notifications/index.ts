@@ -1,1 +1,0 @@
-export * from "./qs-user-home-icon-tray-1.component";

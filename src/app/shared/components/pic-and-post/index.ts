@@ -1,0 +1,1 @@
+export * from "./pic-and-post.component";

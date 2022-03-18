@@ -87,20 +87,20 @@ export const users:User[] = [
     created:new Date("11/22/2020")},
 ];
 export const tasks:Task[] = [
-  {id:"1",created:new Date("06/06/2020"),agent:null,type:"onboarding",dueOn:new Date("05/24/2020"),progress:63.50},
+  {id:"1",created:new Date("06/06/2020"),type:"onboarding",dueOn:new Date("05/24/2020"),progress:63.50},
+  {id:"2",created:new Date("06/06/2020"),type:"new-lead",agent:users[0],dueOn:new Date("05/21/2020"),progress:63.50},
+  {id:"3",created:new Date("06/06/2020"),type:"new-lead",agent:users[1],dueOn:new Date("05/19/2020"),progress:63.50},
+  {id:"4",created:new Date("06/06/2020"),type:"doc-review",dueOn:new Date("05/24/2020"),progress:0},
+];
+export const sessions:Session[] = [];
+  /*{id:"1",created:new Date("06/06/2020"),type:"onboarding",dueOn:new Date("05/24/2020"),progress:63.50},
+  {id:"2",created:new Date("06/06/2020"),type:"new-lead",agent:users[0],dueOn:new Date("05/21/2020"),progress:63.50},
+  {id:"3",created:new Date("06/06/2020"),type:"new-lead",agent:users[1],dueOn:new Date("05/19/2020"),progress:63.50},
+  {id:"4",created:new Date("06/06/2020"),type:"doc-review",dueOn:new Date("05/24/2020"),progress:0},
+];*/
+export const rooms:Room[] = [];
+  /*{id:"1",created:new Date("06/06/2020"),agent:null,type:"onboarding",dueOn:new Date("05/24/2020"),progress:63.50},
   {id:"2",created:new Date("06/06/2020"),type:"new-lead",agent:users[0],dueOn:new Date("05/21/2020"),progress:63.50},
   {id:"3",created:new Date("06/06/2020"),type:"new-lead",agent:users[1],dueOn:new Date("05/19/2020"),progress:63.50},
   {id:"4",created:new Date("06/06/2020"),type:"doc-review",agent:null,dueOn:new Date("05/24/2020"),progress:0},
-];
-export const sessions:Session[] = [
-  {id:"1",created:new Date("06/06/2020"),agent:null,type:"onboarding",dueOn:new Date("05/24/2020"),progress:63.50},
-  {id:"2",created:new Date("06/06/2020"),type:"new-lead",agent:users[0],dueOn:new Date("05/21/2020"),progress:63.50},
-  {id:"3",created:new Date("06/06/2020"),type:"new-lead",agent:users[1],dueOn:new Date("05/19/2020"),progress:63.50},
-  {id:"4",created:new Date("06/06/2020"),type:"doc-review",agent:null,dueOn:new Date("05/24/2020"),progress:0},
-];
-export const rooms:Room[] = [
-  {id:"1",created:new Date("06/06/2020"),agent:null,type:"onboarding",dueOn:new Date("05/24/2020"),progress:63.50},
-  {id:"2",created:new Date("06/06/2020"),type:"new-lead",agent:users[0],dueOn:new Date("05/21/2020"),progress:63.50},
-  {id:"3",created:new Date("06/06/2020"),type:"new-lead",agent:users[1],dueOn:new Date("05/19/2020"),progress:63.50},
-  {id:"4",created:new Date("06/06/2020"),type:"doc-review",agent:null,dueOn:new Date("05/24/2020"),progress:0},
-];
+];*/

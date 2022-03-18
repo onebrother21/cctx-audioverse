@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { AppService } from '@state';
-import { User } from '../models';
+import { AppService } from '../app';
+import { User } from '../../models';
 import { users } from '../../_data_api';
 
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map,tap } from 'rxjs/operators';
 import { Observable,of, throwError } from 'rxjs';
 
-import { AppEntity, AppService } from '@state';
+import { AppService } from '../app';
 import { User } from '../../models';
 import { AuthUsersDBService } from '../../_auth_api';
 

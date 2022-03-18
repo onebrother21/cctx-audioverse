@@ -4,7 +4,9 @@ import { Router,ActivationEnd } from "@angular/router";
 import { filter,withLatestFrom,tap } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 
-import { AppState,AppRoute,route$ } from "@state";
+import { AppState } from '../../states';
+import { AppRoute } from '../../models';
+import { route$ } from '../../selectors';
 
 @Injectable({providedIn:"root"})
 export class NavigationService {

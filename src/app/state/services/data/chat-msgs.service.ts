@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
-import { AppService } from '@state';
-import { ChatMsg } from '../models';
+import { AppService } from '../app';
+import { ChatMsg } from '../../models';
 
 @Injectable({providedIn:'root'})
 

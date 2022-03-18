@@ -1,0 +1,1 @@
+export * from "./me-home-icon-tray-2.component";

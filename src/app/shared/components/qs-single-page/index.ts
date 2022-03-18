@@ -1,1 +1,0 @@
-export * from "./qs-single-page.component";

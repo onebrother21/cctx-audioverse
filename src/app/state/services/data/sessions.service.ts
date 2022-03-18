@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { AppService } from '@state';
-import { Session } from '../models';
-import { sessions } from '../_data_api';
+import { AppService } from '../app';
+import { Session } from '../../models';
+import { sessions } from '../../_data_api';
 
 
 @Injectable({providedIn:'root'})

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { map,tap } from 'rxjs/operators';
 import { Observable,of } from 'rxjs';
 
-import { AppService } from '@state';
-import { User } from '../models';
-import { AuthUsersDBService } from '../_auth_api';
+import { AppService } from '../app';
+import { User } from '../../models';
+import { AuthUsersDBService } from '../../_auth_api';
 
 const me:User = {
   id:"my-id-01",

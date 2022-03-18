@@ -1,1 +1,0 @@
-export * from "./qs-uploads.component";

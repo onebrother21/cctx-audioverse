@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { AppEntity,AppRoute } from "@state";
+import { AppEntity,AppRoute } from "../models";
 import { NavigationActions as NAV } from "../actions";
 import { NavigationState,initializeNavigation } from "../states";
 

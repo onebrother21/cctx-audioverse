@@ -1,7 +1,7 @@
 import { AppEntity } from '@state';
 export type User = AppEntity &
-Record<"username"|"email"|"phn",string> &
-Partial<Record<"img"|"pin"|"code"|"token"|"hometown"|"loc"|"token",string>> &
+Record<"username"|"email",string> &
+Partial<Record<"phn"|"img"|"pin"|"code"|"token"|"hometown"|"loc"|"token",string>> &
 {
   name:{first:string;last:string},
   verified?:Date;

@@ -1,1 +1,0 @@
-export * from "./qs-pic-and-post.component";

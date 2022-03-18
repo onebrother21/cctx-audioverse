@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   DefaultUrlSerializer,
   UrlTree} from "@angular/router";
-import { AppRoute } from "../models";
+import { AppRoute } from "../../models";
 
 export const mergeRouteParams = (route:ActivatedRouteSnapshot|null,getter:(r:ActivatedRouteSnapshot) => Params):Params => {
   if (!route) {return {};}

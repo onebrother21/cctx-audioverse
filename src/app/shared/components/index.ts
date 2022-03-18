@@ -1,15 +1,15 @@
 
-import { BlueBoxComponent } from './qs-blue-box';
-import { IconComponent } from './qs-icon';
-import { IconMenuComponent } from './qs-icon-menu';
-import { IconMenuItemComponent } from './qs-icon-menu-item';
-import { NumberPadComponent } from './qs-numpad';
-import { LoadingIndicatorComponent } from './qs-loading-indicator';
-import { ReactionsComponent } from './qs-reactions';
-import { UploadComponent } from './qs-upload';
-import { UploadDetailsComponent } from './qs-upload-details';
-import { UploadListComponent } from './qs-upload-list';
-import { UploadsComponent } from './qs-uploads';
+import { BlueBoxComponent } from './blue-box';
+import { IconComponent } from './icon';
+import { IconMenuComponent } from './icon-menu';
+import { IconMenuItemComponent } from './icon-menu-item';
+import { NumberPadComponent } from './numpad';
+import { LoadingIndicatorComponent } from './loading-indicator';
+import { ReactionsComponent } from './reactions';
+import { UploadComponent } from './upload';
+import { UploadDetailsComponent } from './upload-details';
+import { UploadListComponent } from './upload-list';
+import { UploadsComponent } from './uploads';
 
 export const COMPONENTS = [
   UploadComponent,

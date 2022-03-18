@@ -1,1 +1,0 @@
-export * from "./qs-room.component";
