@@ -12,4 +12,4 @@ export * from "./contact-us.services";
 export * from "./tasks.service";
 
 export * from "./data-loaded.guard";
-export * from "./auth.guard";
+export * from "../../guards/auth.guard";

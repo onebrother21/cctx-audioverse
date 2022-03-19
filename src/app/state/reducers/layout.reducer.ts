@@ -7,9 +7,9 @@ const reducer = createReducer(
   initialState,
   on(LAYOUT.fetch,s => ({...s,loading:true})),
   on(LAYOUT.load,(s,{payload:layout}) => ({...s,...layout,loading:false})),
-  on(LAYOUT.toggleMobileNav,(s,{payload:open}) => ({ ...s,mobileNav:{...s.mobileNav,open:toggleMobileNav(s,open)}})),
+  on(LAYOUT.toggleNav,(s,{payload:open}) => ({ ...s,nav:{...s.nav,open:toggleNav(s,open)}})),
   on(LAYOUT.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
 );
 
 export function LayoutReducer(s:LayoutState|undefined,action:Action) {return reducer(s,action);}
-export const toggleMobileNav = (s:LayoutState,o?:boolean) => o !== undefined && o !== null?o:!s.mobileNav.open;
+export const toggleNav = (s:LayoutState,o?:boolean) => o !== undefined && o !== null?o:!s.nav.open;

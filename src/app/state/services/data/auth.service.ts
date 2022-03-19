@@ -14,7 +14,6 @@ export class AuthenticationService {
   //login(creds:AuthCreds){return this.app.http.post<AuthStatus>('/login',creds);}
   //verify(creds:AuthCreds){return this.app.http.post<AuthStatus>('/verify',creds);}
   //reset(creds:AuthCreds){return this.app.http.post<AuthStatus>('/reset',creds);}
-  //logout(username:string){return this.app.http.del('/login',username);}
   constructor(private app:AppService,private _auth:AuthUsersDBService){}
   save(o:any){this.app.local.set("appuser",o);}
   navigateAuthentication(action:string){
@@ -44,6 +43,7 @@ export class AuthenticationService {
   //this.app.http.post<User>(this.ext+"/signin",o);}
   signup(o:{email:string}){return this._auth.signup(o);}
   //{return this.app.http.post<User>(this.ext+"/signup",o);}
+  signout(){return this.app.http.del(this.ext+'/login');}
   verify(o:{username:string;code:string}){return this._auth.verify(o);}
   //{return this.app.http.post<User>(this.ext+"/verify",o);}
   login(o:{username:string;pin:string}){return this._auth.login(o);}
@@ -52,7 +52,8 @@ export class AuthenticationService {
   //{return this.app.http.post<User>(this.ext+"/register",o);}
   registerExt(o:any){return this._auth.registerExt(o);}
   //{return this.app.http.post<User>(this.ext+"/register",o);}
-  forgot(o:{email:string}){return of(o);}
+  forgotName(o:any){return of(o);}
+  forgotPin(o:{email:string}){return of(o);}
   //{return this.app.http.post<User>(this.ext+"/forgot",o);}
   updatePin(o:{username:string;pin:string}){return this._auth.updatePin(o);}
   //{return this.app.http.post<User>(this.ext+"/updatePin",o);}

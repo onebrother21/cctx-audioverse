@@ -5,10 +5,9 @@ import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom } from "rxjs/operators";
 
 import { AppError } from "../types";
-import { AppError,AppService } from "@state";
 import { Task } from "../models";
 import { TasksActions as TASKS } from "../actions";
-import { TasksService } from "../services";
+import { AppService,TasksService } from "../services";
 
 @Injectable()
 export class TasksEffects implements OnInitEffects {
@@ -25,7 +24,7 @@ export class TasksEffects implements OnInitEffects {
   createTask$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(TASKS.create),
     map(o => o.payload),
-    mergeMap(o => this.tasks.send(o).pipe(
-      map((task:Task) => TASKS.loadMore([task])),
+    mergeMap(o => this.tasks.create(o).pipe(
+      map((task:Task) => TASKS.loadOne(task)),
       catchError(error => of(TASKS.error(new AppError(error))))))));
 }

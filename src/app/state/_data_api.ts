@@ -3,7 +3,7 @@ import { map,tap,delay } from 'rxjs/operators';
 import { Observable,of, throwError } from 'rxjs';
 
 import { AppEntity, AppService } from '@state';
-import { User,Task,TaskAgent,Session,Room } from './models';
+import { User,Task,TaskAgent,Session,Room, Ad, ChatMsg, ContactUsMsg, UserJson } from './models';
 
 @Injectable({providedIn:'root'})
 export class AuthUsersDBService {
@@ -68,7 +68,7 @@ export class AuthUsersDBService {
     return this.saveAndRespondWJSON({...user,...o});
   }
 }
-export const users:User[] = [
+export const users:UserJson[] = [
   {
     username:"tiabia",
     phn:"340-893-2724",
@@ -104,3 +104,7 @@ export const rooms:Room[] = [];
   {id:"3",created:new Date("06/06/2020"),type:"new-lead",agent:users[1],dueOn:new Date("05/19/2020"),progress:63.50},
   {id:"4",created:new Date("06/06/2020"),type:"doc-review",agent:null,dueOn:new Date("05/24/2020"),progress:0},
 ];*/
+export const ads:Ad[] = [];
+//export const forums:Forum[] = [];
+export const msgs:ChatMsg[] = [];
+export const contactUsMsgs:ContactUsMsg[] = [];

@@ -5,10 +5,9 @@ import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom } from "rxjs/operators";
 
 import { AppError } from "../types";
-import { AppError,AppService } from "@state";
 import { Session } from "../models";
 import { SessionsActions as SESSIONS } from "../actions";
-import { SessionsService } from "../services";
+import { AppService,SessionsService } from "../services";
 
 @Injectable()
 export class SessionsEffects implements OnInitEffects {
@@ -25,7 +24,7 @@ export class SessionsEffects implements OnInitEffects {
   CreateSession$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(SESSIONS.create),
     map(o => o.payload),
-    mergeMap(o => this.sessions.send(o).pipe(
-      map((session:Session) => SESSIONS.loadMore([session])),
+    mergeMap(o => this.sessions.create(o).pipe(
+      map((session:Session) => SESSIONS.loadOne(session)),
       catchError(error => of(SESSIONS.error(new AppError(error))))))));
 }

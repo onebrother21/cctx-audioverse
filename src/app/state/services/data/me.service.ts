@@ -6,16 +6,6 @@ import { AppService } from '../app';
 import { User } from '../../models';
 import { AuthUsersDBService } from '../../_auth_api';
 
-const me:User = {
-  id:"my-id-01",
-  phn:"832-448-1315",
-  created:new Date("06/06/2020"),
-  username:"jackswift",
-  email:"service.onebrother@gmail.com",
-  img:"",
-  name:{first:"Jack",last:"Swift"},
-};
-
 @Injectable({providedIn:'root'})
 export class MeService {
   ext = "/app-user";

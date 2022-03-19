@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map,tap,mergeMap,withLatestFrom,filter } from 'rxjs/operators';
 
-import { AppService,route$ } from "@state";
 import { NavigationActions as NAV } from '../actions';
-import { NavigationService } from '../services';
+import { AppService,NavigationService } from '../services';
+import { route$ } from "../selectors";
 @Injectable()
 export class NavigationEffects {
   constructor(

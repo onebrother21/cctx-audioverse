@@ -13,8 +13,8 @@ export class RoomsService {
   ext = "/rooms";
   constructor(private app:AppService){}
   fetch(){return of(rooms);}//this.app.http.get<Room[]>("/");}
-  fetchOne(username:string){return this.app.http.get<Room>("/"+username);}
-  create(username:string){return this.app.http.post<Room>("/",{username});}
+  fetchOne(id:string){return this.app.http.get<Room>("/"+id);}
+  create(o:Room){return this.app.http.post<Room>("/",o);}
   update(id:string,updates:Partial<Room>){return this.app.http.put<Room>("/"+id,updates);}
   remove(id:string){return this.app.http.del("/"+id);}
 }

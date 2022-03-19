@@ -5,12 +5,9 @@ import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
 import { AppError } from "../types";
-import { AppError,AppService,AppRoute,route$ } from "@state";
 import { ContactUsMsg } from "../models";
-import { ContactUsState } from "../states";
 import { ContactUsActions as CONTACTUS } from "../actions";
-import { ContactUsService } from "../services";
-import { ROUTER_NAVIGATION, RouterNavigationAction } from "@ngrx/router-store";
+import { AppService,ContactUsService } from "../services";
 
 @Injectable()
 export class ContactUsEffects {
@@ -23,7 +20,7 @@ export class ContactUsEffects {
     mergeMap(() => this.contactUs.fetch().pipe(
       map((msgs:ContactUsMsg[]) => CONTACTUS.load(msgs)),
       catchError(error => of(CONTACTUS.error(new AppError(error))))))));
-  SendContactUs$:Observable<Action> = createEffect(() => this.actions$.pipe(
+  SendContactUsMsg$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(CONTACTUS.send),
     map(o => o.payload),
     mergeMap(o => this.contactUs.send(o).pipe(

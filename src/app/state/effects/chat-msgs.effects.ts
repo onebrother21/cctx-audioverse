@@ -5,10 +5,9 @@ import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
 import { AppError } from "../types";
-import { AppError,AppService } from "@state";
 import { ChatMsg } from "../models";
 import { ChatMessagesActions as CHAT } from "../actions";
-import { ChatMessagesService } from "../services";
+import { AppService,ChatMessagesService } from "../services";
 
 @Injectable()
 export class ChatMessagesEffects {
@@ -19,9 +18,9 @@ export class ChatMessagesEffects {
   fetchChatMsgs$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(CHAT.fetch),
     mergeMap(() => this.msgs.fetch().pipe(
-      map((msgs:ChatMsg[]) => CHAT.load(msgs)),
+      map(msgs => CHAT.load(msgs)),
       catchError(error => of(CHAT.error(new AppError(error))))))));
-  SendChatMessages$:Observable<Action> = createEffect(() => this.actions$.pipe(
+  SendChatMsg$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(CHAT.send),
     map(o => o.payload),
     mergeMap(o => this.msgs.send(o).pipe(

@@ -3,6 +3,6 @@ import { AuthJson } from "../models";
 
 export interface AuthenticationState extends CommonState {status:AuthJson|null;}
 export const initializeAuth = ():AuthenticationState => ({
-  ...initializeCommonState(false,false),
+  ...initializeCommonState(),
   status:null,
 });

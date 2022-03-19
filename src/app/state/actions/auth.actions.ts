@@ -15,5 +15,6 @@ export const AuthenticationActions = {
   updatePin:createAction("@qs/auth/update-pin",(o:AuthCreds) => ({payload:o})),
   update:createAction("@qs/auth/update",(o:Partial<User>) => ({payload:o})),
   load:createAction("@qs/auth/load",(o:AuthJson) => ({payload:o})),
+  unload:createAction('@qs/auth/unload'),
   error:createAction("@qs/auth/error",(o:AppError) => ({payload:o})),
 };

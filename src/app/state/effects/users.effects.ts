@@ -5,7 +5,7 @@ import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom } from "rxjs/operators";
 
 import { AppError } from "../types";
-import { User } from "../models";
+import { UserJson } from "../models";
 import { UsersActions as USERS } from "../actions";
 import { AppService,UsersService } from "../services";
 
@@ -19,12 +19,12 @@ export class UsersEffects implements OnInitEffects {
   fetchUsers$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(USERS.fetch),
     mergeMap(() => this.users.fetch().pipe(
-      map((users:User[]) => USERS.load(users)),
+      map((users:UserJson[]) => USERS.load(users)),
       catchError(error => of(USERS.error(new AppError(error))))))));
   createUser$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(USERS.create),
     map(o => o.payload),
-    mergeMap(o => this.users.send(o).pipe(
-      map((user:User) => USERS.loadMore([user])),
+    mergeMap(o => this.users.create(o).pipe(
+      map((user:UserJson) => USERS.loadOne(user)),
       catchError(error => of(USERS.error(new AppError(error))))))));
 }

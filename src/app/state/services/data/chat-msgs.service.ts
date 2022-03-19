@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { of,tap } from 'rxjs';
 
 import { AppService } from '../app';
 import { ChatMsg } from '../../models';
@@ -10,8 +10,6 @@ export class ChatMessagesService {
   ext = "/msgs";
   constructor(private app:AppService){}
   fetch(){return of(msgs);}//this.app.http.get<ChatMsg[]>("/");}
-  fetchOne(username:string){return this.app.http.get<ChatMsg>("/"+username);}
-  create(username:string){return this.app.http.post<ChatMsg>("/",{username});}
-  update(id:string,updates:Partial<ChatMsg>){return this.app.http.put<ChatMsg>("/"+id,updates);}
-  remove(id:string){return this.app.http.del("/"+id);}
+  fetchOne(id:string){return this.app.http.get<ChatMsg>("/"+id);}
+  send(o:ChatMsg){return this.app.http.post<ChatMsg>("/",o);}
 }

@@ -5,11 +5,9 @@ import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
 import { AppError } from "../types";
-import { AppError,AppService,AppRoute,route$ } from "@state";
 import { Layout } from "../models";
-import { LayoutState } from "../states";
 import { LayoutActions as LAYOUT } from "../actions";
-import { LayoutService } from "../services";
+import { AppService,LayoutService } from "../services";
 import { ROUTER_NAVIGATION, RouterNavigationAction } from "@ngrx/router-store";
 
 @Injectable()

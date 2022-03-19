@@ -4,8 +4,7 @@ import { Action } from "@ngrx/store";
 import { Observable,of,withLatestFrom } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
-import { AppError } from "../types";
-import { User } from "../models";
+import { AppEntity, AppError } from "../types";
 import {
   AuthenticationActions as AUTH,
   NavigationActions as NAV,
@@ -35,18 +34,18 @@ export class AuthenticationEffects {
     mergeMap(o => this.auth.signup(o).pipe(
       mergeMap(auth => ([
         AUTH.update(auth),
-        ME.create(auth.email),
+        ME.create(new AppEntity(auth.email) as any),
         NAV.go({url:"/secur01/verify"}),
       ])),
       catchError(error => of(AUTH.error(new AppError(error))))))));
       
-  Signout$:Observable<Action> = createEffect(() => this.action$.pipe(
+  Signout$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.signout),
     mergeMap(() => this.app.select(authid$)),
-    mergeMap(id => this.auth.signout(id).pipe(
+    mergeMap(id => this.auth.signout().pipe(
       mergeMap(auth => ([
-        AUTH.update(null),
-        ME.load(null),
+        AUTH.update({}),
+        ME.load({}),
         NAV.go({url:"/secur01/verify"}),
       ])),
       catchError(error => of(AUTH.error(new AppError(error))))))));

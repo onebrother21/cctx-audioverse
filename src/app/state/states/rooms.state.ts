@@ -1,8 +1,8 @@
-import { CommonState,initializeCommonState } from "./common.state";
+import { CommonStateWithEntities,initializeCommonStateWithEntities } from "./common.state";
 import { Room } from "../models";
 
-export interface RoomsState extends CommonState<Room> {latest:Room[];}
+export interface RoomsState extends CommonStateWithEntities<Room> {latest:Room[];}
 export const initializeRooms = ():RoomsState => ({
-  ...initializeCommonState(false,true),
+  ...initializeCommonStateWithEntities(),
   latest:[],
 });
