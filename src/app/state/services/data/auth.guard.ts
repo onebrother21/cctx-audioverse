@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot){
     return this.app.select(authed$).pipe(
       take(1),
-      tap((auth:boolean) => this.app.logger.log("auth guard is good",auth)),
+      tap((auth:boolean) => this.app.logger.log("auth guard is good to go",auth)),
       map((auth:boolean) => {
         if(auth) return true;
         this.router.navigate(['/login'],{queryParams:{returnUrl:state.url}});
