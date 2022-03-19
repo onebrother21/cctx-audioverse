@@ -1,7 +1,7 @@
 import { CommonState,initializeCommonState } from "./common.state";
-import { Entity,AppRoute } from "../models";
+import { AppRoute } from "../models";
 
-export interface NavigationState extends CommonState<AppRoute & Entity> {
+export interface NavigationState extends CommonState<AppRoute> {
   page:string;
   requested?:AppRoute;
 }

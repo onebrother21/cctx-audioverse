@@ -1,7 +1,7 @@
 import { CommonState,initializeCommonState } from "./common.state";
-import { Entity } from "../models";
+import { AuthJson } from "../models";
 
-export interface AuthenticationState extends CommonState {status:any;}
+export interface AuthenticationState extends CommonState {status:AuthJson|null;}
 export const initializeAuth = ():AuthenticationState => ({
   ...initializeCommonState(false,false),
   status:null,

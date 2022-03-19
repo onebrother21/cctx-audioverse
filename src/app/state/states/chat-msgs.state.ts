@@ -1,8 +1,7 @@
 import { CommonState,initializeCommonState } from "./common.state";
-import { Entity } from "../models";
 import { ChatMsg } from "../models";
 
-export interface ChatMessagesState extends CommonState<ChatMsg & Entity> {latest:ChatMsg[];}
+export interface ChatMessagesState extends CommonState<ChatMsg> {latest:ChatMsg[];}
 export const initializeChatMessages = ():ChatMessagesState => ({
   ...initializeCommonState(false,true),
   latest:[],

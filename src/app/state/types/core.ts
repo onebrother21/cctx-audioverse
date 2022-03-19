@@ -29,11 +29,12 @@ export type Entity = {
   removed?:Date;
   desc?:string;
   meta?:MiscInfo;};
-export type SelectedEntity<T extends Entity> = {id:T["id"];i:number;item:T;};
-export type EntitySet<T extends Entity> = {
+export type SelectedEntity<T> = {id:string;i:number;item:T;};
+export type EntitySet<T> = {
   items:T[];
   ids:string[];
-  selected:SelectedEntity<T>|null;};
+  selected:SelectedEntity<T>|null;
+};
 export type DeletedEntity = {id:string;done:boolean;ok:boolean;};
 
 export type ReqValidationError = {msg:string;param:string;location:string;};

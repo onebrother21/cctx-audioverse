@@ -20,7 +20,8 @@ export type UserObj = AppEntity & UserConfig & UserOptConfig &  UserSettings & {
 };
 export type UserMeta = {acct:"SLV1"|"GLD1"|"GLD2"|"PLT1";mates:string[];};
 export type UserType = UserObj & UserMeta;
-export type UserPublic = "username"|"email"|"hometown"|"settings"|"roles"|"tastes"|"uses"|"bio"|"motto"|"social"|"img"|"mates"|"acct";
+export type UserPublic = "username"|"email"|"hometown"|"settings"|
+"roles"|"tastes"|"uses"|"bio"|"motto"|"social"|"img"|"mates"|"acct";
 export type UserJson = Pick<UserType,UserPublic> & {
   memberSince:string|Date;
   fullname?:string;
@@ -32,7 +33,7 @@ export class User extends AppEntity {
   json(me?:boolean):UserJson {
     const {
       username,email,name,hometown,settings,roles,tastes,uses,
-      bio,motto,social,img,mates,created,acct
+      bio,motto,social,img,mates,acct,created,
     } = this;
     return {
       username,email,
