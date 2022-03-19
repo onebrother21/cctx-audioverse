@@ -1,31 +1,22 @@
-import { NavItem,AppRoute } from "@state";
+import { NavItem } from "./navigation.model";
 
-export type AppHeader = {
-  menu:AppRoute[];
-};
-export type AppMobileNav = {
-  open:boolean;
-  menu:NavItem[];
-};
-export type AppFooter = {
-  open:boolean;
-  copy:string;
-};
-export type AppMainView = {
-  open:boolean;
-};
-export type AppPagination = {
+export type LayoutParams = {open?:boolean;menu?:NavItem[];};
+export type LayoutHeader = LayoutParams;
+export type LayoutHeaderNav = LayoutParams;
+export type LayoutFooter = LayoutParams & {copy:string;};
+export type LayoutMainView = LayoutParams;
+export type Pagination = {
   current:number;
   total:number;
   next?:string;
   prev?:string;
 };
 export type Layout = {
-  header:Partial<AppHeader>;
-  mobileNav:Partial<AppMobileNav>;
-  footer:Partial<AppFooter>;
-  main:Partial<AppMainView>;
-  pagination:Partial<AppPagination>;
+  header:LayoutHeader;
+  footer:LayoutFooter;
+  nav:LayoutHeaderNav;
+  main:LayoutMainView;
+  pagination?:Pagination;
 };
 export type Icon = {
   label:string;

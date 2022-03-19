@@ -1,9 +1,9 @@
 import { AppEntity } from "@state";
-import { User } from "./app-user.model";
+import { UserId } from "./user.model";
 
 export type Session = AppEntity & {
   id:string;
   title:string;
-  members:User[];
+  members:UserId[];
   duration:string|number;
 };

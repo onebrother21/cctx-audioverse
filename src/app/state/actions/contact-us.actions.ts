@@ -1,5 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { AppError,ContactUsMsg } from "../models";
+import { AppError } from "../types";
+import { ContactUsMsg } from "../models";
 
 export const ContactUsActions = {
   fetch:createAction("@qs/contact-us/fetch"),

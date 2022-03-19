@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'qs-header',
@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   title = "header";
+  headerNavOpen = false;
+  toggleHeaderNav(outside?:boolean){
+    this.headerNavOpen = outside == undefined || !outside?!this.headerNavOpen:false;
+  }
 }

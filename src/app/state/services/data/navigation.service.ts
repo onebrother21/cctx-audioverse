@@ -54,29 +54,3 @@ export class NavigationService {
     }
   }
 }
-/*
-case "appts":return "Appointments";
-case "commissions":return "Commissions";
-case "queue":return "Task Queue";
-case "chat":return "Service Chat";
-case "video-chat":return "Service Video Chat";
-
-case "services":return "Our Services";
-case "forms":return "Forms";
-case "links":return "Links";
-case "webinars":return "Webinars";
-case "announcements":return "Announcements";
-case "tutorials":return "Tutorials";
-
-case "file-single":return "File Single";
-case "blog-single":return "Blog Details";
-case "email":return "Email Template";
-case "coming":return "Coming Soon";
-
-case "signin":return "Sign In";
-case "signup":return "Sign Up";
-case "verify":return "Verify Email";
-case "complete-acct":return "Complete Account";
-case "forgot":return "Forgot Username/Pin";
-case "reset":return "Reset Pin";
-*/

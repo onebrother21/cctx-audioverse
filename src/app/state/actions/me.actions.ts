@@ -1,5 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { AppError,User } from "../models";
+import { AppError } from "../types";
+import { User } from "../models";
 
 export const MeActions = {
   active:createAction("@qs/me/active"),

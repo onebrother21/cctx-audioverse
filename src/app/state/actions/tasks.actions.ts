@@ -1,5 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { AppError,Task } from "../models";
+import { AppError } from "../types";
+import { Task } from "../models";
 
 export const TasksActions = {
   fetch:createAction("@qs/tasks/fetch"),

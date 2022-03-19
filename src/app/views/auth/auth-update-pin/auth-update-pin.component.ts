@@ -20,7 +20,7 @@ export class AuthUpdatePinComponent {
     this.auth.loading.subscribe(loading => this.loading = loading);
   }
   submitPin(pin:string){
-    if(!this.confirm){this.confirm = pin;this.greeting = "Confirm Your Pin";}
+    if(!this.confirm){this.confirm = pin;this.greeting = "Now Confirm Your Pin";}
     else if(this.confirm == pin) this.auth.send({action:"update-pin",pin});
     else return;
   }

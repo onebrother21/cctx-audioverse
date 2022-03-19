@@ -35,7 +35,7 @@
               <p>What would you like to do inside Audioverse?</p>
               <label formArrayName="uses" *ngFor="let o of usesControls; let i = index">
                 <input type="checkbox" [formControlName]="i">&nbsp;
-                <span class="u-text-3">{{uses[i]}}</span>
+                <span class="u-text-3">{{uses[i].label}}</span>
               </label>
             </div>
             <!--div *ngIf="!registerForm.valid" style="color:red">At least one category must be selected.</div-->

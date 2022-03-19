@@ -8,6 +8,7 @@ import { MeAccountEditorComponent } from './me-acct-editor';
 import { MeNotificationsComponent } from './me-notifications';
 import { MeNotifications2Component } from './me-notifications-2';
 import { MeHomeAltComponent } from './me-home-alt';
+import { MeSettingsEditorComponent } from './me-settings-editor';
 
 const routes: Routes = [
   {path:"",redirectTo:"hm",pathMatch:"full"},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:"hm2",component:MeHomeAltComponent},
   {path:"dash",component:MeDashComponent},
   {path:"acct",component:MeAccountComponent},
-  {path:"edit",component:MeAccountEditorComponent},
+  {path:"edit/acct",component:MeAccountEditorComponent},
+  {path:"edit/settings",component:MeSettingsEditorComponent},
   {path:"upgrade",component:MeAccountComponent},
   {path:"msgs",component:MeMessagesComponent},
 ];
@@ -28,10 +30,11 @@ export class MeRoutingModule { }
 export const COMPONENTS = [
   MeDashComponent,
   MeAccountComponent,
+  MeAccountEditorComponent,
+  MeSettingsEditorComponent,
   MeHomeComponent,
   MeHomeAltComponent,
   MeMessagesComponent,
-  MeAccountEditorComponent,
   MeNotificationsComponent,
   MeNotifications2Component,
 ];

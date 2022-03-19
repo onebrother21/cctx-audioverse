@@ -21,7 +21,7 @@ export class MeService {
   ext = "/app-user";
   constructor(private app:AppService,private _auth:AuthUsersDBService){}
   update(o:Partial<User>){return this._auth.update(o).pipe(tap(o => this.save(o)));
-  }//{return this.app.http.post<User>(this.ext+"/update",o);}
+  }//{return this.app.http.post<UserJson>(this.ext+"/update",o);}
   populate(){return this.app.local.get("appuser");}
   save(o:any){return this.app.local.set("appuser",o);}
 }

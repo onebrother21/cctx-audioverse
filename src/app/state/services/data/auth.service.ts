@@ -3,12 +3,18 @@ import { map,tap } from 'rxjs/operators';
 import { Observable,of, throwError } from 'rxjs';
 
 import { AppService } from '../app';
-import { User } from '../../models';
+import { AuthAcct, AuthJson, User } from '../../models';
 import { AuthUsersDBService } from '../../_auth_api';
 
 @Injectable({providedIn:'root'})
 export class AuthenticationService {
   ext = "/secur01";
+  url = "localhost:3000/api/v1/auth";
+  //register(newuser:AuthConfig){return this.app.http.post<AuthStatus>('/register',newuser);}
+  //login(creds:AuthCreds){return this.app.http.post<AuthStatus>('/login',creds);}
+  //verify(creds:AuthCreds){return this.app.http.post<AuthStatus>('/verify',creds);}
+  //reset(creds:AuthCreds){return this.app.http.post<AuthStatus>('/reset',creds);}
+  //logout(username:string){return this.app.http.del('/login',username);}
   constructor(private app:AppService,private _auth:AuthUsersDBService){}
   save(o:any){this.app.local.set("appuser",o);}
   navigateAuthentication(action:string){
@@ -26,9 +32,10 @@ export class AuthenticationService {
     };
     return of(navigator());
   }
-  getAuthStatus(o:Partial<User>){
+  getAuthStatus(o:Partial<AuthJson>){
     const sessionTime = 1000 * 60 * 3;
-    const idleTime = o.lastActivity?o.lastActivity.getTime() - Date.now():0;
+    const lastActivity = new Date(o.lastActivity||"");
+    const idleTime = lastActivity.getTime() - Date.now();
     return o.username && o.token && sessionTime >= idleTime?"authok":
     o.username && o.token?"signedin":
     "";

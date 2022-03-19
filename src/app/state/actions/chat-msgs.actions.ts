@@ -1,5 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { AppError,ChatMsg } from "../models";
+import { AppError } from "../types";
+import { ChatMsg } from "../models";
 
 export const ChatMessagesActions = {
   fetch:createAction("@qs/chat-msgs/fetch"),

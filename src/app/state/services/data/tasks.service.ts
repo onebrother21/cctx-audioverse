@@ -12,6 +12,9 @@ import { tasks } from '../../_data_api';
 export class TasksService {
   ext = "/tasks";
   constructor(private app:AppService){}
-  fetch(){return of(tasks);}//this.get<Task[]>();}
-  send(o:Task){return this.app.http.post<Task>(this.ext,o);}
+  fetch(){return of(tasks);}//this.app.http.get<Task[]>("/");}
+  fetchOne(username:string){return this.app.http.get<Task>("/"+username);}
+  create(username:string){return this.app.http.post<Task>("/",{username});}
+  update(id:string,updates:Partial<Task>){return this.app.http.put<Task>("/"+id,updates);}
+  remove(id:string){return this.app.http.del("/"+id);}
 }

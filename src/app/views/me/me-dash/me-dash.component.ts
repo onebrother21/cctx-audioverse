@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Icon } from '@state';
+import { Icon, User } from '@state';
 import { MeService } from '../me.service';
 
 @Component({
@@ -10,6 +10,9 @@ import { MeService } from '../me.service';
 export class MeDashComponent {
   title = "me-dash";
   menu:Icon[] = this.user.menu;
-  constructor(private user:MeService){}
+  me:Partial<User> = {};
+  constructor(private user:MeService){
+    this.user.me$.subscribe(me => this.me = me);
+  }
   selectItem(item:Icon){console.log(item);}
 }

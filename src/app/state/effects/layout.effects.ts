@@ -4,6 +4,7 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
+import { AppError } from "../types";
 import { AppError,AppService,AppRoute,route$ } from "@state";
 import { Layout } from "../models";
 import { LayoutState } from "../states";
@@ -21,7 +22,7 @@ export class LayoutEffects {
     ofType(ROUTER_NAVIGATION),
     map((action:RouterNavigationAction) => action.payload.routerState),
     mergeMap(() => ([
-      LAYOUT.toggleMobileNav(false),
+      LAYOUT.toggleNav(false),
       LAYOUT.scrollTop(),
     ]))));
   ScrollToTop$:Observable<Action> = createEffect(() => this.actions$.pipe(

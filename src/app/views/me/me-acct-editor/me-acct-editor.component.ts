@@ -1,26 +1,37 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { User } from '@state';
 import { MeService } from '../me.service';
 
 @Component({
   selector: 'qs-me-acct-editor',
   templateUrl: './me-acct-editor.component.html',
   styleUrls: ['./me-acct-editor.component.scss'],
-  //encapsulation:ViewEncapsulation.None
 })
 export class MeAccountEditorComponent {
   title = "me-acct-editor";
   updateAcctForm:FormGroup;
   loading:boolean = false;
+  me:Partial<User> = {};
   constructor(private user:MeService,private fb:FormBuilder){
-    this.user.loading.subscribe(loading => this.loading = loading);
     this.updateAcctForm = this.fb.group({
-      action:['update',Validators.required],
-      username:['',Validators.required],
-      firstname:['',Validators.required],
-      lastname:['',Validators.required],
-      age:['',Validators.required],
-      hometown:['',Validators.required],
+      action:['update-acct',Validators.required],
+      email:['',Validators.required],
+      phn:['',Validators.required],
+      motto:['',Validators.required],
+      bio:['',Validators.required],
+    });
+    this.user.loading$.subscribe(loading => this.loading = loading);
+    this.user.me$.subscribe(me => {
+      this.me = me;
+      console.log(me);
+      this.updateAcctForm.reset({
+        action:"update-acct",
+        email:me.email,
+        phn:me.phn,
+        motto:me.motto||"",
+        bio:me.bio||"",
+      });
     });
   }
   get f(){return this.updateAcctForm.controls;}
@@ -29,12 +40,11 @@ export class MeAccountEditorComponent {
     const o = {..._o,name:{first:firstname,last:lastname}};
     this.user.send(o);
     this.updateAcctForm.reset({
-      action:"updateAcct",
-      username:"",
-      firstname:"",
-      lastname:"",
-      age:"",
-      hometown:"",
+      action:"update-acct",
+      email:"",
+      phn:"",
+      motto:"",
+      bio:"",
     });
   }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { AppService } from "@state";
+import { AppService, User } from "@state";
 import {
   Icon,Ad,Room,
   NavigationActions as Navigation,
-  userLoading$,
+  userLoading$,me$,
 } from "@state";
 import { Observable } from "rxjs";
 
@@ -123,8 +123,12 @@ export class MeService {
       content:"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
     },
   ];
-  loading:Observable<boolean> = new Observable();
-  constructor(private app:AppService){this.loading = this.app.select(userLoading$);}
+  me$:Observable<Partial<User>> = new Observable();
+  loading$:Observable<boolean> = new Observable();
+  constructor(private app:AppService){
+    this.loading$ = this.app.select(userLoading$);
+    this.me$ = this.app.select(me$);
+  }
   send(o:any){this.app.do(Navigation.go({url:this.getNextMePage(o.type)}));}
   getNextMePage(type:string){
     switch(type){

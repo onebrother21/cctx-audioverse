@@ -1,5 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { AppError,Session } from "../models";
+import { AppError } from "../types";
+import { Session } from "../models";
 
 export const SessionsActions = {
   fetch:createAction("@qs/sessions/fetch"),

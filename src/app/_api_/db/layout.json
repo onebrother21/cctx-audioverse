@@ -1,0 +1,46 @@
+{
+  "header":{
+    "menu":[
+      {"link":"/en","label":"home"},
+      {"link":"/en/leaders","label":"leaders"},
+      {"link":"/en/contact","label":"contact"},
+      {"link":"/en/about","label":"about"},
+      {"link":"/en/auth","label":"signin"}
+    ],
+    "//deadlinks":[
+      {"link":"/en/components","label":"components"},
+      {"link":"/en/publications","label":"publications"},
+      {"link":"/en/speakings","label":"speakings"},
+      {"link":"/en/projects","label":"projects"}
+    ]
+  },
+  "footer":{
+    "open":true,
+    "copy":"&copy; 2020 Houston Chess League"
+  },
+  "sidebar":{
+    "open":false,
+    "menu":[
+      {"link":"/en/invites/new","label":"Invite Friends"},
+      {"link":"/en/invites/new/game","label":"Schedule Game"},
+      {"link":"/en/me","label":"Update Profile"},
+      {"link":"/en/me/settings","label":"Update Settings"}
+    ]
+  },
+  "main":{
+    "menu":[
+      {"link":"/en/me","label":"my profile"},
+      {"link":"/en/me/settings","label":"my settings"},
+      {"link":"/en/games/new","label":"schedule game"},
+      {"link":"/en/members/invite","label":"invite friends"},
+      {"link":"/en/about","label":"about"},
+      {"link":"/en/auth","label":"signin"}
+    ]
+  },
+  "pagination":{
+    "current":1,
+    "total":5,
+    "next":"",
+    "prev":""
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "about":{
+    "title":"Who I am, and what I love doing",
+    "published":"2018-11-25",
+    "readTime":1,
+    "content":[
+      "<p>Hi! My name is Carlos Caballero and I'm PhD. in Computer Science from Málaga, Spain.</p>",
+      "<p>Teaching developers and degree/master computer science how to be experts in web technologies ",
+      "and computer science fundamentals is what I do. I'm teaching in a vocational center and the ",
+      "University Oberta of Cataluya. Also, I teach to the companies which ask me specific courses ",
+      "in Angular, TypeScript, NodeJS or any topic about development.</p>",
+      "<p>I have collaborated with universities in research tasks, as a result of which I have ",
+      "given several talks around of the world and obtained a PhD. in computer science. ",
+      "In addition, I have written many books about computer science for computer students ",
+      "from networks to Web programming.<br><br>Finally, today I dedicate myself to teaching students, ",
+      "collaborating with companies to take their projects forward and creating personal projects ",
+      "that may be useful.</p>",
+      "<p>If you require my services or want a collaboration do not hesitate to contact me.</p>"
+    ]
+  },
+  "blog":{
+    "url":"/",
+    "name":"houston chess league",
+    "img":"assets/img/profile_image.jpg",
+    "motto":"Jackswift21",
+    "social":[
+      {
+        "url":"https://twitter.com/carlillo",
+        "title":"Twitter",
+        "class":"fab fa-twitter"
+      },
+      {
+        "url":"https://github.com/caballerog",
+        "title":"Fork me on Github",
+        "class":"fab fa-github"
+      },
+      {
+        "url":"https://www.linkedin.com/in/carlos-caballero-gonzalez",
+        "title":"linkedIn",
+        "class":"fab fa-linkedin-in"
+      },
+      {
+        "url":"https://www.carloscaballero.io/rss/",
+        "title":"RSS Feed",
+        "class":"fas fa-rss"
+      }
+    ]
+  },
+  "sharing":{
+    "greeting":[
+      "These blogs, resources and demonstrations are of great relevance now, ",
+      "I would love it if I had a moment to share them!"],
+    "menu":[
+      {
+        "type":"facebook",
+        "link":"https://www.facebook.com/sharer/sharer.php?",
+        "segments":["u=https://www.carloscaballero.io/javascript-es2016-features-with-examples/"],
+        "windowSize":"width=580,height=296",
+        "share":"facebook-share",
+        "icon":"fab fa-facebook-f",
+        "title":"Share on Facebook",
+        "label":"Facebook"},
+      {
+        "type":"twitter",
+        "link":"https://twitter.com/share?text=",
+        "segments":[
+          "JavaScript%20ES2016%20Features%20With%C2%A0Examples&amp;",
+          "url=https://www.carloscaballero.io/javascript-es2016-features-with-examples/"],
+        "windowSize":"width=550,height=235",
+        "share":"twitter-share",
+        "icon":"fab fa-twitter share-icon",
+        "title":"Share on Twitter",
+        "label":"Twitter"},
+      {
+        "type":"linkedin",
+        "link":"https://www.linkedin.com/shareArticle?mini=true&url=",
+        "segments":[
+          "mini=true&amp;",
+          "url=https://www.carloscaballero.io/javascript-es2016-features-with-examples/&amp;",
+          "title=JavaScript%20ES2016%20Features%20With%C2%A0Examples"],
+        "windowSize":"width=600,height=494",
+        "share":"linkedin-share",
+        "title":"Share on Linkedin",
+        "icon":"fab fa-linkedin-in",
+        "label":"linkedin"}
+    ]
+  },
+  "tags":[
+    {
+      "link":"posts/q",
+      "query":{"tag":"angular"},
+      "img":"angular_logo.png",
+      "label":"angular"},
+    {
+      "link":"posts/q",
+      "query":{"tag":"javascript"},
+      "img":"javascript_logo.png",
+      "label":"javascript"},
+    {
+      "link":"posts/q",
+      "query":{"tag":"nestjs"},
+      "img":"nestjs_logo.png",
+      "label":"nestjs"},
+    {
+      "link":"posts/q",
+      "query":{"tag":"nodejs"},
+      "img":"nodejs_logo.png",
+      "label":"nodejs"},
+    {
+      "link":"posts/q",
+      "query":{"tag":"typescript"},
+      "img":"typescript_logo.png",
+      "label":"typescript"},
+    {
+      "link":"posts/q",
+      "query":{"tag":"zextra"},
+      "img":"terminal_logo.png",
+      "label":"zextra"}
+  ],
+  "board":{
+    "leaders":[
+      {"label":"Jackswift","link":"users/jackswift","rank":0.669},
+      {"label":"DirtyD","link":"users/donaldo","rank":0.669},
+      {"label":"Paris","link":"users/parishenry","rank":0.669},
+      {"label":"Julia","link":"users/juliathesweet","rank":0.669}
+    ],
+    "this_week":[
+      {"label":"Jackswift","link":"users/jackswift","rank":0.669},
+      {"label":"DirtyD","link":"users/donaldo","rank":0.669},
+      {"label":"Paris","link":"users/parishenry","rank":0.669},
+      {"label":"Julia","link":"users/juliathesweet","rank":0.669}
+    ],
+    "overall":[
+      {"label":"Jackswift","link":"users/jackswift","rank":0.669},
+      {"label":"DirtyD","link":"users/donaldo","rank":0.669},
+      {"label":"Paris","link":"users/parishenry","rank":0.669},
+      {"label":"Julia","link":"users/juliathesweet","rank":0.669}
+    ],
+    "events":[
+      {"label":"The Opening","link":"events/123"},
+      {"label":"March Madness","link":"events/456"}
+    ],
+    "newMembers":[
+      {"label":"Jackswift","link":"users/jackswift"},
+      {"label":"DirtyD","link":"users/donaldo"},
+      {"label":"Paris","link":"users/parishenry"},
+      {"label":"Julia","link":"users/juliathesweet"}
+    ]
+  }
+}

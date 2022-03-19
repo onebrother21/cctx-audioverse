@@ -4,6 +4,7 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
+import { AppError } from "../types";
 import { AppError,AppService,AppRoute,route$ } from "@state";
 import { ContactUsMsg } from "../models";
 import { ContactUsState } from "../states";

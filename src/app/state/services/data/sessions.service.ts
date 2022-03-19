@@ -12,6 +12,9 @@ import { sessions } from '../../_data_api';
 export class SessionsService {
   ext = "/sessions";
   constructor(private app:AppService){}
-  fetch(){return of(sessions);}//this.get<Session[]>();}
-  send(o:Session){return this.app.http.post<Session>(this.ext,o);}
+  fetch(){return of(sessions);}//this.app.http.get<Session[]>("/");}
+  fetchOne(username:string){return this.app.http.get<Session>("/"+username);}
+  create(username:string){return this.app.http.post<Session>("/",{username});}
+  update(id:string,updates:Partial<Session>){return this.app.http.put<Session>("/"+id,updates);}
+  remove(id:string){return this.app.http.del("/"+id);}
 }

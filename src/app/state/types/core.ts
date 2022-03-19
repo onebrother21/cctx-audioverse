@@ -66,6 +66,3 @@ export interface LocaleDateOpts {
   minute?: string;
   second?: string;
 }
-export interface AppLocals {
-  dateFormat: LocaleDateOpts;
-}

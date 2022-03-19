@@ -1,23 +1,29 @@
-import { Entity,ErrorObj,ErrorConfig } from "./common-types";
-import { longId } from './common-utils';
+import { Entity,ErrorObj,ErrorConfig,LocaleDateOpts } from "./core";
+import { longId } from '../utils';
 
+export interface AppLocals {dateFormat: LocaleDateOpts;}
 export interface AppEntity extends Entity {}
 export class AppEntity {
   constructor(o:any){
     Object.assign(this,o);
-    this.id = o.id || longId();
-    this.created = new Date();}}
+    this.id = o.id || "qs-"+longId();
+    this.created = new Date();
+  }
+}
 export interface DocEntity extends Entity {
   published:string|Date;
   content:string|string[];
   title:string;
-  tags:string[];}
+  tags:string[];
+}
 export class DocEntity extends AppEntity {
   constructor(o:any){
     super(o);
     this.published = new Date();
     this.content = o.content || "";
-    this.tags = [];}}
+    this.tags = [];
+  }
+}
 export interface AppError extends ErrorObj {}
 export class AppError extends Error {
   constructor(o:string|Error|ErrorConfig){

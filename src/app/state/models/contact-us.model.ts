@@ -1,2 +1,4 @@
-import { AppEntity } from '@state';
-export type ContactUsMsg = AppEntity & Record<"name"|"email"|"subject"|"message",string>;
+import { AppEntity } from '../types';
+import { UserId } from './user.model';
+
+export type ContactUsMsg = AppEntity & Record<"name"|"email"|"subject"|"message",string> & {user?:UserId;};

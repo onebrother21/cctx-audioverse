@@ -21,7 +21,11 @@ export class AuthRegisterExtComponent {
   isSubmitted = false;
   tastes = ["Country","Jazz","HipHop & Rap","Pop","Rock","Indie"];
   roles = ["Producer","Engineer","Writer","Vocalist","Rapper","Instrumentalist","Industry Rep","Fan"];
-  uses = ["Create new music","Browse new music","Learn from others","Socialize with others"];
+  uses = [
+    {label:"Create new music",value:"create"},
+    {label:"Browse new music",value:"browse"},
+    {label:"Learn from others",value:"learn"},
+    {label:"Socialize with others",value:"socialize"},];
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading.subscribe(loading => this.loading = loading);
     this.registerForm = this.fb.group({
@@ -51,9 +55,8 @@ export class AuthRegisterExtComponent {
     if(!this.registerForm.valid){false;}
     const tastes = this.mapAndFilterCheckList(this.registerForm.value.tastes,this.tastes);
     const roles = this.mapAndFilterCheckList(this.registerForm.value.roles,this.roles);
-    const uses = this.mapAndFilterCheckList(this.registerForm.value.uses,this.uses);
+    const uses = this.mapAndFilterCheckList(this.registerForm.value.uses,this.uses).map(o => o.value);
     const o = {action:this.registerForm.value.action,tastes,roles,uses};
-    console.log(o);
     this.auth.send(o);
     this.registerForm.reset({
       action:"register-ext",

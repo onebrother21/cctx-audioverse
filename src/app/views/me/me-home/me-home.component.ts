@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Ad, Room } from '@state';
+import { Ad, Room, User } from '@state';
 import { MeService } from '../me.service';
 
 @Component({
@@ -9,9 +9,10 @@ import { MeService } from '../me.service';
 })
 export class MeHomeComponent {
   title = "me-home";
-  rooms:Room[] = this.me.rooms;
-  ads:Ad[] = this.me.ads;
-  constructor(private me:MeService){
-
+  rooms:Room[] = this.user.rooms;
+  ads:Ad[] = this.user.ads;
+  me:Partial<User> = {};
+  constructor(private user:MeService){
+    this.user.me$.subscribe(me => this.me = me);
   }
 }

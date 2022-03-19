@@ -10,10 +10,25 @@ import { ChatMessagesState } from './chat-msgs.state';
 import { ContactUsState } from './contact-us.state';
 import { TasksState } from "./tasks.state";
 
+import { HCLContentState } from './content';
+import { AlertsState } from './alerts';
+import { AuthState } from './auth';
+import { UserState } from './user';
+import { SearchState } from './search';
+import { HCLPlayersState } from './players';
+import { HCLGamesState } from './games';
+import { HCLTourneysState } from './tourneys';
+import { HCLInvitesState } from './invites';
+import { HCLLessonsState } from './lessons';
+import { HCLPostsState } from './posts';
+
 export interface AppState {
   router:RouterState;
   layout:LayoutState;
+  alerts:AlertsState;
+  content:HCLContentState;
   navigation:NavigationState;
+  search:SearchState;
   auth:AuthenticationState;
   me:MeState;
   users:UsersState;
@@ -22,6 +37,12 @@ export interface AppState {
   msgs:ChatMessagesState;
   contactUs:ContactUsState;
   tasks:TasksState;
+  players:HCLPlayersState;
+  games:HCLGamesState;
+  tourneys:HCLTourneysState;
+  invites:HCLInvitesState;
+  lessons:HCLLessonsState;
+  posts:HCLPostsState;
 }
 
 export * from "./common.state";
@@ -37,3 +58,18 @@ export * from "./chat-msgs.state";
 export * from "./contact-us.state";
 export * from "./tasks.state";
 //add some stat type, exp pts for clients taking classes, show on leaderboard
+
+export * from "./alerts";
+export * from "./auth";
+export * from "./common";
+export * from "./content";
+export * from "./games";
+export * from "./invites";
+export * from "./layout";
+export * from "./lessons";
+export * from "./navigation";
+export * from "./posts";
+export * from "./players";
+export * from "./search";
+export * from "./tourneys";
+export * from "./user";

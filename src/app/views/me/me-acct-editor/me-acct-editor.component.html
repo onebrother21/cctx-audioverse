@@ -24,28 +24,33 @@ C99.9,93.7,86.4,82.3,124.3,80.3z"></path></svg>
           <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
             <div class="u-container-layout u-valign-middle u-container-layout-2">
               <div class="u-expanded-width u-form u-form-1">
-                <form action="//localhost:51889/editor/Forms/Process" method="POST" class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" source="email" name="form">
+                <form [formGroup]="updateAcctForm" (ngSubmit)="submitForm()" 
+                class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" name="form">
                   <input type="hidden" id="siteId" name="siteId" value="745822">
                   <input type="hidden" id="pageId" name="pageId" value="749340">
                   <div class="u-form-email u-form-group u-form-group-2">
                     <label for="email-3b9a" class="u-form-control-hidden u-label">Email</label>
-                    <input type="email" placeholder="Enter a valid email address" id="email-3b9a" name="email" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
+                    <input type="text" placeholder="Enter email" id="email-3b9a" name="email" formControlName="email" 
+                    class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
                   </div>
                   <div class="u-form-email u-form-group u-form-group-2">
                     <label for="email-3b9a" class="u-form-control-hidden u-label">Phone</label>
-                    <input type="email" placeholder="Enter a valid email address" id="email-3b9a" name="email" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
+                    <input type="text" placeholder="Enter phone" id="email-3b9a" name="phn" formControlName="phn" 
+                    class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
                   </div>
                   <div class="u-form-email u-form-group u-form-group-2">
                     <label for="email-3b9a" class="u-form-control-hidden u-label">Motto</label>
-                    <input type="email" placeholder="Enter a valid email address" id="email-3b9a" name="email" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
+                    <input type="text" placeholder="Enter motto" id="email-3b9a" name="motto" formControlName="motto" 
+                    class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required="">
                   </div>
-                  <div class="u-form-group u-form-message u-form-group-3">
-                    <label for="message-3b9a" class="u-form-control-hidden u-label">Bio</label>
-                    <textarea placeholder="Enter your message" rows="4" cols="50" id="message-3b9a" name="message" class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-3" required=""></textarea>
+                  <div class="u-form-email u-form-group u-form-group-2">
+                    <label for="email-3b9a" class="u-form-control-hidden u-label">Bio</label>
+                    <textarea placeholder="Enter bio" rows="4" cols="50" id="message-3b9a" name="bio" formControlName="bio" 
+                    class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-2" required=""></textarea>
                   </div>
                   <div class="u-align-left u-form-group u-form-submit u-form-group-4">
-                    <a href="#" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">Submit</a>
-                    <input type="submit" value="submit" class="u-form-control-hidden">
+                    <input type="submit" value="submit" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">
+                    <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
                   </div>
                   <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                   <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>

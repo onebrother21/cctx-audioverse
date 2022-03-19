@@ -12,7 +12,8 @@ const reducer = createReducer(
   on(AUTH.registerExt,s => ({...s,loading:true})),
   on(AUTH.updatePin,s => ({...s,loading:true})),
   on(AUTH.login,s => ({...s,loading:true})),
-  on(AUTH.forgot,s => ({...s,loading:true})),
+  on(AUTH.forgotName,s => ({...s,loading:true})),
+  on(AUTH.forgotPin,s => ({...s,loading:true})),
   on(AUTH.load,(s,{payload:user})  => ({...s,auth:user,loading:false})),
   on(AUTH.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
 );

@@ -1,7 +1,7 @@
 import { AppEntity } from '@state';
-import { User } from "./app-user.model";
+import { UserId } from "./user.model";
 
-export type TaskAgent = User;
+export type TaskAgent = UserId;
 export type TaskTypes = {
   "onboarding":"Onboarding";
   "new-lead":"New Lead";

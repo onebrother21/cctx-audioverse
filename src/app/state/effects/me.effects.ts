@@ -4,10 +4,10 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,switchMap } from "rxjs/operators";
 
-import { AppError,AppService } from "@state";
+import { AppError } from "../types";
 import { User } from "../models";
 import { MeActions as ME } from "../actions";
-import { MeService } from "../services";
+import { AppService,MeService } from "../services";
 
 @Injectable()
 export class MeEffects implements OnInitEffects {

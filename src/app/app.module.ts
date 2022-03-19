@@ -5,13 +5,15 @@ import { SharedModule } from './shared';
 import { LayoutModule } from "./layout";
 import { AppStateModule } from './state';
 import { AppRoutingModule } from './app-routing.module';
+import { LandingModule } from './views/landing';
 import { AppComponent } from './app.component';
+
+import { fakeBackendProvider } from './_api_';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '@env/environment.prod';
-import { LandingModule } from './views/landing';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +28,7 @@ import { LandingModule } from './views/landing';
     AngularFireStorageModule,
     LandingModule,
   ],
-  providers: [],
+  providers: [fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

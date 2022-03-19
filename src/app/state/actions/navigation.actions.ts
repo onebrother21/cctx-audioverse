@@ -1,8 +1,8 @@
 import { createAction } from "@ngrx/store";
-import { AppError,AppRoute } from  "../models";
+import { AppError } from "../types";
+import { AppRoute } from  "../models";
 
 export const NavigationActions = {
-  navigate:createAction("@qs/navigation/navigate",(o:AppRoute) => ({payload:o})),
   go:createAction("@qs/navigation/go",(o:AppRoute) => ({payload:o})),
   back:createAction("@qs/navigation/back",(o:AppRoute) => ({payload:o})),
   forward:createAction("@qs/navigation/forward",(o:AppRoute) => ({payload:o})),
