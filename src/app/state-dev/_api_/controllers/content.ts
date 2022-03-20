@@ -6,7 +6,7 @@ export const contentController = (request:HttpRequest<any>,next:HttpHandler) => 
   const {url,method,headers,body} = request;
   const CONTENT = {
     fetch:() => {
-      save("hcl-content",db.content);
+      save("qs-content",db.content);
       return ok(db.content);}};
   switch(true){
     case method === 'GET':return CONTENT.fetch();

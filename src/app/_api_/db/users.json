@@ -1,28 +1,38 @@
 [
   {
     "id":"some-random-id-0",
+    "sid":"some-random-id-0",
+    "name":{"first":"Jimmy","last":"Swift"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
     "created":"2020-2-7",
-    "handle":"jackswift",
-    "email":"service.onebrother@gmail.com",
-    "pin":"0000",
-    "code":null,
-    "role":"HCL-SUPER",
-    "scopes":["games","profiles","invites"],
-    "verified":"2020-2-7",
-    "loggedin":"2020-2-7",
-    "updated":"2020-2-7"
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
   },
   {
     "id":"some-random-id-1",
+    "sid":"some-random-id-1",
+    "name":{"first":"Jack","last":"Swift"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
     "created":"2020-2-7",
-    "handle":"skateboard",
-    "email":"service.onebrother@gmail.com",
-    "pin":"0000",
-    "code":null,
-    "role":"HCL-ADMIN",
-    "scopes":["games","profiles","invites"],
-    "verified":"2020-2-7",
-    "loggedin":"2020-2-7",
-    "updated":"2020-2-7"
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
   }
 ]

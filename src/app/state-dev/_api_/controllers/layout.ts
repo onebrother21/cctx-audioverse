@@ -2,8 +2,8 @@ import { HttpRequest,HttpHandler} from '@angular/common/http';
 import { ok,save,errors as e } from '../utils';
 import { db } from '../db';
 
-export const layoutController = (req:HttpRequest<any>) => {
-  const {url,method,headers,body} = req;
+export const layoutController = (request:HttpRequest<any>,next:HttpHandler) => {
+  const {url,method,headers,body} = request;
   const LAYOUT = {
     fetch:() => {
       save('qs-layout',db.layout);

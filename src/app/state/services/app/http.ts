@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AppLocalStorageService } from './local-storage';
-import { DeletedEntity } from "../../models";
+import { DeletedEntity } from "../../types";
 
 @Injectable({providedIn:"root"})
 export class AppHttpService {

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Strings } from "../../models";
+import { Strings } from "../../types";
 
 const colors:Strings = {
   log:"cyan",

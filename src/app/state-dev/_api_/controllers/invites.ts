@@ -1,16 +1,17 @@
 import { HttpRequest,HttpHandler} from '@angular/common/http';
-import { AppEntity, Invite } from '@state';
+import { Invite } from '@state';
+import { longId,AppError } from '@onebro/ob-common';
 import { ok,isLoggedIn,idFromUrl,findone,save,add,errors as e } from '../utils';
 import { db } from '../db';
 
-export const invitesController = (req:HttpRequest<any>) => {
-  const {url,method,headers,body} = req;
+export const invitesController = (request:HttpRequest<any>,next:HttpHandler) => {
+  const {url,method,headers,body} = request;
   const INVITES = {
     create:() => {
-      const newinvite = body as Invite;
-      add("qs-invites",db.invites,new AppEntity(newinvite));
-      return ok();},
-    fetchRecent:() => !isLoggedIn(headers)?e["unauthorized"]():ok(db.invites),
+      const newinvite = new Invite(body);
+      add("qs-invites",db.invites,newinvite);
+      return ok(newinvite);},
+    fetchRecent:() => /*!isLoggedIn(headers)?unauthorized():*/ok(db.invites),
     fetchById:() => {
       return isLoggedIn(headers)?e["unauthorized"]():
       ok(db.invites.find(x => x.id == idFromUrl(url)));},
@@ -23,9 +24,7 @@ export const invitesController = (req:HttpRequest<any>) => {
       if (!isLoggedIn(headers)) return e["unauthorized"]();
       db.invites = db.invites.filter(x => x.id !== idFromUrl(url));
       save("qs-invites",db.invites);
-      return ok();
-    }
-  };
+      return ok();}};
   switch(true){
     case url.endsWith('/invites') && method === 'POST':return INVITES.create();
     case url.endsWith('/invites') && method === 'GET':return INVITES.fetchRecent();

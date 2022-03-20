@@ -8,8 +8,8 @@ export type AuthConfig = AuthCreds & AuthId & AuthRole;
 export type AuthObj = AppEntity & AuthCreds & AuthId & AuthRole & {
   scopes:string[];
   req?:string;
-  reset?:string;
-  verification?:string;
+  reset?:string|null;
+  verification?:string|null;
 };
 export type AuthMeta = {
   verified:string|Date;

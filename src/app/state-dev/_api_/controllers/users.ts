@@ -3,8 +3,8 @@ import { UserConfig,User, AppEntity } from '@state';
 import { ok,isLoggedIn,idFromUrl,errors as e,save,findone,add } from '../utils';
 import { db } from '../db';
 
-export const usersController = (req:HttpRequest<any>) => {
-  const {url,method,headers,body} = req;
+export const usersController = (request:HttpRequest<any>,next:HttpHandler) => {
+  const {url,method,headers,body} = request;
   const USERS = {
     create:() => {
       const newuser = new User({

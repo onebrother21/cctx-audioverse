@@ -1,6 +1,5 @@
 import { HttpRequest,HttpHandler} from '@angular/common/http';
-import { Game } from '@state';
-import { longId,AppError, slugify } from '@onebro/ob-common';
+import { Game,longId,AppError, slugify } from '@state';
 import { ok,isLoggedIn,idFromUrl,findone,save,add,errors as e } from '../utils';
 import { db } from '../db';
 
@@ -9,7 +8,7 @@ export const gamesController = (request:HttpRequest<any>,next:HttpHandler) => {
   const GAMES = {
     create:() => {
       const newgame = body as Game;
-      add("hcl-games",db.games,newgame);
+      add("qs-games",db.games,newgame);
       return ok();},
     fetchRecent:() => /*!isLoggedIn(headers)?unauthorized():*/ok(db.games),
     fetchById:() => {
@@ -18,13 +17,15 @@ export const gamesController = (request:HttpRequest<any>,next:HttpHandler) => {
     update:() => {
       if (!isLoggedIn(headers)) return e["unauthorized"]();
       let {o,i} = findone(db.games,"id",idFromUrl(url));
-      save("hcl-games",db.games,{...o,...body},i);
+      save("qs-games",db.games,{...o,...body},i);
       return ok();},
     remove:() => {
       if (!isLoggedIn(headers)) return e["unauthorized"]();
       db.games = db.games.filter(x => x.id !== idFromUrl(url));
-      save("hcl-games",db.games);
-      return ok();}};
+      save("qs-games",db.games);
+      return ok();
+    }
+  };
   switch(true){
     case url.endsWith('/games') && method === 'POST':return GAMES.create();
     case url.endsWith('/games') && method === 'GET':return GAMES.fetchRecent();

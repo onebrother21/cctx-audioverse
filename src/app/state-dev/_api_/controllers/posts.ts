@@ -9,7 +9,7 @@ export const postsController = (request:HttpRequest<any>,next:HttpHandler) => {
   const POSTS = {
     create:() => {
       const newpost = body as Post;
-      add("hcl-posts",db.posts,{...newpost,slug:slugify(newpost.title)});
+      add("qs-posts",db.posts,{...newpost,slug:slugify(newpost.title)});
       return ok();},
     fetch:() => /*!isLoggedIn(headers)?unauthorized():*/ok(db.posts),
     fetchRecent:() => /*!isLoggedIn(headers)?unauthorized():*/ok(db.recent),
@@ -19,12 +19,12 @@ export const postsController = (request:HttpRequest<any>,next:HttpHandler) => {
     update:() => {
       if (!isLoggedIn(headers)) return e["unauthorized"]();
       let {o,i} = findone(db.posts,"id",idFromUrl(url));
-      save("hcl-posts",db.posts,{...o,...body},i);
+      save("qs-posts",db.posts,{...o,...body},i);
       return ok();},
     remove:() => {
       if (!isLoggedIn(headers)) return e["unauthorized"]();
       db.posts = db.posts.filter(x => x.id !== idFromUrl(url));
-      save("hcl-posts",db.posts);
+      save("qs-posts",db.posts);
       return ok();}};
   switch(true){
     case url.endsWith('/posts') && method === 'POST':return POSTS.create();

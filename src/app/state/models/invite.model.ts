@@ -1,5 +1,5 @@
 import { DocEntity,Status } from '../types';
-import { PlayerId } from './player.model';
+import { PlayerId } from '../../state-dev/models/player.model';
 
 export enum InviteStatuses {
   S = "sent",

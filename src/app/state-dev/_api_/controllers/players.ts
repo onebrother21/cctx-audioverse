@@ -13,7 +13,7 @@ export const playersController = (request:HttpRequest<any>,next:HttpHandler) => 
         ...new Entity({}),
         settings:{lang:"en"},
         mates:[]} as AppUserProfile;
-      add("hcl-profiles",db.profiles,newprofile);
+      add("qs-profiles",db.profiles,newprofile);
       return ok(new AppUser(newprofile).json(true));},
     fetch:() => !isLoggedIn(headers)?
       e["unauthorized"]():
@@ -33,13 +33,13 @@ export const playersController = (request:HttpRequest<any>,next:HttpHandler) => 
       (() => {
         let {o,i} = findone(db.profiles,"id",idFromUrl(url));
         for(const k in body) o[k] = body[k];
-        save("hcl-profiles",db.profiles,o,i);
+        save("qs-profiles",db.profiles,o,i);
         return ok(new AppUser(o).json(true));})(),
     remove:() => !isLoggedIn(headers)?
       e["unauthorized"]():
       (() => {
         db.profiles = db.profiles.filter(x => x.id !== idFromUrl(url));
-        save("hcl-profiles",db.profiles);
+        save("qs-profiles",db.profiles);
         return ok();})(),
     search:() => !isLoggedIn(headers)?
       e["unauthorized"]():
