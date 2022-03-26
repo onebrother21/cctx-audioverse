@@ -10,9 +10,8 @@ export const SessionsActions = {
   unloadOne:createAction('@qs/sessions/unload',(o:string) => ({payload:o})),
   select:createAction('@qs/sessions/select',(o:string) => ({payload:o})),
   deselect:createAction("@qs/sessions/deselect"),
-  
   create:createAction("@qs/sessions/create",(o:Session) => ({payload:o})),
   update:createAction('@qs/sessions/update',(o:Partial<Session>) => ({payload:o})),
   remove:createAction('@qs/sessions/remove',(o:string) => ({payload:o})),
-  error:createAction("@qs/sessions/error",(o:AppError) => ({payload:o})),
+  error:createAction("@qs/sessions/error",(o:Error|AppError) => ({payload:o})),
 };

@@ -1,7 +1,7 @@
 <div class="u-layout-row">
   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-1">
     <div class="u-container-layout u-container-layout-1">
-      <h2 class="u-text u-text-grey-70 u-text-1">Tell Us About Yourself</h2>
+      <h2 class="u-text u-text-grey-70 u-text-1">Tell Us A Bit More</h2>
     </div>
   </div>
   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
@@ -23,9 +23,9 @@
           <div class="u-form-group u-form-name u-form-group-1">
             <div class="checkboxes">
               <p>Do you work in the music industry? Tell us how.</p>
-              <label formArrayName="roles" *ngFor="let o of rolesControls; let i = index">
+              <label formArrayName="mantles" *ngFor="let o of mantlesControls; let i = index">
                 <input type="checkbox" [formControlName]="i">&nbsp;
-                <span class="u-text-3">{{roles[i]}}</span>
+                <span class="u-text-3">{{mantles[i]}}</span>
               </label>
             </div>
             <!--div *ngIf="!registerForm.valid" style="color:red">At least one category must be selected.</div-->

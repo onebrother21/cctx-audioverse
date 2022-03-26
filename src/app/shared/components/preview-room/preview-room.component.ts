@@ -10,19 +10,7 @@ import { Room } from '@state';
 })
 export class PreviewRoomComponent {
   title = "preview-room";
-  @Input() preview:Room = {
-    id:"00",
-    name:"",
-    img:"",
-    vid:"",
-    users:[],
-    rank:0,
-    duration:"",
-    viewCt:0,
-    commentCt:0,
-    userCt:0,
-    created:new Date(),
-  };
+  @Input() preview?:Room;
   @Output() select:EventEmitter<any> = new EventEmitter();
   isLast = 1;
 }

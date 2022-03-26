@@ -1,5 +1,5 @@
-import { HttpRequest,HttpHandler} from '@angular/common/http';
-import { UserConfig,User, AppEntity } from '@state';
+import { HttpRequest } from '@angular/common/http';
+import { User } from '@state';
 import { ok,isLoggedIn,idFromUrl,errors as e,save,findone,add } from '../utils';
 import { db } from '../db';
 
@@ -7,13 +7,10 @@ export const usersController = (req:HttpRequest<any>) => {
   const {url,method,headers,body} = req;
   const USERS = {
     create:() => {
-      const newuser = new User({
-        ...body as UserConfig,
-        settings:{lang:"en",app:{}},
-        mates:[]
-       });
-      add("qs-users",db.users,newuser);
-      return ok(new User(newuser).json(true));},
+      const o = new User({...body,settings:{lang:"en",app:{}},mates:[]});
+      add("qs-users",db.users,o);
+      return ok(o.json(true));
+    },
     fetch:() => !isLoggedIn(headers)?e["unauthorized"]():ok(db.users.map(p => new User(p).json())),
     fetchRecent:() => !isLoggedIn(headers)?e["unauthorized"]():ok(db.users.map(p => new User(p).json())),
     fetchByUsername:() => !isLoggedIn(headers)?
@@ -23,14 +20,13 @@ export const usersController = (req:HttpRequest<any>) => {
         const o = db.users.find(o => o.username == idFromUrl(url));
         return ok(new User(o).json(mine));
       })(),
-    update:() => !isLoggedIn(headers)?
-      e["unauthorized"]():
-      (() => {
-        let {o,i} = findone(db.users,"id",idFromUrl(url));
-        for(const k in body) o[k as keyof User] = body[k];
-        save("qs-users",db.users,o,i);
-        return ok(new User(o).json(true));
-      })(),
+    update:() => {
+      if(!isLoggedIn(headers)) return e["unauthorized"]();
+      const {o,i} = findone(db.users,"id",idFromUrl(url));
+      for(const k in body) (o as any)[k] = body[k];
+      save("qs-users",db.users,o,i);
+      return ok(new User(o).json(true));
+    },
     remove:() => !isLoggedIn(headers)?
       e["unauthorized"]():
       (() => {

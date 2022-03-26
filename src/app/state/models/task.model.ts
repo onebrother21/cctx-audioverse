@@ -34,4 +34,5 @@ export type Task = AppEntity & {
   progress:number;
   agent?:TaskAgent;
   notes?:string[];
+  tags?:string[];
 };

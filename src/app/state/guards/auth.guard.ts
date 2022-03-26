@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { take,map,tap } from 'rxjs';
 import { AppService } from '../services';
 import { authed$ } from '../selectors';
+import * as AppUtils from "../utils";
 
 @Injectable({providedIn:'root'})
 
@@ -14,7 +15,7 @@ export class AuthGuard implements CanActivate {
     return this.app.select(authed$).pipe(
       take(1),
       map(o => !!o),
-      tap((auth:boolean) => this.app.logger.log("auth guard is good to go",auth)),
+      tap((auth:boolean) => AppUtils.log("auth guard is good to go",auth)),
       map((auth:boolean) => {
         if(auth) return true;
         this.router.navigate(['/login'],{queryParams:{returnUrl:state.url}});

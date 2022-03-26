@@ -13,5 +13,5 @@ export const RoomsActions = {
   create:createAction("@qs/rooms/create",(o:Room) => ({payload:o})),
   update:createAction('@qs/rooms/update',(o:Partial<Room>) => ({payload:o})),
   remove:createAction('@qs/rooms/remove',(o:string) => ({payload:o})),
-  error:createAction("@qs/rooms/error",(o:AppError) => ({payload:o})),
+  error:createAction("@qs/rooms/error",(o:Error|AppError) => ({payload:o})),
 };

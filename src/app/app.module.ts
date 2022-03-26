@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LandingModule } from './views/landing';
 import { AppComponent } from './app.component';
 
-import { fakeBackendProvider } from './_api_';
+import { MockBackendProvider } from './_api_';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -28,7 +28,7 @@ import { environment } from '@env/environment.prod';
     AngularFireStorageModule,
     LandingModule,
   ],
-  providers: [fakeBackendProvider],
+  providers: [MockBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

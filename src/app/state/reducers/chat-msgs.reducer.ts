@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { ChatMessagesActions as CHAT } from "../actions";
 import { ChatMessagesState,initializeChatMessages } from "../states";
+import { AppError } from "../types";
 
 const initialState = initializeChatMessages();
 const reducer = createReducer(
@@ -35,7 +36,8 @@ const reducer = createReducer(
     return {...s,selected,error:null};
   }),
   on(CHAT.deselect,(s) => ({ ...s,selected:null})),
-  on(CHAT.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
+  on(CHAT.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );
 
 export function ChatMessagesReducer(s:ChatMessagesState|undefined,action:Action) {return reducer(s,action);}
+const formetError = (e:Error|AppError) => e instanceof AppError?e.json():e;

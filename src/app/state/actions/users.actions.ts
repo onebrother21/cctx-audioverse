@@ -10,8 +10,8 @@ export const UsersActions = {
   unloadOne:createAction('@qs/users/unload',(o:string) => ({payload:o})),
   select:createAction('@qs/users/select',(o:string) => ({payload:o})),
   deselect:createAction("@qs/users/deselect"),
-  create:createAction("@qs/users/create",(o:User) => ({payload:o})),
+  create:createAction("@qs/users/create",(o:{username:string}) => ({payload:o})),
   update:createAction('@qs/users/update',(o:Partial<User>) => ({payload:o})),
   remove:createAction('@qs/users/remove',(o:string) => ({payload:o})),
-  error:createAction("@qs/users/error",(o:AppError) => ({payload:o})),
+  error:createAction("@qs/users/error",(o:Error|AppError) => ({payload:o})),
 };

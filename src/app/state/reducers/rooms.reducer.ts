@@ -1,13 +1,15 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { RoomsActions as ROOMS } from "../actions";
 import { RoomsState,initializeRooms } from "../states";
+import { AppError } from "../types";
 
 const initialState = initializeRooms();
 const reducer = createReducer(
   initialState,
   on(ROOMS.fetch,s => ({...s,loading:true})),
   on(ROOMS.fetchRecent,s => ({...s,loading:true})),
-  on(ROOMS.send,s => ({...s,loading:true})),
+  on(ROOMS.create,s => ({...s,loading:true})),
+  on(ROOMS.update,s => ({...s,loading:true})),
   on(ROOMS.load,(s,{payload:items}) => ({
     ...s,
     items,
@@ -35,7 +37,8 @@ const reducer = createReducer(
     return {...s,selected,error:null};
   }),
   on(ROOMS.deselect,(s) => ({ ...s,selected:null})),
-  on(ROOMS.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
+  on(ROOMS.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );
 
 export function RoomsReducer(s:RoomsState|undefined,action:Action) {return reducer(s,action);}
+const formetError = (e:Error|AppError) => e instanceof AppError?e.json():e;

@@ -3,11 +3,10 @@ import { AppError } from "../types";
 import { User } from "../models";
 
 export const MeActions = {
-  active:createAction("@qs/me/active"),
+  //active:createAction("@qs/me/active"),
   populate:createAction("@qs/me/populate"),
   load:createAction("@qs/me/load",(o:Partial<User>) => ({payload:o})),
   unload:createAction('@qs/me/unload'),
-  create:createAction("@qs/me/create",(o:User) => ({payload:o})),
   update:createAction('@qs/me/update',(o:Partial<User>) => ({payload:o})),
-  error:createAction("@qs/me/error",(o:AppError) => ({payload:o})),
+  error:createAction("@qs/me/error",(o:Error|AppError) => ({payload:o})),
 };

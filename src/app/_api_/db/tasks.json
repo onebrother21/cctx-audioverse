@@ -1,12 +1,13 @@
 [
   {
-    "id":"1",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-1",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+    "id":"s0ome-task-id-1",
+    "desc":"finish data state",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"onboarding",
+    "progress":92,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -16,15 +17,16 @@
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
     "tags":["angular","nodejs"]
-  },
-  {
-    "id":"2",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-2",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+  },{
+    "id":"s0ome-task-id-2",
+    "desc":"do search feature",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"doc-review",
+    "agent":"s0ome-user-id-1",
+    "progress":45,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -33,34 +35,17 @@
       "Inani feugait ancillae sit at. Suavitate efficiendi mea ea, ",
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
-    "tags":["nestjs","typescript"]
-  },
-  {
-    "id":"3",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-3",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
-      "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
-      "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
-      "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
-      "Eu prompta platonem quo, sea ne tempor eirmod explicari, quem prima ut eam. ",
-      "Mel tamquam petentium definiebas eu, numquam vocibus noluisse in duo. ",
-      "Inani feugait ancillae sit at. Suavitate efficiendi mea ea, ",
-      "tantas oportere scriptorem no his, sea affert veritus ne."
-    ],
-    "tags":["angular"]
-  },
-  {
-    "id":"4",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-4",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+    "tags":["angular","nodejs"]
+  },{
+    "id":"s0ome-task-id-3",
+    "desc":"add filters to home feed",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"onboarding",
+    "agent":"s0ome-user-id-1",
+    "progress":63.50,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -70,15 +55,33 @@
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
     "tags":["angular"]
-  },
-  {
+  },{
+    "id":"s0ome-task-id-4",
+    "desc":"finish app layout",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2022",
+    "type":"onboarding",
+    "progress":63.50,
+    "notes":[
+      "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
+      "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
+      "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
+      "Eu prompta platonem quo, sea ne tempor eirmod explicari, quem prima ut eam. ",
+      "Mel tamquam petentium definiebas eu, numquam vocibus noluisse in duo. ",
+      "Inani feugait ancillae sit at. Suavitate efficiendi mea ea, ",
+      "tantas oportere scriptorem no his, sea affert veritus ne."
+    ],
+    "tags":["angular"]
+  },{
     "id":"5",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-5",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+    "desc":"appreciate yourself",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"onboarding",
+    "progress":0,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -87,16 +90,16 @@
       "Inani feugait ancillae sit at. Suavitate efficiendi mea ea, ",
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
-    "tags":["angular"]
-  },
-  {
-    "id":"6",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-6",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+    "tags":["angular","nodejs"]
+  },{
+    "id":"s0ome-task-id-6",
+    "desc":"and show love",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"new-lead",
+    "progress":25,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -105,16 +108,16 @@
       "Inani feugait ancillae sit at. Suavitate efficiendi mea ea, ",
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
-    "tags":["angular"]
-  },
-  {
-    "id":"7",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-7",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+    "tags":["angular","nodejs"]
+  },{
+    "id":"s0ome-task-id-7",
+    "desc":"keep up w the joneses...not!",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"new-lead",
+    "progress":0,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -124,15 +127,15 @@
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
     "tags":["angular","javascript"]
-  },
-  {
-    "id":"8",
-    "title":"OMG This is the best",
-    "slug":"omg-this-is-the-best-8",
-    "featured":true,
-    "readTime":6,
-    "published":"1/21/2020",
-    "content":[
+  },{
+    "id":"s0ome-task-id-8",
+    "desc":"fuck all of that",
+    "created":"06/06/2020",
+    "published":"06/06/2020",
+    "dueOn":"05/24/2020",
+    "type":"onboarding",
+    "progress":17,
+    "notes":[
       "Lorem ipsum dolor sit amet, et vel hinc partem voluptaria, ",
       "pro dicat expetenda no. Affert propriae sit ei, ex vide nominati splendide nam, ",
       "ubique copiosae consequuntur id nam. Qui doctus impetus labitur ei. ",
@@ -141,6 +144,6 @@
       "Inani feugait ancillae sit at. Suavitate efficiendi mea ea, ",
       "tantas oportere scriptorem no his, sea affert veritus ne."
     ],
-    "tags":["angular"]
+    "tags":["angular","nodejs"]
   }
 ]

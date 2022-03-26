@@ -1,6 +1,5 @@
 export * from "./layout.model";
 export * from "./navigation.model";
-export * from "./auth.model";
 export * from "./user.model";
 export * from "./upload.model";
 export * from "./session.model";

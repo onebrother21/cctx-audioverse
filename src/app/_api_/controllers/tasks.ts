@@ -1,4 +1,4 @@
-import { HttpRequest,HttpHandler} from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 import { AppEntity, Task } from '@state';
 import { ok,isLoggedIn,idFromUrl,findone,save,add,errors as e } from '../utils';
 import { db } from '../db';

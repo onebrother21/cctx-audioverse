@@ -6,23 +6,7 @@ export const layoutLoading$ = createSelector(layout$,s => s.loading);
 export const layoutErr$ = createSelector(layout$,s => s.error);
 
 export const header$ = createSelector(layout$,s => s.header);
-export const mobileNav$ = createSelector(layout$,s => s.mobileNav);
+export const headerNav$ = createSelector(layout$,s => s.nav);
 export const footer$ = createSelector(layout$,s => s.footer);
 export const pagination$ = createSelector(layout$,s => s.pagination);
-
-export const headerMenu$ = createSelector(header$,s => s.menu);
-export const mobileNavMenu$ = createSelector(mobileNav$,s => s.menu);
-export const mobileNavOpen$ = createSelector(mobileNav$,s => s.open);
-export const footerOpen$ = createSelector(mobileNav$,s => s.open);
 export const copyright$ = createSelector(footer$,s => s.copy);
-
-export const header$ = createSelector(layout$,s => s.header);
-export const sidebar$ = createSelector(layout$,s => s.sidebar);
-export const footer$ = createSelector(layout$,s => s.footer);
-export const pagination$ = createSelector(layout$,s => s.pagination);
-
-export const headerMenu$ = createSelector(header$,s => s.menu);
-export const sidebarMenu$ = createSelector(sidebar$,s => s.menu);
-export const sidebarOpen$ = createSelector(sidebar$,s => s.open);
-export const footerOpen$ = createSelector(sidebar$,s => s.open);
-export const copy$ = createSelector(footer$,s => s.copy);

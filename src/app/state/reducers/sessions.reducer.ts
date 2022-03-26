@@ -1,13 +1,15 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { SessionsActions as SESSIONS } from "../actions";
 import { SessionsState,initializeSessions } from "../states";
+import { AppError } from "../types";
 
 const initialState = initializeSessions();
 const reducer = createReducer(
   initialState,
   on(SESSIONS.fetch,s => ({...s,loading:true})),
   on(SESSIONS.fetchRecent,s => ({...s,loading:true})),
-  on(SESSIONS.send,s => ({...s,loading:true})),
+  on(SESSIONS.create,s => ({...s,loading:true})),
+  on(SESSIONS.update,s => ({...s,loading:true})),
   on(SESSIONS.load,(s,{payload:items}) => ({
     ...s,
     items,
@@ -35,7 +37,8 @@ const reducer = createReducer(
     return {...s,selected,error:null};
   }),
   on(SESSIONS.deselect,(s) => ({ ...s,selected:null})),
-  on(SESSIONS.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
+  on(SESSIONS.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );
 
 export function SessionsReducer(s:SessionsState|undefined,action:Action) {return reducer(s,action);}
+const formetError = (e:Error|AppError) => e instanceof AppError?e.json():e;

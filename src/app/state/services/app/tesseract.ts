@@ -5,7 +5,6 @@ import * as fs from "fs";
 import PDFParser,{StringifyStream} from "pdf2json";
 
 @Injectable({providedIn:"root"})
-
 export class TesseractService {
   result = "Recognizing...";
   constructor(){}

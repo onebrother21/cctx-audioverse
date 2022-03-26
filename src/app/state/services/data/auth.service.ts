@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { map,tap } from 'rxjs/operators';
-import { Observable,of, throwError } from 'rxjs';
-
 import { AppService } from '../app';
-import { AuthAcct, AuthJson, User } from '../../models';
-import { AuthUsersDBService } from '../../_auth_api';
+import { User,UserJson } from '../../models';
+import { of } from 'rxjs';
 
 @Injectable({providedIn:'root'})
 export class AuthenticationService {
-  ext = "/secur01";
-  url = "localhost:3000/api/v1/auth";
-  //register(newuser:AuthConfig){return this.app.http.post<AuthStatus>('/register',newuser);}
-  //login(creds:AuthCreds){return this.app.http.post<AuthStatus>('/login',creds);}
-  //verify(creds:AuthCreds){return this.app.http.post<AuthStatus>('/verify',creds);}
-  //reset(creds:AuthCreds){return this.app.http.post<AuthStatus>('/reset',creds);}
-  constructor(private app:AppService,private _auth:AuthUsersDBService){}
-  save(o:any){this.app.local.set("appuser",o);}
-  navigateAuthentication(action:string){
+  ext = "/auth";
+  constructor(private app:AppService){}
+  signup(o:{email:string}){return this.app.http.post<UserJson>(this.ext+"/signup",o);}
+  signin(o:{username:string}){return this.app.http.post<UserJson>(this.ext+"/signin",o);}
+  verify(o:{email:string;code:string;phn?:string}){return this.app.http.post<UserJson>(this.ext+"/verify",o);}
+  register(o:Partial<User>){return this.app.http.post<UserJson>(this.ext+"/register",o);}
+  registerExt(o:Partial<User>){return this.app.http.put<UserJson>(this.ext+"/register",o);}
+  updatePin(o:{username:string;pin:string}){return this.app.http.put<UserJson>(this.ext+"/login",o);}
+  login(o:{username:string;pin:string}){return this.app.http.post<UserJson>(this.ext+"/login",o);}
+  signout(){return this.app.http.del(this.ext+'/login');}
+  forgotName(o:any){return this.app.http.post<UserJson>(this.ext+"/forgot",o);}
+  forgotPin(o:{email:string}){return this.app.http.post<UserJson>(this.ext+"/forgot",o);}
+  navigateUserentication(action:string){
     const navigator = () => {
       switch(true){
         case /signup/.test(action):return "/secur01/verify";
@@ -31,30 +32,12 @@ export class AuthenticationService {
     };
     return of(navigator());
   }
-  getAuthStatus(o:Partial<AuthJson>){
+  getUserStatus(o:Partial<UserJson>){
     const sessionTime = 1000 * 60 * 3;
-    const lastActivity = new Date(o.lastActivity||"");
-    const idleTime = lastActivity.getTime() - Date.now();
+    const activity = o.activity?o.activity.time:new Date();
+    const idleTime = activity.getTime() - Date.now();
     return o.username && o.token && sessionTime >= idleTime?"authok":
     o.username && o.token?"signedin":
     "";
   }
-  signin(o:{username:string}){return this._auth.signin(o);}
-  //this.app.http.post<User>(this.ext+"/signin",o);}
-  signup(o:{email:string}){return this._auth.signup(o);}
-  //{return this.app.http.post<User>(this.ext+"/signup",o);}
-  signout(){return this.app.http.del(this.ext+'/login');}
-  verify(o:{username:string;code:string}){return this._auth.verify(o);}
-  //{return this.app.http.post<User>(this.ext+"/verify",o);}
-  login(o:{username:string;pin:string}){return this._auth.login(o);}
-  //{return this.app.http.post<User>(this.ext+"/login",o);}
-  register(o:User){return this._auth.register(o);}
-  //{return this.app.http.post<User>(this.ext+"/register",o);}
-  registerExt(o:any){return this._auth.registerExt(o);}
-  //{return this.app.http.post<User>(this.ext+"/register",o);}
-  forgotName(o:any){return of(o);}
-  forgotPin(o:{email:string}){return of(o);}
-  //{return this.app.http.post<User>(this.ext+"/forgot",o);}
-  updatePin(o:{username:string;pin:string}){return this._auth.updatePin(o);}
-  //{return this.app.http.post<User>(this.ext+"/updatePin",o);}
 }

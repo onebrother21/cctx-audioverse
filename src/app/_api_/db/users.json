@@ -1,7 +1,29 @@
 [
   {
-    "id":"some-random-id-0",
-    "sid":"some-random-id-0",
+    "id":"qs-s0me-user-id-0",
+    "qid":"qs-s0me-user-id-0",
+    "username":"Jackswift",
+    "name":{"first":"Jack","last":"Swift"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willCollab":true}},
+    "email":"service.onebrother@gmail.com",
+    "pin":"0000",
+    "role":"QS-SUPER",
+    "scopes":["view-room","send-invite"],
+    "verified":"2020-2-7",
+    "loggedin":"2020-2-7",
+    "updated":"2020-2-7",
+    "stats":{
+      "wins":52,
+      "losses":20,
+      "draws":5
+    }
+  },{
+    "id":"qs-s0me-user-id-1",
+    "sid":"qs-s0me-user-id-1",
+    "username":"Skateboard",
     "name":{"first":"Jimmy","last":"Swift"},
     "motto":"fuck with me",
     "bio":"u cant tho",
@@ -16,11 +38,101 @@
         "draws":5
       }
     }
-  },
-  {
-    "id":"some-random-id-1",
-    "sid":"some-random-id-1",
-    "name":{"first":"Jack","last":"Swift"},
+  },{
+    "id":"qs-s0me-user-id-2",
+    "sid":"qs-s0me-user-id-2",
+    "username":"TiaBia",
+    "name":{"first":"Tiabia","last":"Swizzy"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
+    "created":"2020-2-7",
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
+  },{
+    "id":"qs-s0me-user-id-3",
+    "sid":"qs-s0me-user-id-3",
+    "username":"BreezeAwesome",
+    "name":{"first":"AJ","last":"Swizzy"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
+    "created":"2020-2-7",
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
+  },{
+    "id":"qs-s0me-user-id-4",
+    "sid":"qs-s0me-user-id-4",
+    "username":"AshBeeeee",
+    "name":{"first":"Ash","last":"Swizzy"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
+    "created":"2020-2-7",
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
+  },{
+    "id":"qs-s0me-user-id-5",
+    "sid":"qs-s0me-user-id-5",
+    "username":"SouthSide Slug",
+    "name":{"first":"Steven","last":"Swizzy"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
+    "created":"2020-2-7",
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
+  },{
+    "id":"qs-s0me-user-id-6",
+    "sid":"qs-s0me-user-id-6",
+    "username":"Two Chains",
+    "name":{"first":"Sam","last":"Swizzy"},
+    "motto":"fuck with me",
+    "bio":"u cant tho",
+    "dob":"9-27-1980",
+    "settings":{"lang":"en","app":{"willTutor":true}},
+    "created":"2020-2-7",
+    "updated":"2020-2-7",
+    "stats":{
+      "qs":{
+        "wins":52,
+        "losses":20,
+        "draws":5
+      }
+    }
+  },{
+    "id":"qs-s0me-user-id-7",
+    "sid":"qs-s0me-user-id-7",
+    "username":"DJ Monarch",
+    "name":{"first":"Mike","last":"Swizzy"},
     "motto":"fuck with me",
     "bio":"u cant tho",
     "dob":"9-27-1980",

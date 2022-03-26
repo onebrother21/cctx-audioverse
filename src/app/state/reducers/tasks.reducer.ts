@@ -1,13 +1,15 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { TasksActions as TASKS } from "../actions";
 import { TasksState,initializeTasks } from "../states";
+import { AppError } from "../types";
 
 const initialState = initializeTasks();
 const reducer = createReducer(
   initialState,
   on(TASKS.fetch,s => ({...s,loading:true})),
   on(TASKS.fetchRecent,s => ({...s,loading:true})),
-  on(TASKS.send,s => ({...s,loading:true})),
+  on(TASKS.create,s => ({...s,loading:true})),
+  on(TASKS.update,s => ({...s,loading:true})),
   on(TASKS.load,(s,{payload:items}) => ({
     ...s,
     items,
@@ -35,7 +37,8 @@ const reducer = createReducer(
     return {...s,selected,error:null};
   }),
   on(TASKS.deselect,(s) => ({ ...s,selected:null})),
-  on(TASKS.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
+  on(TASKS.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );
 
 export function TasksReducer(s:TasksState|undefined,action:Action) {return reducer(s,action);}
+const formetError = (e:Error|AppError) => e instanceof AppError?e.json():e;

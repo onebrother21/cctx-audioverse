@@ -6,14 +6,13 @@ import { AuthService } from '../auth.service';
   selector: 'qs-auth-forgot',
   templateUrl: './auth-forgot.component.html',
   styleUrls: ['./auth-forgot.component.scss'],
-  //encapsulation:ViewEncapsulation.None
 })
 export class AuthForgotComponent {
   title = "auth-forgot";
   forgotForm:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){
-    this.auth.loading.subscribe(loading => this.loading = loading);
+    this.auth.loading$.subscribe(loading => this.loading = loading);
     this.forgotForm = this.fb.group({
       type:['forgot',Validators.required],
       email:['',Validators.required],

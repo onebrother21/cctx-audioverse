@@ -5,22 +5,21 @@ import { Observable,of } from 'rxjs';
 import { map,mergeMap,tap,filter } from 'rxjs/operators';
 
 import { 
-  LayoutActions as Layout,
-  AuthActions as Auth,
-  UserActions as User,
-  HCLContentActions as HCLContent,
- } from '../actions';
+  LayoutActions as LAYOUT,
+  AuthenticationActions as AUTH,
+  MeActions as ME,
+} from '../actions';
 import { AppService } from '../services';
 
 @Injectable()
-export class CoreAppEffects {
+export class AppEffects {
   constructor(private action$:Actions,private app:AppService){}
   OnInit$:Observable<Action> = createEffect(() => this.action$.pipe(
     ofType(ROOT_EFFECTS_INIT),
     mergeMap(() => ([
-      Layout.fetch(),
-      User.populate(),
-      HCLContent.fetch(),
+      LAYOUT.fetch(),
+      ME.populate(),
+      //CONTENT.fetch(),
     ]))));
   OnError$:Observable<Action> = createEffect(() => this.action$.pipe(
     filter((action:any) => action.error && action.error instanceof Error),
@@ -29,6 +28,6 @@ export class CoreAppEffects {
   redirect401s$:Observable<Action> = createEffect(() => this.action$.pipe(
     filter((action:any) => action.error && action.error instanceof Error),
     filter(({error}) => error.status === 401),
-    tap(() => location.reload(true)),
-    map(() => Auth.logout())));
+    tap(() => location.reload()),
+    map(() => AUTH.signout())));
 }

@@ -2,7 +2,7 @@ import { AppError,EntitySet } from "../types";
 
 export interface CommonState{
   loading:boolean;
-  error:ReturnType<AppError["json"]>|null;
+  error:Error|ReturnType<AppError["json"]>|null;
 }
 export const initializeCommonState = ():CommonState => ({loading:false,error:null});
 export const initializeEntityState = <T>():EntitySet<T> => ({

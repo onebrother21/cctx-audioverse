@@ -7,5 +7,5 @@ export const LayoutActions = {
   fetch:createAction("@qs/layout/fetch"),
   load:createAction("@qs/layout/load",(o:Layout) => ({payload:o})),
   toggleNav:createAction("@qs/layout/toggle-nav",(o?:boolean) => ({payload:o})),
-  error:createAction("@qs/layout/error",(o:AppError) => ({payload:o})),
+  error:createAction("@qs/layout/error",(o:Error|AppError) => ({payload:o})),
 };

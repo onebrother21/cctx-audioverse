@@ -6,7 +6,7 @@ export const layoutController = (req:HttpRequest<any>) => {
   const {url,method,headers,body} = req;
   const LAYOUT = {
     fetch:() => {
-      save('qs-layout',db.layout);
+      //save('qs-layout',db.layout);
       return ok(db.layout);}};
   switch(true){
     case method === 'GET':return LAYOUT.fetch();

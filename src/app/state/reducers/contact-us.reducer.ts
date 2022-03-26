@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { ContactUsActions as CONTACTUS } from "../actions";
 import { ContactUsState,initializeContactUs } from "../states";
+import { AppError } from "../types";
 
 const initialState = initializeContactUs();
 const reducer = createReducer(
@@ -35,7 +36,8 @@ const reducer = createReducer(
     return {...s,selected,error:null};
   }),
   on(CONTACTUS.deselect,(s) => ({ ...s,selected:null})),
-  on(CONTACTUS.error,(s,{payload:error}) => ({ ...s,error:error.json(),loading:false})),
+  on(CONTACTUS.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );
 
 export function ContactUsReducer(s:ContactUsState|undefined,action:Action) {return reducer(s,action);}
+const formetError = (e:Error|AppError) => e instanceof AppError?e.json():e;

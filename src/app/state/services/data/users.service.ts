@@ -4,17 +4,15 @@ import { map, tap } from 'rxjs/operators';
 
 import { AppService } from '../app';
 import { User, UserJson } from '../../models';
-import { users } from '../../_data_api';
 
 
 @Injectable({providedIn:'root'})
-
 export class UsersService {
   ext = "/users";
   constructor(private app:AppService){}
-  fetch(){return of(users);}//this.app.http.get<User[]>("/");}
-  fetchOne(username:string){return this.app.http.get<UserJson>("/"+username);}
-  create(o:User){return this.app.http.post<UserJson>("/",o);}
-  update(id:string,updates:Partial<User>){return this.app.http.put<UserJson>("/"+id,updates);}
-  remove(id:string){return this.app.http.del("/"+id);}
+  fetch(){return this.app.http.get<UserJson[]>(this.ext);}
+  fetchOne(username:string){return this.app.http.get<UserJson>(this.ext+"/"+username);}
+  create(o:{username:string}){return this.app.http.post<UserJson>(this.ext,o);}
+  update(id:string,updates:Partial<User>){return this.app.http.put<UserJson>(this.ext+"/"+id,updates);}
+  remove(id:string){return this.app.http.del(this.ext+"/"+id);}
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserJson } from '@state';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -15,13 +16,20 @@ export class AuthUpdatePinComponent {
     maxlength:4,
     masked:true
   };
-  loading:boolean = false;
+  loading = false;
+  isSubmitted = false;
+  user?:UserJson;
   constructor(private auth:AuthService){
-    this.auth.loading.subscribe(loading => this.loading = loading);
+    this.auth.loading$.subscribe(loading => this.loading = loading);
+    this.auth.me$.subscribe(user => this.user = user);
   }
   submitPin(pin:string){
     if(!this.confirm){this.confirm = pin;this.greeting = "Now Confirm Your Pin";}
-    else if(this.confirm == pin) this.auth.send({action:"update-pin",pin});
+    else if(this.confirm == pin) this.auth.send({
+      action:"update-pin",
+      pin,
+      username:this.user?.username,
+    });
     else return;
   }
 }

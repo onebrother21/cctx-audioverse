@@ -12,7 +12,7 @@ export class AuthSignInComponent {
   signinForm:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){
-    this.auth.loading.subscribe(loading => this.loading = loading);
+    this.auth.loading$.subscribe(loading => this.loading = loading);
     this.signinForm = this.fb.group({
       action:['signin',Validators.required],
       username:['',Validators.required],

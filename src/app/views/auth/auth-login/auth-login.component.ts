@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserJson } from '@state';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,9 +15,18 @@ export class AuthLoginComponent {
     maxlength:4,
     masked:true
   };
-  loading:boolean = false;
+  loading = false;
+  isSubmitted = false;
+  user?:UserJson;
   constructor(private auth:AuthService){
-    this.auth.loading.subscribe(loading => this.loading = loading);
+    this.auth.loading$.subscribe(loading => this.loading = loading);
+    this.auth.me$.subscribe(user => this.user = user);
   }
-  submitPin(pin:string){this.auth.send({action:"login",pin});}
+  submitPin(pin:string){
+    this.auth.send({
+      action:"login",
+      pin,
+      username:this.user?.username,
+    });
+  }
 }

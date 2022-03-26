@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, filter, take, tap } from 'rxjs/operators';
-import { AppService } from '../app';
-import { sessions$ } from '../../selectors';
+import { AppService } from '../services';
+import { sessions$ } from '../selectors';
 
 @Injectable()
 export class DataLoadedGuard implements CanActivate {

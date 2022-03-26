@@ -2,15 +2,18 @@ import { Injectable } from "@angular/core";
 import { AppService } from "@state";
 import {
   AuthenticationActions as AUTH,
-  authLoading$
+  authLoading$,
+  me$,UserJson,
 } from "@state";
 import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthService {
-  loading:Observable<boolean> = new Observable();
+  loading$:Observable<boolean> = new Observable();
+  me$:Observable<UserJson> = new Observable();
   constructor(private app:AppService){
-    this.loading = this.app.select(authLoading$);
+    this.loading$ = this.app.select(authLoading$);
+    this.me$ = this.app.select(me$) as Observable<UserJson>;
   }
   send(o:any){
     switch(o.action){

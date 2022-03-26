@@ -1,5 +1,5 @@
-<a routerLink="{{'/sessions/room/'+preview.id}}">
-  <h4 class="u-text u-text-grey-50 u-text-5">{{preview.name}}</h4>
+<a *ngIf="preview" routerLink="{{'/sessions/room/'+preview.id}}">
+  <h4 class="u-text u-text-grey-50 u-text-5">{{preview.title}}</h4>
   <div class="u-align-center u-container-style u-expanded-width u-group u-group-1">
     <div class="u-container-layout u-valign-middle u-container-layout-3">
       <img class="u-image u-image-default" 

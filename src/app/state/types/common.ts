@@ -7,13 +7,13 @@ export class AppEntity {
   constructor(o:any){
     Object.assign(this,o);
     this.id = o.id || "qs-"+longId();
-    this.created = new Date();
+    this.created = o.created || new Date();
   }
 }
 export interface DocEntity extends Entity {
   published:string|Date;
   content:string|string[];
-  title:string;
+  title?:string;
   tags:string[];
 }
 export class DocEntity extends AppEntity {
@@ -31,10 +31,12 @@ export class AppError extends Error {
     if(typeof o === "string"){super(o);}
     else if(o instanceof Error){super(o.message);_o.name = o.name;}
     else {
-      super(o.msg || "The data provided is not valid");
+      super(o.message ||o.msg || "The data provided is not valid");
       _o = {...o};}
-    //if(Error.captureStackTrace){Error.captureStackTrace(this,AppError);}
-    Object.assign(this,new AppEntity({}),{status:500,info:{}},_o);}
+    if(Error.captureStackTrace){Error.captureStackTrace(this,AppError);}
+    Object.assign(this,new AppEntity({}),{status:500,info:{}},_o);
+    console.log(this.json())
+  }
   json(){
     const {id,name,message,status,code,errors,warning,info,stack,created} = this;
     return {id,name,message,status,code,errors,warning,info,stack,created};

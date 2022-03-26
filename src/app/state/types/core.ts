@@ -28,7 +28,9 @@ export type Entity = {
   updated?:Date;
   removed?:Date;
   desc?:string;
-  meta?:MiscInfo;};
+  info?:string|MiscInfo;
+  meta?:MiscInfo;
+};
 export type SelectedEntity<T> = {id:string;i:number;item:T;};
 export type EntitySet<T> = {
   items:T[];
@@ -40,6 +42,7 @@ export type DeletedEntity = {id:string;done:boolean;ok:boolean;};
 export type ReqValidationError = {msg:string;param:string;location:string;};
 export type ValidationErrors = {errors:ReqValidationError[]|DataMap<any>};
 export type ErrorConfig = Partial<{
+  message:string;
   msg:string;
   status:number;
   code:number|string;
@@ -55,7 +58,7 @@ export type Values = DataMap<KnownType>;
 export type ValueMethods = Methods<KnownType>;
 export type MiscInfo = Values;
 export type EnumInfo<K extends string> = EnumMap<K,Values>;
-export type Status<K> = {name:K;time:Date;info:MiscInfo;};
+export type Status<K> = {name:K;time:Date;info?:MiscInfo;};
 
 export interface LocaleDateOpts {
   weekday?: string;

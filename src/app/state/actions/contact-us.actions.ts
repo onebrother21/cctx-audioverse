@@ -11,5 +11,5 @@ export const ContactUsActions = {
   select:createAction('@qs/contact-us/select',(o:string) => ({payload:o})),
   deselect:createAction("@qs/contact-us/deselect"),
   send:createAction("@qs/contact-us/send",(o:ContactUsMsg) => ({payload:o})),
-  error:createAction("@qs/contact-us/error",(o:AppError) => ({payload:o})),
+  error:createAction("@qs/contact-us/error",(o:Error|AppError) => ({payload:o})),
 };

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { MockBackendNotifier } from '@api';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,10 +10,11 @@ import { AuthService } from '../auth.service';
 })
 export class AuthSignUpComponent {
   title = "auth-signup";
+  loading = false;
+  isSubmitted = false;
   signupForm:FormGroup;
-  loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){
-    this.auth.loading.subscribe(loading => this.loading = loading);
+    this.auth.loading$.subscribe(loading => this.loading = loading);
     this.signupForm = this.fb.group({
       action:['signup',Validators.required],
       email:['',Validators.required],
