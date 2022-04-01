@@ -4,6 +4,7 @@ import { NavigationEffects } from './navigation.effects';
 import { AuthenticationEffects } from './auth.effects';
 import { MeEffects } from './me.effects';
 import { UsersEffects } from './users.effects';
+import { BusinessesEffects } from './businesses.effects';
 
 
 export const EFFECTS = [
@@ -13,4 +14,5 @@ export const EFFECTS = [
   AuthenticationEffects,
   MeEffects,
   UsersEffects,
+  BusinessesEffects,
 ];

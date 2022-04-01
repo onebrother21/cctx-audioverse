@@ -6,15 +6,16 @@ export interface AppEntity extends Entity {}
 export class AppEntity {
   constructor(o:any){
     Object.assign(this,o);
-    this.id = o.id || "qs-"+longId();
+    this.qid = o.qid || "qs-"+longId();
+    this.id = o.id || this.qid;
     this.created = o.created || new Date();
   }
 }
 export interface DocEntity extends Entity {
-  published:string|Date;
-  content:string|string[];
-  title?:string;
+  published:Date;
   tags:string[];
+  title?:string;
+  content?:string|string[];
 }
 export class DocEntity extends AppEntity {
   constructor(o:any){

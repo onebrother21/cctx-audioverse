@@ -3,6 +3,7 @@ import { AppError } from "../types";
 import { User,UserJson } from "../models";
 
 export const UsersActions = {
+  error:createAction("@qs/users/error",(o:Error|AppError) => ({payload:o})),
   fetch:createAction("@qs/users/fetch"),
   fetchRecent:createAction('@qs/users/fetch/recent'),
   load:createAction("@qs/users/load",(o:UserJson[]) => ({payload:o})),
@@ -13,5 +14,7 @@ export const UsersActions = {
   create:createAction("@qs/users/create",(o:{username:string}) => ({payload:o})),
   update:createAction('@qs/users/update',(o:Partial<User>) => ({payload:o})),
   remove:createAction('@qs/users/remove',(o:string) => ({payload:o})),
-  error:createAction("@qs/users/error",(o:Error|AppError) => ({payload:o})),
+  query:createAction("@qs/users/query",(o:{[k in keyof User]?:User[k]}) => ({payload:o})),
+  exists:createAction("@qs/users/exists",(o:{[k in keyof User]?:User[k]}) => ({payload:o})),
+  existsLoad:createAction("@qs/users/exists-load",(o:boolean) => ({payload:o})),
 };

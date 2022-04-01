@@ -1,7 +1,10 @@
-export class Upload {
-  key:string = "";
-  name:string = "";
-  url:string = "";
+import { DocEntity } from '../types';
+
+export type UploadObj = DocEntity & {
+  key:string;
+  name:string;
+  url:string;
   file:File;
-  constructor(file: File) {this.file = file;}
-}
+};
+export interface Upload extends UploadObj {}
+export class Upload extends DocEntity {}

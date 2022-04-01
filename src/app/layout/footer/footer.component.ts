@@ -8,9 +8,4 @@ import { Component,ViewEncapsulation } from '@angular/core';
 })
 export class FooterComponent {
   title = "footer";
-  footer = {
-    text:
-    "Sample text. Click to select the text box. "+
-    "Click again or double click to start editing the text."
-  };
 }

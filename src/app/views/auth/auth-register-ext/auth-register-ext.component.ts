@@ -20,9 +20,9 @@ export class AuthRegisterExtComponent {
   loading = false;
   isSubmitted = false;
   user?:UserJson;
-  registerForm:FormGroup;
-  tastes = ["Country","Jazz","HipHop & Rap","Pop","Rock","Indie"];
-  mantles = ["Producer","Engineer","Writer","Vocalist","Rapper","Instrumentalist","Industry Rep","Fan"];
+  form:FormGroup;
+  tastes = ["Country","Jazz","HipHop & Rap","R & B/Soul","Pop","Rock","Indie","Other"];
+  mantles = ["Producer","Engineer","Writer","Vocalist","Rapper","Instrumentalist","Industry Rep","Fan","Other"];
   uses = [
     {label:"Create new music",value:"create"},
     {label:"Browse new music",value:"browse"},
@@ -31,7 +31,7 @@ export class AuthRegisterExtComponent {
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading$.subscribe(loading => this.loading = loading);
     this.auth.me$.subscribe(user => this.user = user);
-    this.registerForm = this.fb.group({
+    this.form = this.fb.group({
       action:['register-ext',Validators.required],
       mantles:new FormArray([],minSelectedCheckboxes(1)),
       tastes:new FormArray([],minSelectedCheckboxes(1)),
@@ -45,28 +45,27 @@ export class AuthRegisterExtComponent {
     this.mantles.forEach(() => this.mantlesFormArray.push(new FormControl(false)));
     this.uses.forEach(() => this.usesFormArray.push(new FormControl(false)));
   }
-  get f(){return this.registerForm.controls;}
-  get tastesFormArray(){return this.registerForm.controls["tastes"] as FormArray;}
+  get f(){return this.form.controls;}
+  get tastesFormArray(){return this.form.controls["tastes"] as FormArray;}
   get tastesControls(){return this.tastesFormArray.controls;}
-  get mantlesFormArray(){return this.registerForm.controls["mantles"] as FormArray;}
+  get mantlesFormArray(){return this.form.controls["mantles"] as FormArray;}
   get mantlesControls(){return this.mantlesFormArray.controls;}
-  get usesFormArray(){return this.registerForm.controls["uses"] as FormArray;}
+  get usesFormArray(){return this.form.controls["uses"] as FormArray;}
   get usesControls(){return this.usesFormArray.controls;}
   mapAndFilterCheckList(o:any[],_o:any[]){return o.map((checked:boolean,i:number) => checked?_o[i]:null).filter((v:any) => v !== null);}
   submitForm(){
     this.isSubmitted = true;
-    if(!this.registerForm.valid){false;}
-    const tastes = this.mapAndFilterCheckList(this.registerForm.value.tastes,this.tastes);
-    const mantles = this.mapAndFilterCheckList(this.registerForm.value.mantles,this.mantles);
-    const uses = this.mapAndFilterCheckList(this.registerForm.value.uses,this.uses).map(o => o.value);
+    if(!this.form.valid){false;}
+    const tastes = this.mapAndFilterCheckList(this.form.value.tastes,this.tastes);
+    const mantles = this.mapAndFilterCheckList(this.form.value.mantles,this.mantles);
+    const uses = this.mapAndFilterCheckList(this.form.value.uses,this.uses).map(o => o.value);
     const o = {
-      action:this.registerForm.value.action,
+      action:this.form.value.action,
       tastes,mantles,uses,
       username:this.user?.username,
     };
-    this.auth.send(o);
-    this.registerForm.reset({
-      action:"register-ext",
+    this.auth.send("register-ext",o);
+    this.form.reset({
       tastes:[],
       mantles:[],
       uses:[],

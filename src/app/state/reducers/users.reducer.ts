@@ -41,6 +41,7 @@ const reducer = createReducer(
     const selected = {id:s.ids[i],i,item:s.items[i]};
     return {...s,selected,error:null};
   }),
+  on(USERS.existsLoad,(s,{payload:exists}) => ({ ...s,exists})),
   on(USERS.deselect,(s) => ({ ...s,selected:null})),
   on(USERS.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );

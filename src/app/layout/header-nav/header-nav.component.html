@@ -2,33 +2,13 @@
   <div class="u-clearfix u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl">
     <div class="u-accordion u-expanded-width-xs u-faq u-spacing-20 u-accordion-1" style="margin:auto;" >
       <div class="u-accordion-item">
-        <a class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
-          <span class="u-accordion-link-text"><i class="fa fa-plus"></i> Create New</span>
-        </a>
-        <a class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
-          <span class="u-accordion-link-text"><i class="fa fa-folder"></i> Recent Files</span>
-        </a>
-        <a class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
-          <span class="u-accordion-link-text"><i class="fa fa-users"></i> User Community</span>
-        </a>
-        <a class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
-          <span class="u-accordion-link-text"><i class="fa fa-user"></i> Account & Settings</span>
-        </a>
-        <a class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
-          <span class="u-accordion-link-text"><i class="fa fa-question"></i> Help & Support</span>
-        </a>
-        <!--div class="u-accordion-active u-accordion-pane u-container-style u-accordion-pane-1" 
-        id="accordion-6327" aria-labelledby="link-accordion-6327">
-          <div class="u-container-layout u-container-layout-1">
-            <div class="fr-view u-clearfix u-rich-text u-text">
-              <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. 
-                Phasellus sed efficitur dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur. 
-                Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet.
-              </p>
-            </div>
-          </div>
-        </div-->
+        <ng-container *ngFor="let o of menus[!isAuthed?0:1]">
+          <a routerLink="{{o.link}}" class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 
+          u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" 
+          id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
+            <span class="u-accordion-link-text"><i class="{{o.icon}}"></i> {{o.label}}</span>
+          </a>
+        </ng-container>
       </div>
     </div>
   </div>

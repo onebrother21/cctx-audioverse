@@ -1,11 +1,17 @@
 import { HttpRequest } from '@angular/common/http';
 import { User } from '@state';
-import { ok,isLoggedIn,idFromUrl,errors as e,save,findone,add } from '../utils';
+import { ok,isLoggedIn,idFromUrl,errors as e,save,findone,add, queryFromUrl } from '../utils';
 import { db } from '../db';
 
 export const usersController = (req:HttpRequest<any>) => {
   const {url,method,headers,body} = req;
   const USERS = {
+    query:() => {
+      const {field,val} = queryFromUrl(url);
+      console.log({field,val})
+      const o = db.users.find(o => (o as any)[field] == val);
+      return ok(o?new User(o).json():null);
+    },
     create:() => {
       const o = new User({...body,settings:{lang:"en",app:{}},mates:[]});
       add("qs-users",db.users,o);
@@ -39,6 +45,7 @@ export const usersController = (req:HttpRequest<any>) => {
     case url.endsWith('/users') && method === 'POST':return USERS.create();
     case url.endsWith('/users') && method === 'GET':return USERS.fetch();
     case url.endsWith('/users/recent') && method === 'GET':return USERS.fetchRecent();
+    case url.match(/\/users\/q\?/) && method === 'GET':return USERS.query();
     case url.match(/\/users\/\w+$/) && method === 'GET':return USERS.fetchByUsername();
     case url.match(/\/users\/\w+$/) && method === 'PUT':return USERS.update();
     case url.match(/\/users\/\w+$/) && method === 'DELETE':return USERS.remove();

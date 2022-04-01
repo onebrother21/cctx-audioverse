@@ -1,32 +1,32 @@
 import { AppEntity,Strings,MiscInfo,Status,Digit } from '../types';
 import * as AppUtils from '../utils';
 
-export type UserPin = `${Digit}${Digit}${Digit}${Digit}`;
-export type UserAppSettings = Partial<{
+export type BusinessPin = `${Digit}${Digit}${Digit}${Digit}`;
+export type BusinessAppSettings = Partial<{
   canActivate:boolean;
   canShare:boolean;
   acceptInvites:boolean;
   maxSessions:number;
   willCollab:boolean;
 }>;
-export type UserAcct = {
+export type BusinessAcct = {
   email:string;
   phn:`${number}`;
-  username:string;
+  businessName:string;
   name:{first:string;last:string;};
   dob:Date;
   hometown:string;
   loc:string;
-  settings:{lang:string;app:UserAppSettings;data?:MiscInfo;};
+  settings:{lang:string;app:BusinessAppSettings;data?:MiscInfo;};
   role:"QS-GUEST"|"QS-USER"|"QS-PLAYER"|"QS-ADMIN"|"QS-SUPER";
   acct:"SLV1"|"GLD1"|"GLD2"|"PLT1";
   scopes:string[];
   status:Status<"new"|"locked"|"enabled"|"disabled"|"verified"|"offline"|"deleted">;
   activity?:{val:string;time:Date;};
 };
-export type UserAuth = {
+export type BusinessAuth = {
   next:"verify"|"register"|"register-ext"|"update-pin"|"reset";
-  pin:UserPin;
+  pin:BusinessPin;
   code:string;
   reset?:string|null;
   verification?:string|null;
@@ -35,7 +35,7 @@ export type UserAuth = {
   verified?:string|Date;
   lastlogin?:string|Date;
 };
-export type UserProfile = Partial<{
+export type BusinessProfile = Partial<{
   img:string;
   motto:string;
   bio:string;
@@ -44,20 +44,20 @@ export type UserProfile = Partial<{
   uses:string[];
   socials:Strings;
 }>;
-export type UserObj = AppEntity & UserAcct & UserAuth & UserProfile;
-export type UserPublic = Extract<keyof UserObj,
-"qid"|"email"|"phn"|"username"|"hometown"|"loc"|"settings"|"role"|"acct"|"scopes"|"status"|"activity"|
+export type BusinessObj = AppEntity & BusinessAcct & BusinessAuth & BusinessProfile;
+export type BusinessPublic = Extract<keyof BusinessObj,
+"qid"|"email"|"phn"|"businessName"|"hometown"|"loc"|"settings"|"role"|"acct"|"scopes"|"status"|"activity"|
 "info"|"desc"|"meta"|"img"|"motto"|"bio"|"mantles"|"tastes"|"uses"|"socials"|
 "next"|"reqtoken"|"token"|"verified"|"lastlogin"
 >;
-export type UserJson = Pick<UserObj,UserPublic> & {
+export type BusinessJson = Pick<BusinessObj,BusinessPublic> & {
   memberSince:string|Date;
   fullname:string;
   age:number|null;
 };
-export type UserId = UserJson["qid"];
-export interface User extends UserObj {}
-export class User extends AppEntity {
+export type BusinessId = BusinessJson["qid"];
+export interface Business extends BusinessObj {}
+export class Business extends AppEntity {
   toAge(){
     const dob = this.dob instanceof Date?this.dob:new Date(this.dob);
     const ageInMS = Date.now() - new Date(dob).getTime();
@@ -66,13 +66,13 @@ export class User extends AppEntity {
     console.log(age);
     return age;
   }
-  json(me?:boolean,auth?:boolean):UserJson {
+  json(me?:boolean,auth?:boolean):BusinessJson {
     console.log(this);
     return {
       qid:this.qid,
       email:this.email,
       phn:this.phn,
-      username:this.username,
+      businessName:this.businessName,
       fullname:this.name.first?this.name.first+" "+this.name.last:"",
       age:this.dob?this.toAge():null,
       hometown:this.hometown,

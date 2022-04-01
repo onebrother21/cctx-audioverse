@@ -10,3 +10,4 @@ export * from "./rooms.service";
 export * from "./chat-msgs.service";
 export * from "./contact-us.services";
 export * from "./tasks.service";
+export * from "./businesses.service";

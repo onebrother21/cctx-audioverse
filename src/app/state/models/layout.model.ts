@@ -1,6 +1,6 @@
 import { NavItem } from "./navigation.model";
 
-export type LayoutParams = {open?:boolean;menu?:NavItem[];};
+export type LayoutParams = {open?:boolean;menus?:NavItem[][];};
 export type LayoutHeader = LayoutParams;
 export type LayoutHeaderNav = LayoutParams;
 export type LayoutFooter = LayoutParams & {copy:string;};

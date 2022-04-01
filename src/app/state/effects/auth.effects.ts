@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of,withLatestFrom } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
-import { AppEntity, AppError } from "../types";
 import {
   AuthenticationActions as AUTH,
   MeActions as ME,
@@ -19,7 +18,8 @@ export class AuthenticationEffects {
   constructor(
     private actions$:Actions,
     private auth:AuthenticationService,
-    private app:AppService){}
+    private app:AppService,
+  ){}
   Signup$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.signup),
     map(o => o.payload),

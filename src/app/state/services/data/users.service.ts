@@ -15,4 +15,8 @@ export class UsersService {
   create(o:{username:string}){return this.app.http.post<UserJson>(this.ext,o);}
   update(id:string,updates:Partial<User>){return this.app.http.put<UserJson>(this.ext+"/"+id,updates);}
   remove(id:string){return this.app.http.del(this.ext+"/"+id);}
+  query(q:{[k in keyof User]?:User[k]}){
+    const qstr = `${Object.keys(q)[0]}=${Object.values(q)[0]}`;
+    return this.app.http.get<UserJson>(this.ext+"/q?"+qstr);
+  }
 }

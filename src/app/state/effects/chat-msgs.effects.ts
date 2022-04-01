@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
-import { AppError } from "../types";
 import { ChatMsg } from "../models";
 import { ChatMessagesActions as CHAT } from "../actions";
 import { AppService,ChatMessagesService } from "../services";
@@ -19,11 +18,11 @@ export class ChatMessagesEffects {
     ofType(CHAT.fetch),
     mergeMap(() => this.msgs.fetch().pipe(
       map(msgs => CHAT.load(msgs)),
-      catchError(error => of(CHAT.error(new AppError(error))))))));
+      catchError(error => of(CHAT.error(error)))))));
   SendChatMsg$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(CHAT.send),
     map(o => o.payload),
     mergeMap(o => this.msgs.send(o).pipe(
       map((msg:ChatMsg) => CHAT.loadOne(msg)),
-      catchError(error => of(CHAT.error(new AppError(error))))))));
+      catchError(error => of(CHAT.error(error)))))));
 }

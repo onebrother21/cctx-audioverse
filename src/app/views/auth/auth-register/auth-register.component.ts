@@ -13,12 +13,11 @@ export class AuthRegisterComponent {
   loading = false;
   isSubmitted = false;
   user?:UserJson;
-  registerForm:FormGroup;
+  form:FormGroup;
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading$.subscribe(loading => this.loading = loading);
     this.auth.me$.subscribe(user => this.user = user);
-    this.registerForm = this.fb.group({
-      action:['register',Validators.required],
+    this.form = this.fb.group({
       username:['',Validators.required],
       firstname:['',Validators.required],
       lastname:['',Validators.required],
@@ -26,10 +25,10 @@ export class AuthRegisterComponent {
       hometown:['',Validators.required],
     });
   }
-  get f(){return this.registerForm.controls;}
+  get f(){return this.form.controls;}
   submitForm(){
-    console.log(this.registerForm.value,this.user);
-    const {firstname,lastname,dob,..._o} = this.registerForm.value;
+    console.log(this.form.value,this.user);
+    const {firstname,lastname,dob,..._o} = this.form.value;
     const o = {
       ..._o,
       name:{first:firstname,last:lastname},
@@ -37,9 +36,8 @@ export class AuthRegisterComponent {
       email:this.user?.email,
       phn:this.user?.phn,
     };
-    this.auth.send(o);
-    this.registerForm.reset({
-      action:"register",
+    this.auth.send("register",o);
+    this.form.reset({
       username:"",
       firstname:"",
       lastname:"",

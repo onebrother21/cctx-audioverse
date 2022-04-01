@@ -1,9 +1,9 @@
-import { AppEntity, DocEntity } from "../types";
+import { DocEntity } from "../types";
 import { UserId } from "./user.model";
 
 
 export type RoomComment = {user:string;body:string;time:Date;};
-export type Room = DocEntity & {
+export type RoomObj = DocEntity & {
   duration:number|string;
   users:UserId[];
   slug?:string;
@@ -16,4 +16,7 @@ export type Room = DocEntity & {
   viewCt?:number;
   commentCt?:number;
 };
+export interface Room extends RoomObj {}
+export class Room extends DocEntity {}
+
 export type Ad = {header:string;content:string;};

@@ -9,19 +9,16 @@ import { AuthService } from '../auth.service';
 })
 export class AuthForgotComponent {
   title = "auth-forgot";
-  forgotForm:FormGroup;
+  form:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading$.subscribe(loading => this.loading = loading);
-    this.forgotForm = this.fb.group({
-      type:['forgot',Validators.required],
-      email:['',Validators.required],
-    });
+    this.form = this.fb.group({email:['',Validators.required]});
   }
-  get f(){return this.forgotForm.controls;}
+  get f(){return this.form.controls;}
   submitForm(){
-    const o = this.forgotForm.value;
-    this.auth.send(o);
-    this.forgotForm.reset();
+    const o = this.form.value;
+    this.auth.send("forgot",o);
+    this.form.reset();
   }
 }

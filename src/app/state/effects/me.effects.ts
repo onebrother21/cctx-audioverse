@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom,filter } from "rxjs/operators";
 
-import { AppError } from "../types";
 import { User } from "../models";
 import {
   MeActions as ME,
@@ -23,7 +22,7 @@ export class MeEffects {
     ofType(ME.populate),
     map(() => this.user.populate()),
     map((user:User) => ME.load(user)),
-    catchError(error => of(ME.error(new AppError(error))))));
+    catchError(error => of(ME.error(error)))));
   SaveMe$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ME.load),
     tap(o => this.user.save(o.payload))),{dispatch:false});

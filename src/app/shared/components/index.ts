@@ -12,13 +12,8 @@ import { UploadListComponent } from './upload-list';
 import { UploadsComponent } from './uploads';
 import { PreviewListComponent } from './preview-list';
 import { PreviewRoomComponent } from './preview-room';
-import { DialogComponent } from './dialog/dialog.component';
 
 export const COMPONENTS = [
-  UploadComponent,
-  UploadDetailsComponent,
-  UploadListComponent,
-  UploadsComponent,
   IconComponent,
   IconMenuComponent,
   IconMenuItemComponent,
@@ -28,5 +23,8 @@ export const COMPONENTS = [
   ReactionsComponent,
   PreviewListComponent,
   PreviewRoomComponent,
-  DialogComponent,
+  UploadComponent,
+  UploadDetailsComponent,
+  UploadListComponent,
+  UploadsComponent,
 ];

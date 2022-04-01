@@ -4,27 +4,25 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom } from "rxjs/operators";
 
-import { AppError } from "../types";
 import { Session } from "../models";
 import { SessionsActions as SESSIONS } from "../actions";
 import { AppService,SessionsService } from "../services";
 
 @Injectable()
-export class SessionsEffects implements OnInitEffects {
+export class SessionsEffects {
   constructor(
     private actions$:Actions,
     private sessions:SessionsService,
     private app:AppService){}
-  ngrxOnInitEffects():Action {return SESSIONS.fetch();}
   FetchSessions$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(SESSIONS.fetch),
     mergeMap(() => this.sessions.fetch().pipe(
       map((sessions:Session[]) => SESSIONS.load(sessions)),
-      catchError(error => of(SESSIONS.error(new AppError(error))))))));
+      catchError(error => of(SESSIONS.error(error)))))));
   CreateSession$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(SESSIONS.create),
     map(o => o.payload),
     mergeMap(o => this.sessions.create(o).pipe(
       map((session:Session) => SESSIONS.loadOne(session)),
-      catchError(error => of(SESSIONS.error(new AppError(error))))))));
+      catchError(error => of(SESSIONS.error(error)))))));
 }

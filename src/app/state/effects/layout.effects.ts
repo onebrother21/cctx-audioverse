@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
-import { AppError } from "../types";
 import { Layout } from "../models";
 import { LayoutActions as LAYOUT } from "../actions";
 import { AppService,LayoutService } from "../services";
@@ -31,5 +30,5 @@ export class LayoutEffects {
     mergeMap(() =>
       this.layout.fetch().pipe(
         map((layout:Layout) => LAYOUT.load(layout)),
-        catchError(error => of(LAYOUT.error(new AppError(error))))))));
+        catchError(error => of(LAYOUT.error(error)))))));
 }

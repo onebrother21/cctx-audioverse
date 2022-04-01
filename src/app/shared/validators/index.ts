@@ -1,4 +1,5 @@
-import { FormArray, ValidatorFn } from "@angular/forms";
+import { AbstractControl, AsyncValidatorFn, FormArray, ValidatorFn } from "@angular/forms";
+import { debounceTime, map, Observable, take } from "rxjs";
 
 export function minSelectedCheckboxes(min = 1):ValidatorFn {
   const validator = (formArray:FormArray) => {
@@ -13,4 +14,15 @@ export function minSelectedCheckboxes(min = 1):ValidatorFn {
   };
 
   return validator as ValidatorFn;
+}
+
+export function checkAsyncError(errSelector:Observable<any>): AsyncValidatorFn {
+  return (control:AbstractControl): Promise<{[key:string]:any}|null>|Observable<{[key:string]:any}|null> => {
+    return errSelector.pipe(
+      debounceTime(500),
+      take(1),
+      map(value => {
+        console.log(value);
+        return !!value ? { invalid: true } : null;}));
+  };
 }

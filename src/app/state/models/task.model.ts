@@ -1,4 +1,4 @@
-import { AppEntity } from '@state';
+import { DocEntity } from '../types';
 import { UserId } from "./user.model";
 
 export type TaskAgent = UserId;
@@ -28,11 +28,12 @@ export const taskTypes:TaskTypes = {
 };
 export type TaskType = keyof TaskTypes;
 export type TaskName = {[k in TaskType]:TaskTypes[k]}[TaskType];
-export type Task = AppEntity & {
+export type TaskObj = DocEntity & {
   type:TaskType|TaskName;
   dueOn:Date;
   progress:number;
   agent?:TaskAgent;
   notes?:string[];
-  tags?:string[];
 };
+export interface Task extends TaskObj {}
+export class Task extends DocEntity {}

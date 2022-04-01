@@ -9,15 +9,15 @@ export const save = <T>(s:string,m:T|T[],o?:T,i?:number) => {
 export const add = <T>(s:string,m:T[],o:T) => {m.push(o);save(s,m);};
 export const findone = <T>(m:T[],keys:string|string[],value:any|any[]) => {
   let i:number = -1;
-  const checker = (k:string) => {
+  const indexFilter = (k:string) => {
     if(!Array.isArray(value)) i = m.findIndex(o => o[k as keyof T] === value);
     else for(let j = 0,l = value.length;j<l;j++){
       i = m.findIndex(o => o[k as keyof T] === value[j]);
       if(i !== -1) break;
     }
   };
-  if(typeof keys == "string") checker(keys);
-  else for(let j = 0,l = keys.length;j<l;j++){checker(keys[j]);if(i !== -1) break;}
+  if(typeof keys == "string") indexFilter(keys);
+  else for(let j = 0,l = keys.length;j<l;j++){indexFilter(keys[j]);if(i !== -1) break;}
   return {o:m[i],i};
 };
 export const ok = (body?:any) => of(new HttpResponse({status:200,body}));
@@ -32,10 +32,10 @@ export const idFromUrl = (url:string) => {
 export const queryFromUrl = (url:string) => {
   const urlParts = url.split('q?');
   const q = urlParts[urlParts.length - 1].split("=");
-  return {[q[0]]:q[1]};
+  return {field:q[0],val:q[1]};
 };
 export const errors:{[k:string]:(...a:any) => Observable<HttpEvent<AppError|Error>>} = {
-  error:(error:AppError) => {throw error;},
+  someerror:(error:AppError) => {throw error;},
   fourohfour:() => {throw new AppError({status:404,msg:'Page not found',code:"ENOTFOUND"});},
   unauthorized:() => {throw new AppError({status:401,msg:'Unauthorized',code:"EAUTHORIZED"});},
   existingUser:() => {throw new AppError({

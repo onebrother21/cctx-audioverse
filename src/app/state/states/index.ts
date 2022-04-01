@@ -9,6 +9,7 @@ import { RoomsState } from './rooms.state';
 import { ChatMessagesState } from './chat-msgs.state';
 import { ContactUsState } from './contact-us.state';
 import { TasksState } from "./tasks.state";
+import { BusinessesState } from './businesses.state';
 
 export interface AppState {
   router:RouterState;
@@ -22,6 +23,7 @@ export interface AppState {
   msgs:ChatMessagesState;
   contactUs:ContactUsState;
   tasks:TasksState;
+  businesses:BusinessesState;
 }
 
 export * from "./common.state";
@@ -36,4 +38,5 @@ export * from "./rooms.state";
 export * from "./chat-msgs.state";
 export * from "./contact-us.state";
 export * from "./tasks.state";
+export * from "./businesses.state";
 //add some stat type, exp pts for clients taking classes, show on leaderboard

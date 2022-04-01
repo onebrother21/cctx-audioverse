@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
-import { AppError } from "../types";
 import { ContactUsMsg } from "../models";
 import { ContactUsActions as CONTACTUS } from "../actions";
 import { AppService,ContactUsService } from "../services";
@@ -19,11 +18,11 @@ export class ContactUsEffects {
     ofType(CONTACTUS.fetch),
     mergeMap(() => this.contactUs.fetch().pipe(
       map((msgs:ContactUsMsg[]) => CONTACTUS.load(msgs)),
-      catchError(error => of(CONTACTUS.error(new AppError(error))))))));
+      catchError(error => of(CONTACTUS.error(error)))))));
   SendContactUsMsg$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(CONTACTUS.send),
     map(o => o.payload),
     mergeMap(o => this.contactUs.send(o).pipe(
       map((msg:ContactUsMsg) => CONTACTUS.loadOne(msg)),
-      catchError(error => of(CONTACTUS.error(new AppError(error))))))));
+      catchError(error => of(CONTACTUS.error(error)))))));
 }

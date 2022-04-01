@@ -9,19 +9,16 @@ import { AuthService } from '../auth.service';
 })
 export class AuthSignInComponent {
   title = "auth-signin";
-  signinForm:FormGroup;
+  form:FormGroup;
   loading:boolean = false;
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.auth.loading$.subscribe(loading => this.loading = loading);
-    this.signinForm = this.fb.group({
-      action:['signin',Validators.required],
-      username:['',Validators.required],
-    });
+    this.form = this.fb.group({username:['',Validators.required]});
   }
-  get f(){return this.signinForm.controls;}
+  get f(){return this.form.controls;}
   submitForm(){
-    const o = this.signinForm.value;
-    this.auth.send(o);
-    this.signinForm.reset({action:"signin",username:""});
+    const o = this.form.value;
+    this.auth.send("signin",o);
+    this.form.reset({username:""});
   }
 }

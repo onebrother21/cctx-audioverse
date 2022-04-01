@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
-import { Observable,of } from 'rxjs';
+import { Observable,catchError,throwError, of } from 'rxjs';
 import { delay,mergeMap,materialize,dematerialize } from 'rxjs/operators';
 import { 
   layoutController,
@@ -47,7 +47,11 @@ export class MockBackendInterceptor implements HttpInterceptor {
     };
     return of(url)
     .pipe(mergeMap(main))
-    .pipe(materialize(),delay(300),dematerialize());
+    .pipe(materialize(),delay(300),dematerialize())
+    .pipe(catchError(error => {
+      console.warn('the interceptor has caught an error, process it here',error);
+      return throwError(() => error);
+    }));
   }
 }
 export const MockBackendProvider = {

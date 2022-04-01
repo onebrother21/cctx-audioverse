@@ -1,29 +1,28 @@
+
+export type Digit = "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9";
 export type Constructor<T> = new (...args:any[]) => T;
-export type Keys<T> = keyof T;
-export type Method<T> = (...params:any[]) => T;
-export type TypedMethod<T,U> = (...params:(T|any)[]) => U;
-export type Callback<T> = (v:T) => void;
-export type AsyncCallback<T> = (v:T) => Promise<void>;
-export type Members<T> = {[k in Keys<T>]:T[k]};
-export type Member<T> = Partial<T>;
-export type Payload<T,K extends Keys<T>> = T[K];
 export type DeepPartial<T> = {[P in keyof T]?:DeepPartial<T[P]>;};
 export type DeepPartialExcept<T,K extends keyof T> = DeepPartial<T> & Pick<T,K>;
-export type Primitive = string|number|boolean|Function|{[k:string]:any;}|any[];
+export type Nullable<T> = T|null;
+export type Keys<T> = keyof T;
+export type Values<T> = {[k in keyof T]:T[k]}[keyof T];
+export type Primitive = string|number|boolean|Date|Error;
+export type PrimitiveArr = Primitive[];
+export interface Primitives {[key:string]:Primitive|PrimitiveArr|Primitives;}
 export type DataMap<T> = {[key:string]:T};
-export type EnumMap<K extends string,T> = {[k in K]:T};
-export type Strings = DataMap<string>;
-export type EnumStrings<K extends string> = EnumMap<K,string>;
-export type Numbers = DataMap<number>;
-export type EnumNums<K extends string> = EnumMap<K,number>;
-export type Bools = DataMap<boolean>;
-export type EnumBools<K extends string> = EnumMap<K,boolean>;
+export type Enum<T,K extends string|undefined = undefined,J extends string|undefined = undefined> =
+(K extends string?Record<K,T>:DataMap<T>) &
+(J extends string?Partial<Record<J,T>>:{});
+export type Strings<K extends string|undefined = undefined> = Enum<string,K>;
+export type Numbers<K extends string|undefined = undefined> = Enum<number,K>;
+export type Bools<K extends string|undefined = undefined> = Enum<boolean,K>;
+export type Method<T> = (...params:any[]) => T;
 export type Methods<T> = DataMap<Method<T>>;
+export type TypedMethod<T,U> = (...params:(T|any)[]) => U;
 export type TypedMethods<T,U> = DataMap<TypedMethod<T,U>>;
-export type CalcVars = DataMap<any>;
-export type Calculation = (o:CalcVars) => string|boolean|number|any;
 export type Entity = {
   id:string;
+  qid:`qs-${string}`;
   created:Date;
   updated?:Date;
   removed?:Date;
@@ -35,7 +34,7 @@ export type SelectedEntity<T> = {id:string;i:number;item:T;};
 export type EntitySet<T> = {
   items:T[];
   ids:string[];
-  selected:SelectedEntity<T>|null;
+  selected:Nullable<SelectedEntity<T>>;
 };
 export type DeletedEntity = {id:string;done:boolean;ok:boolean;};
 
@@ -47,26 +46,11 @@ export type ErrorConfig = Partial<{
   status:number;
   code:number|string;
   warning:boolean;
-  info:string|MiscInfo;} & ValidationErrors>;
+} & ValidationErrors>;
 export type ErrorObj = Error & ErrorConfig & Entity;
 export type ErrorType = Error|ErrorObj|ValidationErrors;
-export type Errors = DataMap<ErrorType>;
-export type EnumErrors<K extends string> = EnumMap<K,ErrorType>;
+export type Errors<K extends string|undefined = undefined> = Enum<ErrorType,K>;
 
-export type KnownType = Primitive|ErrorType|Date;
-export type Values = DataMap<KnownType>;
-export type ValueMethods = Methods<KnownType>;
-export type MiscInfo = Values;
-export type EnumInfo<K extends string> = EnumMap<K,Values>;
+export type MiscInfo = Primitives;
 export type Status<K> = {name:K;time:Date;info?:MiscInfo;};
-
-export interface LocaleDateOpts {
-  weekday?: string;
-  month?: string;
-  day?: string;
-  year?: string;
-  hour?: string;
-  hour12?: boolean;
-  minute?: string;
-  second?: string;
-}
+export type LocaleDateOpts = Record<"weekday"|"month"|"day"|"year"|"hour"|"minute"|"second",string> & {hour12?:boolean;};

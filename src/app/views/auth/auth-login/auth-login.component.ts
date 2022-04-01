@@ -23,8 +23,7 @@ export class AuthLoginComponent {
     this.auth.me$.subscribe(user => this.user = user);
   }
   submitPin(pin:string){
-    this.auth.send({
-      action:"login",
+    this.auth.send("login",{
       pin,
       username:this.user?.username,
     });

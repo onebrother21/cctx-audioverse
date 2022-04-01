@@ -1,4 +1,5 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'qs-header',
@@ -7,8 +8,7 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 })
 export class HeaderComponent {
   title = "header";
-  headerNavOpen = false;
-  toggleHeaderNav(outside?:boolean){
-    this.headerNavOpen = outside == undefined || !outside?!this.headerNavOpen:false;
-  }
+  menuOpen?:boolean = false;
+  constructor(private layout:LayoutService){this.layout.headerNav$.subscribe(nav => this.menuOpen = nav.open);}
+  toggleMenu(outside?:boolean){this.layout.toggleMenu(outside);}
 }

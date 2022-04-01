@@ -11,6 +11,7 @@ import { AuthenticationReducer } from './auth.reducer';
 import { SessionsReducer } from './sessions.reducer';
 import { RoomsReducer } from './rooms.reducer';
 import { UsersReducer } from './users.reducer';
+import { BusinessesReducer } from "./businesses.reducer";
 
 
 export const REDUCERS = {
@@ -26,4 +27,5 @@ export const REDUCERS = {
   msgs:ChatMessagesReducer,
   contactUs:ContactUsReducer,
   tasks:TasksReducer,
+  businesses:BusinessesReducer,
 } as ActionReducerMap<AppState>;

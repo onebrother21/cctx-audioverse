@@ -1,9 +1,6 @@
-import { AppEntity } from "@state";
+import { DocEntity } from '../types';
 import { UserId } from "./user.model";
 
-export type Session = AppEntity & {
-  id:string;
-  title:string;
-  members:UserId[];
-  duration:string|number;
-};
+export type SessionObj = DocEntity & {members:UserId[];duration:number;};
+export interface Session extends SessionObj {}
+export class Session extends DocEntity {}

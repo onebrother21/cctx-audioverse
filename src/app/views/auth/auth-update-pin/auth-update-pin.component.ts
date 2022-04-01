@@ -25,8 +25,7 @@ export class AuthUpdatePinComponent {
   }
   submitPin(pin:string){
     if(!this.confirm){this.confirm = pin;this.greeting = "Now Confirm Your Pin";}
-    else if(this.confirm == pin) this.auth.send({
-      action:"update-pin",
+    else if(this.confirm == pin) this.auth.send("updatePin",{
       pin,
       username:this.user?.username,
     });
