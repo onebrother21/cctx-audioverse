@@ -83,7 +83,6 @@ export class AuthRegisterComponent {
     }
   }
   setErrorOnExistingUser(exists?:Record<string,boolean>){
-    console.log(exists);
     if(this.f && exists){
       const key = Object.keys(exists)[0];
       const val = Object.values(exists)[0];

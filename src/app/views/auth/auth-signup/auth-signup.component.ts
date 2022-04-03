@@ -49,7 +49,6 @@ export class AuthSignUpComponent {
   }
   getErr(field:string,errname?:string){return this.f[field].errors?.[errname||field];}
   setErrorOnExistingUser(exists?:Record<string,boolean>){
-    console.log(exists);
     if(this.f && exists){
       const key = Object.keys(exists)[0];
       const val = Object.values(exists)[0];
