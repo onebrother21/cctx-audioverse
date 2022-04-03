@@ -63,11 +63,13 @@ export class AuthSignInComponent {
       const key = Object.keys(exists)[0];
       const val = Object.values(exists)[0];
       const errname = key +"NotExist";
-      if(!val){
-        this.f[errname].setErrors({[errname]:true});
-        setTimeout(() => this.f[errname].setErrors(null),1800);
+      if(this.f[errname]){
+        if(!val){
+          this.f[errname].setErrors({[errname]:true});
+          setTimeout(() => this.f[errname].setErrors(null),1800);
+        }
+        else this.f[errname].setErrors(null);
       }
-      else this.f[errname].setErrors(null);
       this.hasErrors();
     }
   }

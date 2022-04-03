@@ -57,11 +57,13 @@ export class AuthLoginComponent {
   }
   setErrorOnBadPin(err?:Error){
     const errname = "badPin";
-    if(this.f && err){
-      this.f[errname].setErrors({[errname]:true});
-      setTimeout(() => this.f[errname].setErrors(null),1800);
+    if(this.f && this.f[errname]){
+      if(err){
+        this.f[errname].setErrors({[errname]:true});
+        setTimeout(() => this.f[errname].setErrors(null),1800);
+      }
+      else this.f[errname].setErrors(null);
     }
-    else this.f[errname].setErrors(null);
     this.hasErrors();
   }
   hasErrors(){
