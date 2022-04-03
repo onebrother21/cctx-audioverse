@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@state';
 import { MeDashComponent } from './me-dash';
 import { MeAccountComponent } from './me-acct';
 import { MeHomeComponent } from './me-home';
@@ -11,15 +12,17 @@ import { MeHomeAltComponent } from './me-home-alt';
 import { MeSettingsEditorComponent } from './me-settings-editor';
 
 const routes: Routes = [
-  {path:"",redirectTo:"hm",pathMatch:"full"},
-  {path:"hm",component:MeHomeComponent},
-  {path:"hm2",component:MeHomeAltComponent},
-  {path:"dash",component:MeDashComponent},
-  {path:"acct",component:MeAccountComponent},
-  {path:"edit/acct",component:MeAccountEditorComponent},
-  {path:"edit/settings",component:MeSettingsEditorComponent},
-  {path:"upgrade",component:MeAccountComponent},
-  {path:"msgs",component:MeMessagesComponent},
+  {path:"",canActivate:[AuthGuard],children:[
+    {path:"",redirectTo:"hm",pathMatch:"full"},
+    {path:"hm",component:MeHomeComponent},
+    {path:"hm2",component:MeHomeAltComponent},
+    {path:"dash",component:MeDashComponent},
+    {path:"acct",component:MeAccountComponent},
+    {path:"edit/acct",component:MeAccountEditorComponent},
+    {path:"edit/settings",component:MeSettingsEditorComponent},
+    {path:"upgrade",component:MeAccountComponent},
+    {path:"msgs",component:MeMessagesComponent},
+  ]}
 ];
 
 @NgModule({
