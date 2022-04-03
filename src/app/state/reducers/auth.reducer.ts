@@ -6,7 +6,7 @@ import { AppError } from "../common";
 const initialState = initializeAuth();
 const reducer = createReducer(
   initialState,
-  on(AUTH.load,(s,{payload:token}) => ({...s,token,loading:false,error:null,exists:undefined})),
+  on(AUTH.load,(s,{payload:{token,username} = {}}) => ({...s,token,username,loading:false,error:null,exists:undefined})),
   on(AUTH.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
   on(AUTH.exists,(s,{payload:exists}) => ({ ...s,exists,loading:false,error:null})),
   on(AUTH.lookup,s => ({...s,loading:true})),

@@ -15,7 +15,7 @@
           <qs-numpad (value)="updatePin($event)" [config]="pinConfig" [clear]="isConfirm||isReset"></qs-numpad>
           <input type="hidden" id="siteId" name="siteId" value="745822">
           <input type="hidden" id="pageId" name="pageId" value="749340">
-          <qs-error-alert [duration]="1800" [alert]="error"></qs-error-alert>
+          <qs-alert [duration]="1800" [alert]="error"></qs-alert>
           <input type="hidden" value="" name="recaptchaResponse">
         </form>
       </div>

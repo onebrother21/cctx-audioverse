@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AppService, authErr$, userExists$ } from "@state";
+import { AppService,authErr$,authExists$ } from "@state";
 import {
   AuthenticationActions as AUTH,
   authLoading$,
@@ -22,7 +22,7 @@ export class AuthService {
     this.loading$ = this.app.select(authLoading$);
     this.error$ = this.app.select(authErr$);
     this.me$ = this.app.select(meState$) as Observable<UserJson>;
-    this.userExists$ = this.app.select(userExists$);
+    this.userExists$ = this.app.select(authExists$);
   }
   queryForExistingUser(prop:string,source:Observable<any>){
     source.pipe(
@@ -33,6 +33,7 @@ export class AuthService {
   }
   send(action:string,o:any){
     switch(action){
+      case "signout":this.app.do(AUTH.signout());break;
       case "signup":this.app.do(AUTH.signup(o));break;
       case "signin":this.app.do(AUTH.signin(o));break;
       case "verify":this.app.do(AUTH.verify(o));break;

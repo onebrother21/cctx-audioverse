@@ -1,6 +1,11 @@
 import { Params,Data } from "@angular/router";
 import { Strings,Enum } from '../common';
 
+export type AppAlert = {
+  type:"error"|"success";
+  name:string;
+  data?:Strings;
+};
 export type AppRoute = {url:string;} & Partial<{query:Params;params:Params;data:Data;}>;
 export type NavItem = Partial<{
   label:string;

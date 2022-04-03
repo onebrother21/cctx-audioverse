@@ -4,7 +4,7 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom,filter } from "rxjs/operators";
 
-import { MeActions as ME } from "../actions";
+import { MeActions as ME,AuthenticationActions as AUTH } from "../actions";
 import { AppService,MeService } from "../services";
 
 @Injectable()
@@ -16,7 +16,10 @@ export class MeEffects {
   PopulateMe$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ME.populate),
     map(() => this.user.populate()),
-    map(user => ME.load(user)),
+    mergeMap(user => ([
+      AUTH.load(user),
+      ME.load(user||{}),
+    ])),
     catchError(error => of(ME.error(error)))));
   SaveMe$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ME.load),

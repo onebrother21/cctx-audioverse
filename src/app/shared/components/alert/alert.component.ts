@@ -1,16 +1,18 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
+import { AppAlert,Strings,CommonUtils as Utils } from '@state';
 
 @Component({
-  selector: 'qs-error-alert',
-  templateUrl: './error-alert.component.html',
-  styleUrls: ['./error-alert.component.scss'],
+  selector: 'qs-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss'],
 })
-export class ErrorAlertComponent {
+export class AlertComponent {
   someField: boolean = false;
-  title = "error-alert";
+  title = "alert";
   isShowing = false;
-  errorType ?= "";
-  errors:{[k:string]:string} = {
+  message = "";
+  messageType = "";
+  alerts:Strings = {
     phnOrEmailReq:"Phone or email is required.",
     phnReq:"Phone is required.",
     phnInvalid:"Phone must be a valid US phone number.",
@@ -21,6 +23,7 @@ export class ErrorAlertComponent {
     codeReq:"Code is required.",
     codeInvalid:"Code is invalid.",
     codeIncorrect:"Code is incorrect.",
+    codeSent:"[SENT VIA EMAIL/TEXT] Your verification code is: {code}",
     usernameReq:"Username is required.",
     usernameInvalid:"Username is invalid.",
     usernameExists:"This username is already in use.",
@@ -39,23 +42,40 @@ export class ErrorAlertComponent {
   };
   @Output() confirm:EventEmitter<any> = new EventEmitter();
   @Input() duration:number = 0;
-  @Input() set alert(err:{type:string}|null){
+  @Input() set alert(alert:AppAlert|null){
     switch(true){
-      case !err:{this.errorType = "";this.isShowing = false;break;}
-      case !this.isShowing:{this.showAlert((err||{}).type);break;}
+      case !alert:{
+        this.clear();
+        break;
+      }
+      case !this.isShowing:{
+        this.show(alert);
+        break;
+      }
       default:break;
     }
   }
-  showAlert(err?:string){
-    this.errorType = err;
-    this.isShowing = true;
-    this.duration?setTimeout(() => {
-      this.errorType = "";
-      this.isShowing = false;
-    },this.duration):null;
+  replaceData(alert?:AppAlert|null){
+    if(!alert) return "";
+    const msg = Utils.replaceData(this.alerts[alert.name],alert.data||{});
+    console.log(msg,alert.data);
+    return msg;
   }
-  closeAlert(){
-    this.confirm.emit();
+  clear(){
+    this.message = "";
+    this.messageType = "";
     this.isShowing = false;
+  }
+  show(alert?:AppAlert|null){
+    if(alert){
+      this.messageType = alert.type;
+      this.message = this.replaceData(alert);
+      this.isShowing = true;
+      this.duration?setTimeout(() => this.clear(),this.duration):null;
+    }
+  }
+  close(){
+    this.confirm.emit();
+    this.clear();
   }
 }

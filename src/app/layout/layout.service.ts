@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { 
   AppService,
   LayoutActions as LAYOUT,
-  isAuthed$,headerNav$,content$,
+  authed$,headerNav$,content$,
   LayoutParams,
   LayoutContent
 } from '@state';
@@ -14,7 +14,7 @@ export class LayoutService {
   headerNav$:Observable<LayoutParams>;
   content$:Observable<LayoutContent|undefined>;
   constructor(private app:AppService){
-    this.isAuthed$ = this.app.select(isAuthed$);
+    this.isAuthed$ = this.app.select(authed$);
     this.headerNav$ = this.app.select(headerNav$);
     this.content$ = this.app.select(content$);
   }

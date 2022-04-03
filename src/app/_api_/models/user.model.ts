@@ -29,7 +29,7 @@ export type UserAuthToken = {
   type:"req"|"api";
   user:string;
   role:string;
-  issuedAt:Date;
+  issued:Date;
 };
 export type UserAuth = {
   next:"verify"|"register"|"register-ext"|"update-pin"|"reset";
@@ -82,7 +82,7 @@ export class User extends AppEntity {
     this.tokenData = {
       type:auth?"api":"req",
       id:Utils.longId(),
-      issuedAt:new Date(),
+      issued:new Date(),
       user:this.id,
       role:this.role,
     };

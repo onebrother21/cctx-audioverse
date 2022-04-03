@@ -1,28 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ErrorAlertComponent } from './error-alert.component';
+import { AlertComponent } from './alert.component';
 
-describe('ErrorAlertComponent', () => {
+describe('AlertComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
       declarations: [
-        ErrorAlertComponent
+        AlertComponent
       ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(ErrorAlertComponent);
+    const fixture = TestBed.createComponent(AlertComponent);
     const comp = fixture.componentInstance;
     expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'error-alert'`, () => {
-    const fixture = TestBed.createComponent(ErrorAlertComponent);
+  it(`should have as title 'alert'`, () => {
+    const fixture = TestBed.createComponent(AlertComponent);
     const comp = fixture.componentInstance;
-    expect(comp.title).toEqual('error-alert');
+    expect(comp.title).toEqual('alert');
   });
 });

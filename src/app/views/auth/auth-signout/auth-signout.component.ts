@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'qs-auth-signout',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AuthSignOutComponent {
   title = "auth-signout";
+  constructor(private auth:AuthService){this.auth.send("signout",{});}
 }

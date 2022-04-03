@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { AppAlert } from '@state';
 import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
 
@@ -12,7 +13,7 @@ export class AuthSignUpComponent {
   title = "auth-signup";
   loading = false;
   isSubmitted = false;
-  error:{type:string}|null = null;
+  error:AppAlert|null = null;
   editor:FormGroup;
   formdata = {
     email:['',[
@@ -64,10 +65,10 @@ export class AuthSignUpComponent {
   hasErrors(){
     this.error = null;
     if(this.editor.invalid) switch(true){
-      case this.f['email'].dirty && this.getErr('emailExists'):this.error =  {type:"emailExists"};break;
-      case this.f['phn'].dirty && this.getErr('phnExists'):this.error =  {type:"phnExists"};break;
-      case this.isSubmitted && !!this.getErr('email','required'):this.error =  {type:"emailReq"};break;
-      case this.isSubmitted && !!this.getErr('email','pattern'):this.error =  {type:"emailInvalid"};break;
+      case this.f['email'].dirty && this.getErr('emailExists'):this.error =  {name:"emailExists",type:"error"};break;
+      case this.f['phn'].dirty && this.getErr('phnExists'):this.error =  {name:"phnExists",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('email','required'):this.error =  {name:"emailReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('email','pattern'):this.error =  {name:"emailInvalid",type:"error"};break;
       default:break;
     }
     this.isSubmitted = false;

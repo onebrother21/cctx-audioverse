@@ -120,7 +120,7 @@ export class AuthController {
   static logout = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
     const {o,i} = DB.findone(db.users,"username",body.username);
-    o.meta = {...o.meta,loggedout:new Date()};
+    o.meta = {...(o.meta||{}),loggedout:new Date()};
     o.tokenData = null;
     DB.save("qs-users",db.users,o,i);
     return Handlers.ok();

@@ -1,10 +1,19 @@
 import { Injectable } from "@angular/core";
+import { AppLocalStorageService } from "./local-storage";
+import { environment as env } from "@env/environment.prod";
 
 @Injectable({providedIn:"root"})
 
 export class AppWindowService {
   scroll:number = 0;
-  //constructor(private window:Window){}
+  constructor(private local:AppLocalStorageService){this.refreshVersion();}
+  refreshVersion(){
+    const version = this.local.get("appversion");
+    if(!version || version !== env.version){
+      this.local.set("appversion",env.version)
+      location.reload();
+    }
+  }
   scrollUp(){window.scrollTo({top:0});}
   async pseudofier(){
     const {

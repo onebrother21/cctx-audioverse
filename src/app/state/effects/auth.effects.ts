@@ -10,7 +10,7 @@ import {
   MeActions as ME,
   NavigationActions as NAV,
 } from "../actions";
-import { me$ } from "../selectors";
+import { authid$ } from "../selectors";
 import { AppService,AuthenticationService } from "../services";
 
 @Injectable()
@@ -31,7 +31,7 @@ export class AuthenticationEffects {
     map(o => o.payload),
     mergeMap(o => this.auth.signup(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/secur01/verify"}),
       ])),
@@ -41,23 +41,23 @@ export class AuthenticationEffects {
     map(o => o.payload),
     mergeMap(o => this.auth.signin(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/secur01/login"}),
       ])),
       catchError(error => of(AUTH.error(error)))))));
   Signout$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.signout),
-    withLatestFrom(this.app.select(me$)),
-    map(([,username]) => username||""),
-    map(([,username]) => AUTH.logout({username})),
+    map(() => AUTH.logout()),
     catchError(error => of(AUTH.error(error)))));
   Verify$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.verify),
     map(o => o.payload),
+    withLatestFrom(this.app.select(authid$)),
+    map(([{code},username]) => ({code,email:username||""})),
     mergeMap(o => this.auth.verify(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/secur01/register"}),
       ])),
@@ -65,9 +65,11 @@ export class AuthenticationEffects {
   Register$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.register),
     map(o => o.payload),
+    withLatestFrom(this.app.select(authid$)),
+    map(([user,username]) => ({...user,email:username||""})),
     mergeMap(o => this.auth.register(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/secur01/register-ext"}),
       ])),
@@ -75,9 +77,11 @@ export class AuthenticationEffects {
   RegisterExt$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.registerExt),
     map(o => o.payload),
+    withLatestFrom(this.app.select(authid$)),
+    map(([user,username]) => ({...user,username:username||""})),
     mergeMap(o => this.auth.registerExt(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/secur01/update-pin"}),
       ])),
@@ -85,9 +89,11 @@ export class AuthenticationEffects {
   UpdatePin$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.updatePin),
     map(o => o.payload),
+    withLatestFrom(this.app.select(authid$)),
+    map(([{pin},username]) => ({pin,username:username||""})),
     mergeMap(o => this.auth.updatePin(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/me"}),
       ])),
@@ -95,21 +101,24 @@ export class AuthenticationEffects {
   Login$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.login),
     map(o => o.payload),
+    withLatestFrom(this.app.select(authid$)),
+    map(([{pin},username]) => ({pin,username:username||""})),
     mergeMap(o => this.auth.login(o).pipe(
       mergeMap(user => ([
-        AUTH.load(user.token),
+        AUTH.load(user),
         ME.load(user),
         NAV.go({url:"/me"}),
       ])),
       catchError(error => of(AUTH.error(error)))))));
   Logout$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.logout),
-    map(o => o.payload),
+    withLatestFrom(this.app.select(authid$)),
+    map(([,username]) => ({username:username||""})),
     mergeMap(o => this.auth.logout(o).pipe(
       mergeMap(() => ([
         AUTH.load(),
         ME.load({}),
-        NAV.go({url:"/secur01/verify"}),
+        NAV.go({url:"/"}),
       ])),
       catchError(error => of(AUTH.error(error)))))));
 }

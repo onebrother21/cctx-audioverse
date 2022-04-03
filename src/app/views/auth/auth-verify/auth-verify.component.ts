@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { takeUntil,Subject } from 'rxjs';
-import { UserJson } from '@state';
+import { AppAlert } from '@state';
 import { AuthService } from '../auth.service';
 import { MockBackendNotifier } from "@api";
 
@@ -11,14 +11,21 @@ import { MockBackendNotifier } from "@api";
   styleUrls: ['./auth-verify.component.scss'],
 })
 export class AuthVerifyComponent implements AfterViewInit {
-  listenForMockVerificationCodeAlert(){this.notifier.notification$.subscribe(alert => this.alert = alert);}
-  ngAfterViewInit():void {this.listenForMockVerificationCodeAlert();}
-  alert = "";
+  listenForMockVerificationCodeAlert(){
+    this.notifier.notification$.subscribe(notification => {
+      if(notification) this.alert = {
+        name:"codeSent",
+        type:"success",
+        data:{code:notification.split(": ")[1]}
+      };
+    });
+  }
+  ngAfterViewInit(){this.listenForMockVerificationCodeAlert();}
+  alert:AppAlert|null = null;
+  error:AppAlert|null = null;
   title = "auth-verify";
   loading = false;
   isSubmitted = false;
-  error:{type:string}|null = null;
-  user?:UserJson;
   editor:FormGroup;
   formdata = {
     code:['',[
@@ -35,7 +42,6 @@ export class AuthVerifyComponent implements AfterViewInit {
     private fb:FormBuilder){
     this.editor = this.fb.group(this.formdata);
     this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
-    this.auth.me$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(user => this.user = user);
     this.auth.error$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(err => this.setErrorOnBadCode(err));
   }
   private ngUnsubscribe:Subject<boolean> = new Subject();
@@ -50,11 +56,7 @@ export class AuthVerifyComponent implements AfterViewInit {
     this.isSubmitted = true;
     this.hasErrors();
     if(this.editor.valid){
-      const o = {
-        ...this.editor.value,
-        email:this.user?.email,
-        phn:this.user?.phn,
-      };
+      const o = this.editor.value;
       delete o.badCode;
       this.auth.send("verify",o);
       this.isSubmitted = false;
@@ -72,11 +74,11 @@ export class AuthVerifyComponent implements AfterViewInit {
   hasErrors(){
     this.error = null;
     if(this.editor.invalid) switch(true){
-      case this.f['code'].dirty && this.getErr('badCode'):this.error =  {type:"codeIncorrect"};break;
-      case this.isSubmitted && !!this.getErr('code','required'):this.error =  {type:"codeReq"};break;
-      case this.isSubmitted && !!this.getErr('code','minlength'):this.error =  {type:"codeInvalid"};break;
-      case this.isSubmitted && !!this.getErr('code','maxlength'):this.error =  {type:"codeInvalid"};break;
-      case this.isSubmitted && !!this.getErr('code','pattern'):this.error =  {type:"codeInvalid"};break;
+      case this.f['code'].dirty && this.getErr('badCode'):this.error =  {name:"codeIncorrect",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('code','required'):this.error =  {name:"codeReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('code','minlength'):this.error =  {name:"codeInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('code','maxlength'):this.error =  {name:"codeInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('code','pattern'):this.error =  {name:"codeInvalid",type:"error"};break;
       default:break;
     }
     this.isSubmitted = false;

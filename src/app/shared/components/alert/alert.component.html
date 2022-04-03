@@ -1,0 +1,3 @@
+<div *ngIf="!!(message && isShowing)" class="cctx-alert" [ngClass]="messageType?'cctx-alert-'+messageType:''">
+  <div> {{message}} </div>
+</div>

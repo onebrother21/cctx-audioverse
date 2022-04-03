@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { UserJson } from '@state';
+import { AppAlert,UserJson } from '@state';
 
 @Component({
   selector: 'qs-auth-login',
@@ -16,8 +16,7 @@ export class AuthLoginComponent {
   isReset = false;
   loading = false;
   isSubmitted = false;
-  error:{type:string}|null = null;
-  user?:UserJson;
+  error:AppAlert|null = null;
   editor:FormGroup;
   formdata = {
     pin:['',[
@@ -31,7 +30,6 @@ export class AuthLoginComponent {
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.editor = this.fb.group(this.formdata);
     this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
-    this.auth.me$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(user => this.user = user);
     this.auth.error$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(err => this.setErrorOnBadPin(err));
   }
   private ngUnsubscribe:Subject<boolean> = new Subject();
@@ -51,7 +49,7 @@ export class AuthLoginComponent {
     this.isSubmitted = true;
     this.hasErrors();
     if(this.editor.valid){
-      const o = {...this.editor.value,username:this.user?.username,};
+      const o = this.editor.value;
       delete o.badPin;
       this.auth.send("login",o);
       this.isSubmitted = false;
@@ -69,11 +67,11 @@ export class AuthLoginComponent {
   hasErrors(){
     this.error = null;
     if(this.editor.invalid) switch(true){
-      case this.f['pin'].dirty && this.getErr('badPin'):this.error =  {type:"pinIncorrect"};break;
-      case this.isSubmitted && !!this.getErr('pin','required'):this.error =  {type:"pinReq"};break;
-      case this.isSubmitted && !!this.getErr('pin','minlength'):this.error =  {type:"pinInvalid"};break;
-      case this.isSubmitted && !!this.getErr('pin','maxlength'):this.error =  {type:"pinInvalid"};break;
-      case this.isSubmitted && !!this.getErr('pin','pattern'):this.error =  {type:"pinInvalid"};break;
+      case this.f['pin'].dirty && this.getErr('badPin'):this.error =  {name:"pinIncorrect",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('pin','required'):this.error =  {name:"pinReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('pin','minlength'):this.error =  {name:"pinInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('pin','maxlength'):this.error =  {name:"pinInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('pin','pattern'):this.error =  {name:"pinInvalid",type:"error"};break;
       default:break;
     }
     this.isSubmitted = false;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { UserJson } from '@state';
+import { AppAlert,UserJson } from '@state';
 
 @Component({
   selector: 'qs-auth-register',
@@ -13,8 +13,7 @@ export class AuthRegisterComponent {
   title = "auth-register";
   loading = false;
   isSubmitted = false;
-  error:{type:string}|null = null;
-  user?:UserJson;
+  error:AppAlert|null = null;
   editor:FormGroup;
   formdata = {
     username:['',[
@@ -52,7 +51,6 @@ export class AuthRegisterComponent {
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.editor = this.fb.group(this.formdata);
     this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
-    this.auth.me$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(user => this.user = user);
     this.auth.userExists$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(exists => this.setErrorOnExistingUser(exists));
     this.auth.queryForExistingUser("username",this.f["username"].valueChanges);
   }
@@ -78,12 +76,7 @@ export class AuthRegisterComponent {
     this.hasErrors();
     if(this.editor.valid){
       const {firstname,lastname,..._o} = this.editor.value;
-      const o = {
-        ..._o,
-        name:{first:firstname,last:lastname},
-        email:this.user?.email,
-        phn:this.user?.phn,
-      };
+      const o = {..._o,name:{first:firstname,last:lastname}};
       delete o.usernameExists;
       this.auth.send("register",o);
       this.isSubmitted = false;
@@ -106,27 +99,27 @@ export class AuthRegisterComponent {
   hasErrors(){
     this.error = null;
     if(this.editor.invalid) switch(true){
-      case this.f['username'].dirty && this.getErr('usernameExists'):this.error =  {type:"usernameExists"};break;
-      case this.isSubmitted && !!this.getErr('firstname','required'):this.error =  {type:"firstnameReq"};break;
-      case this.isSubmitted && !!this.getErr('firstname','minlength'):this.error =  {type:"firstnameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('firstname','maxlength'):this.error =  {type:"firstnameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('firstname','pattern'):this.error =  {type:"firstnameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('lastname','required'):this.error =  {type:"lastnameReq"};break;
-      case this.isSubmitted && !!this.getErr('lastname','minlength'):this.error =  {type:"lastnameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('lastname','maxlength'):this.error =  {type:"lastnameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('lastname','pattern'):this.error =  {type:"lastnameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('yob','required'):this.error =  {type:"yobReq"};break;
-      case this.isSubmitted && !!this.getErr('yob','minlength'):this.error =  {type:"yobInvalid"};break;
-      case this.isSubmitted && !!this.getErr('yob','maxlength'):this.error =  {type:"yobInvalid"};break;
-      case this.isSubmitted && !!this.getErr('yob','pattern'):this.error =  {type:"yobInvalid"};break;
-      case this.isSubmitted && !!this.getErr('hometown','required'):this.error =  {type:"hometownReq"};break;
-      case this.isSubmitted && !!this.getErr('hometown','minlength'):this.error =  {type:"hometownInvalid"};break;
-      case this.isSubmitted && !!this.getErr('hometown','maxlength'):this.error =  {type:"hometownInvalid"};break;
-      case this.isSubmitted && !!this.getErr('hometown','pattern'):this.error =  {type:"hometownInvalid"};break;
-      case this.isSubmitted && !!this.getErr('username','required'):this.error =  {type:"usernameReq"};break;
-      case this.isSubmitted && !!this.getErr('username','minlength'):this.error =  {type:"usernameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('username','maxlength'):this.error =  {type:"usernameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('username','pattern'):this.error =  {type:"usernameInvalid"};break;
+      case this.f['username'].dirty && this.getErr('usernameExists'):this.error =  {name:"usernameExists",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('firstname','required'):this.error =  {name:"firstnameReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('firstname','minlength'):this.error =  {name:"firstnameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('firstname','maxlength'):this.error =  {name:"firstnameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('firstname','pattern'):this.error =  {name:"firstnameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('lastname','required'):this.error =  {name:"lastnameReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('lastname','minlength'):this.error =  {name:"lastnameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('lastname','maxlength'):this.error =  {name:"lastnameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('lastname','pattern'):this.error =  {name:"lastnameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('yob','required'):this.error =  {name:"yobReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('yob','minlength'):this.error =  {name:"yobInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('yob','maxlength'):this.error =  {name:"yobInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('yob','pattern'):this.error =  {name:"yobInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('hometown','required'):this.error =  {name:"hometownReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('hometown','minlength'):this.error =  {name:"hometownInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('hometown','maxlength'):this.error =  {name:"hometownInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('hometown','pattern'):this.error =  {name:"hometownInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','required'):this.error =  {name:"usernameReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','minlength'):this.error =  {name:"usernameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','maxlength'):this.error =  {name:"usernameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','pattern'):this.error =  {name:"usernameInvalid",type:"error"};break;
       default:break;
     }
     this.isSubmitted = false;

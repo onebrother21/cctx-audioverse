@@ -4,7 +4,9 @@
       <h2 class="u-text u-text-grey-70 u-text-1">Verify</h2>
       <a routerLink="/" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">
         Cancel Verification?</a>
-      <div *ngIf="alert"><strong>{{alert}}</strong></div>
+      <div class="u-form-vertical u-inner-form">
+        <qs-alert [duration]="10000" [alert]="alert"></qs-alert>
+      </div>
     </div>
   </div>
   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
@@ -23,7 +25,7 @@
             <input type="submit" value="submit" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">
             <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
           </div>
-          <qs-error-alert [duration]="1800" [alert]="error"></qs-error-alert>
+          <qs-alert [duration]="1800" [alert]="error"></qs-alert>
           <input type="hidden" value="" name="recaptchaResponse">
         </form>
       </div>

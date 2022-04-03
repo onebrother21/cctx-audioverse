@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { UserJson } from '@state';
+import { AppAlert,UserJson } from '@state';
 
 @Component({
   selector: 'qs-auth-signin',
@@ -13,8 +13,7 @@ export class AuthSignInComponent {
   title = "auth-signin";
   loading = false;
   isSubmitted = false;
-  error:{type:string}|null = null;
-  user?:UserJson;
+  error:AppAlert|null = null;
   editor:FormGroup;
   formdata = {
     username:['',[
@@ -28,7 +27,6 @@ export class AuthSignInComponent {
   constructor(private auth:AuthService,private fb:FormBuilder){
     this.editor = this.fb.group(this.formdata);
     this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
-    this.auth.me$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(user => this.user = user);
     this.auth.userExists$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(exists => this.setErrorOnNonExistingUser(exists));
     this.auth.queryForExistingUser("username",this.f["username"].valueChanges);
   }
@@ -53,15 +51,8 @@ export class AuthSignInComponent {
     this.isSubmitted = true;
     this.hasErrors();
     if(this.editor.valid){
-      const {firstname,lastname,yob,..._o} = this.editor.value;
-      const o = {
-        ..._o,
-        name:{first:firstname,last:lastname},
-        yob:new Date(yob),
-        email:this.user?.email,
-        phn:this.user?.phn,
-      };
-      delete o.usernameExists;
+      const o = this.editor.value;
+      delete o.usernameNotExists;
       this.auth.send("signin",o);
       this.isSubmitted = false;
     }
@@ -83,11 +74,11 @@ export class AuthSignInComponent {
   hasErrors(){
     this.error = null;
     if(this.editor.invalid) switch(true){
-      case this.f['username'].dirty && this.getErr('usernameNotExist'):this.error =  {type:"usernameNotExist"};break;
-      case this.isSubmitted && !!this.getErr('username','required'):this.error =  {type:"usernameReq"};break;
-      case this.isSubmitted && !!this.getErr('username','minlength'):this.error =  {type:"usernameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('username','maxlength'):this.error =  {type:"usernameInvalid"};break;
-      case this.isSubmitted && !!this.getErr('username','pattern'):this.error =  {type:"usernameInvalid"};break;
+      case this.f['username'].dirty && this.getErr('usernameNotExist'):this.error =  {name:"usernameNotExist",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','required'):this.error =  {name:"usernameReq",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','minlength'):this.error =  {name:"usernameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','maxlength'):this.error =  {name:"usernameInvalid",type:"error"};break;
+      case this.isSubmitted && !!this.getErr('username','pattern'):this.error =  {name:"usernameInvalid",type:"error"};break;
       default:break;
     }
     this.isSubmitted = false;

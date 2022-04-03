@@ -43,6 +43,13 @@ export class CommonUtils {
       /[A-Z]/.test(s[i])?("-"+s[i].toLowerCase()):s[i];}
     return newStr;
   };
+  static replaceData(str:string,data:any = {}){
+    const dataReplacer = (withDelimiters:string,withoutDelimiters:string):string =>
+    data.hasOwnProperty(withoutDelimiters)?
+    data[withoutDelimiters]:
+    withDelimiters;
+    return str.replace(/{(\w+)}/g,dataReplacer);
+  };
   static oProps = (o:{}|any) => {
     if(this.isObj(o)) return Object.keys(o);
     else throw `global "props" called on non-object`;
