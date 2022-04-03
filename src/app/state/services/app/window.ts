@@ -10,7 +10,8 @@ export class AppWindowService {
   refreshVersion(){
     const version = this.local.get("appversion");
     if(!version || version !== env.version){
-      this.local.set("appversion",env.version)
+      this.local.set("appversion",env.version);
+      this.local.set("appuser",null);
       location.reload();
     }
   }
