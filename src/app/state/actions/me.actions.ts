@@ -1,5 +1,5 @@
 import { createAction } from "@ngrx/store";
-import { AppError } from "../types";
+import { AppError } from "../common";
 import { User } from "../models";
 
 export const MeActions = {

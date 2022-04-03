@@ -1,5 +1,5 @@
 import { createAction } from "@ngrx/store";
-import { AppError } from "../types";
+import { AppError } from "../common";
 import { User,UserJson } from "../models";
 
 export const UsersActions = {
@@ -15,6 +15,4 @@ export const UsersActions = {
   update:createAction('@qs/users/update',(o:Partial<User>) => ({payload:o})),
   remove:createAction('@qs/users/remove',(o:string) => ({payload:o})),
   query:createAction("@qs/users/query",(o:{[k in keyof User]?:User[k]}) => ({payload:o})),
-  exists:createAction("@qs/users/exists",(o:{[k in keyof User]?:User[k]}) => ({payload:o})),
-  existsLoad:createAction("@qs/users/exists-load",(o:boolean) => ({payload:o})),
 };

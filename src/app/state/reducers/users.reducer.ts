@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { UsersActions as USERS } from "../actions";
 import { UsersState,initializeUsers } from "../states";
-import { AppError } from "../types";
+import { AppError } from "../common";
 
 const initialState = initializeUsers();
 const reducer = createReducer(
@@ -41,7 +41,6 @@ const reducer = createReducer(
     const selected = {id:s.ids[i],i,item:s.items[i]};
     return {...s,selected,error:null};
   }),
-  on(USERS.existsLoad,(s,{payload:exists}) => ({ ...s,exists})),
   on(USERS.deselect,(s) => ({ ...s,selected:null})),
   on(USERS.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),
 );

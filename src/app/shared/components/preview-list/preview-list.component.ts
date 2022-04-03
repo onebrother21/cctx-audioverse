@@ -1,5 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
-import { Ad,Room,AppUtils } from '@state';//Survey,Forum
+import { Ad,Room,CommonUtils as Utils } from '@state';//Survey,Forum
 
 @Component({
   selector: 'qs-preview-list',
@@ -24,16 +24,16 @@ export class PreviewListComponent {
   constructor(){}
   ngOnInit(){this.compileAds();}
   compileAds(){
-    const pct = AppUtils.randnum(0,100);
+    const pct = Utils.randnum(0,100);
     let previewIdx:number = -1;
     for(let i=0,l=this.maxPreviews;i<l;i++){
-      const typeIdx = AppUtils.randnum(0,this.previewTypes.length-1);
+      const typeIdx = Utils.randnum(0,this.previewTypes.length-1);
       const type = this.previewTypes[typeIdx] as "ad"|"room"|"survey"|"forum";
       switch(type){
-        case "ad":previewIdx = AppUtils.randnum(0,this.ads.length-1);break;
-        case "room":previewIdx = AppUtils.randnum(0,this.rooms.length-1);break;
-        case "survey":previewIdx = AppUtils.randnum(0,this.surveys.length-1);break;
-        case "forum":previewIdx = AppUtils.randnum(0,this.forums.length-1);break;
+        case "ad":previewIdx = Utils.randnum(0,this.ads.length-1);break;
+        case "room":previewIdx = Utils.randnum(0,this.rooms.length-1);break;
+        case "survey":previewIdx = Utils.randnum(0,this.surveys.length-1);break;
+        case "forum":previewIdx = Utils.randnum(0,this.forums.length-1);break;
         default:break;
       }
       //preview?this.previewIds.push(pct <= 25?ad:-1);

@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { SessionsActions as SESSIONS } from "../actions";
 import { SessionsState,initializeSessions } from "../states";
-import { AppError } from "../types";
+import { AppError } from "../common";
 
 const initialState = initializeSessions();
 const reducer = createReducer(

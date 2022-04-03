@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { AppService,UserJson } from '@state';
+import { takeUntil,Subject } from 'rxjs';
+import { UserJson } from '@state';
 import { AuthService } from '../auth.service';
 import { MockBackendNotifier } from "@api";
 
@@ -10,41 +11,47 @@ import { MockBackendNotifier } from "@api";
   styleUrls: ['./auth-verify.component.scss'],
 })
 export class AuthVerifyComponent implements AfterViewInit {
-  title = "auth-verify";
+  listenForMockVerificationCodeAlert(){this.notifier.notification$.subscribe(alert => this.alert = alert);}
+  ngAfterViewInit():void {this.listenForMockVerificationCodeAlert();}
   alert = "";
+  title = "auth-verify";
   loading = false;
   isSubmitted = false;
+  error:{type:string}|null = null;
   user?:UserJson;
-  form:FormGroup;
+  editor:FormGroup;
+  formdata = {
+    code:['',[
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(8),
+      Validators.pattern(/^[A-Z0-9]+$/),
+    ]],
+    badCode:[''],
+  };
   constructor(
     private notifier:MockBackendNotifier,
     private auth:AuthService,
     private fb:FormBuilder){
-    this.auth.loading$.subscribe(loading => this.loading = loading);
-    this.auth.me$.subscribe(user => this.user = user);
-    this.auth.error$.subscribe(err => this.setErrorOnBadCode(err as any));
-    this.form = this.fb.group({
-      code:['',[
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/),
-      ]],
-      badCode:[''],
-    });
+    this.editor = this.fb.group(this.formdata);
+    this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
+    this.auth.me$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(user => this.user = user);
+    this.auth.error$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(err => this.setErrorOnBadCode(err));
   }
-  ngAfterViewInit():void {
-    this.notifier.notification$.subscribe(alert => {
-      console.log(alert);
-      this.alert = alert;
-    });
+  private ngUnsubscribe:Subject<boolean> = new Subject();
+  ngOnDestroy(){
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
   }
-  get f(){return this.form.controls;}
-  hasValidationErrors(){return this.isSubmitted && this.form.invalid;}
+  get f(){return this.editor.controls;}
+  getErr(field:string,errname?:string){return this.f[field].errors?.[errname||field];}
+  reset(){this.editor.reset({code:"",badCode:""});}
   submitForm(){
     this.isSubmitted = true;
-    if(this.form.valid){
+    this.hasErrors();
+    if(this.editor.valid){
       const o = {
-        ...this.form.value,
+        ...this.editor.value,
         email:this.user?.email,
         phn:this.user?.phn,
       };
@@ -53,15 +60,25 @@ export class AuthVerifyComponent implements AfterViewInit {
       this.isSubmitted = false;
     }
   }
-  hasBadCodeError(){return this.form.dirty && this.form.invalid && this.f['badCode'].errors?.['badCode'];}
-  setErrorOnBadCode = (err:Error) => {
-      if(err){
-        this.f["badCode"].setErrors({badCode:true});
-        setTimeout(() => {
-          this.f["badCode"].setErrors(null);
-          //this.form.reset({action:"verify",code:""});
-        },1500);
-      }
-      else this.f["badCode"].setErrors(null);
+  setErrorOnBadCode(err?:any){
+    const errname = "badCode";
+    if(this.f && err){
+      this.f[errname].setErrors({[errname]:true});
+      setTimeout(() => this.f[errname].setErrors(null),1800);
+    }
+    else this.f[errname].setErrors(null);
+    this.hasErrors();
+  }
+  hasErrors(){
+    this.error = null;
+    if(this.editor.invalid) switch(true){
+      case this.f['code'].dirty && this.getErr('badCode'):this.error =  {type:"codeIncorrect"};break;
+      case this.isSubmitted && !!this.getErr('code','required'):this.error =  {type:"codeReq"};break;
+      case this.isSubmitted && !!this.getErr('code','minlength'):this.error =  {type:"codeInvalid"};break;
+      case this.isSubmitted && !!this.getErr('code','maxlength'):this.error =  {type:"codeInvalid"};break;
+      case this.isSubmitted && !!this.getErr('code','pattern'):this.error =  {type:"codeInvalid"};break;
+      default:break;
+    }
+    this.isSubmitted = false;
   }
 }

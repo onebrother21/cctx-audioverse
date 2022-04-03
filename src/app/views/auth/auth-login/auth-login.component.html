@@ -1,20 +1,19 @@
 <div class="u-layout-row">
   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-1">
     <div class="u-container-layout u-container-layout-1">
-      <h2 class="u-text u-text-grey-70 u-text-1">{{greeting}}</h2>
-      <a routerLink="/secur01/signin" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">Already have an account?</a>
+      <h2 class="u-text u-text-grey-70 u-text-1"> Enter Your Pin </h2>
     </div>
   </div>
   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
     <div class="u-container-layout u-valign-middle u-container-layout-2">
       <div class="u-expanded-width u-form u-form-1">
-        <form 
-        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" 
-        name="form">
+        <form [formGroup]="editor" (ngSubmit)="submitForm()" 
+        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" name="editor">
           <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
-          <qs-numpad (num)="submitPin($event)" [config]="pinConfig"></qs-numpad>
+          <qs-numpad (value)="updatePin($event)" [config]="pinConfig" [clear]="isReset"></qs-numpad>
           <input type="hidden" id="siteId" name="siteId" value="745822">
           <input type="hidden" id="pageId" name="pageId" value="749340">
+          <input type="hidden" name="pin" formControlName="pin" required>
           <input type="hidden" value="" name="recaptchaResponse">
         </form>
       </div>

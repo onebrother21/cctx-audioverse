@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,withLatestFrom } from "rxjs/operators";
 
-import { Task } from "../models";
 import { TasksActions as TASKS } from "../actions";
 import { AppService,TasksService } from "../services";
 
@@ -17,12 +16,12 @@ export class TasksEffects {
   fetchTasks$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(TASKS.fetch),
     mergeMap(() => this.tasks.fetch().pipe(
-      map((tasks:Task[]) => TASKS.load(tasks)),
+      map(tasks => TASKS.load(tasks)),
       catchError(error => of(TASKS.error(error)))))));
   createTask$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(TASKS.create),
     map(o => o.payload),
     mergeMap(o => this.tasks.create(o).pipe(
-      map((task:Task) => TASKS.loadOne(task)),
+      map(task => TASKS.loadOne(task)),
       catchError(error => of(TASKS.error(error)))))));
 }

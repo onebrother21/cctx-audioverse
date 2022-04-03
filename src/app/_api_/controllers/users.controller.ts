@@ -1,54 +1,73 @@
 import { HttpRequest } from '@angular/common/http';
-import { User } from '@state';
-import { ok,isLoggedIn,idFromUrl,errors as e,save,findone,add, queryFromUrl } from '../utils';
+import { CommonUtils as Utils } from '../common';
+import {
+  MockApiDBHelpers as DB,
+  MockApiHandlers as Handlers,
+  MockApiLogger as Logger,
+  MockBackendNotifier
+} from '../utils';
 import { db } from '../db';
+import { User } from '../models';
 
-export const usersController = (req:HttpRequest<any>) => {
-  const {url,method,headers,body} = req;
-  const USERS = {
-    query:() => {
-      const {field,val} = queryFromUrl(url);
-      console.log({field,val})
-      const o = db.users.find(o => (o as any)[field] == val);
-      return ok(o?new User(o).json():null);
-    },
-    create:() => {
-      const o = new User({...body,settings:{lang:"en",app:{}},mates:[]});
-      add("qs-users",db.users,o);
-      return ok(o.json(true));
-    },
-    fetch:() => !isLoggedIn(headers)?e["unauthorized"]():ok(db.users.map(p => new User(p).json())),
-    fetchRecent:() => !isLoggedIn(headers)?e["unauthorized"]():ok(db.users.map(p => new User(p).json())),
-    fetchByUsername:() => !isLoggedIn(headers)?
-      e["unauthorized"]():
-      (() => {
-        const mine = /mine=1/.test(url);
-        const o = db.users.find(o => o.username == idFromUrl(url));
-        return ok(new User(o).json(mine));
-      })(),
-    update:() => {
-      if(!isLoggedIn(headers)) return e["unauthorized"]();
-      const {o,i} = findone(db.users,"id",idFromUrl(url));
-      for(const k in body) (o as any)[k] = body[k];
-      save("qs-users",db.users,o,i);
-      return ok(new User(o).json(true));
-    },
-    remove:() => !isLoggedIn(headers)?
-      e["unauthorized"]():
-      (() => {
-        db.users = db.users.filter(x => x.id !== idFromUrl(url));
-        save("qs-users",db.users);
-        return ok();
-      })(),
+export class UsersController {
+  static notifier:MockBackendNotifier;
+  static create = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    const o = new User({...body,settings:{lang:"en",app:{}},mates:[]});
+    DB.add("qs-users",db.users,o);
+    return Handlers.ok(o.json(true));
   };
-  switch(true){
-    case url.endsWith('/users') && method === 'POST':return USERS.create();
-    case url.endsWith('/users') && method === 'GET':return USERS.fetch();
-    case url.endsWith('/users/recent') && method === 'GET':return USERS.fetchRecent();
-    case url.match(/\/users\/q\?/) && method === 'GET':return USERS.query();
-    case url.match(/\/users\/\w+$/) && method === 'GET':return USERS.fetchByUsername();
-    case url.match(/\/users\/\w+$/) && method === 'PUT':return USERS.update();
-    case url.match(/\/users\/\w+$/) && method === 'DELETE':return USERS.remove();
-    default:return e["fourohfour"]();
-  }
-};
+  static fetch = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    return !Handlers.isLoggedIn(headers)?
+    Handlers.e["unauthorized"]():
+    Handlers.ok(db.users.map(p => new User(p).json()));
+  };
+  static fetchRecent = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    return !Handlers.isLoggedIn(headers)?
+    Handlers.e["unauthorized"]():
+    Handlers.ok(db.users.map(p => p.json()));
+  };
+  static fetchById = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    return Handlers.isLoggedIn(headers)?
+    Handlers.e["unauthorized"]():
+    Handlers.ok(db.users.find(x => x.id == Handlers.idFromUrl(url))?.json());
+  };
+  static fetchByUsername = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    return !Handlers.isLoggedIn(headers)?
+    Handlers.e["unauthorized"]():
+    (() => {
+      const mine = /mine=1/.test(url);
+      const o = db.users.find(o => o.username == Handlers.idFromUrl(url));
+      return Handlers.ok(new User(o).json(mine));
+    })();
+  };
+  static update = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
+    const {o,i} = DB.findone(db.users,"id",Handlers.idFromUrl(url));
+    for(const k in body) (o as any)[k] = body[k];
+    DB.save("qs-users",db.users,o,i);
+    return Handlers.ok(new User(o).json(true));
+  };
+  static remove = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    return !Handlers.isLoggedIn(headers)?
+    Handlers.e["unauthorized"]():
+    (() => {
+      db.users = db.users.filter(x => x.id !== Handlers.idFromUrl(url));
+      DB.save("qs-users",db.users);
+      return Handlers.ok();
+    })();
+  };
+  static query = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    const {field,val} = Handlers.queryFromUrl(url);
+    Logger.log({field,val})
+    const o = db.users.find(o => (o as any)[field] == val);
+    return Handlers.ok(o?new User(o).json():null);
+  };
+}

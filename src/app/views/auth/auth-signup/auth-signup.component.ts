@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { checkAsyncError } from '@shared';
-import { AppService,userExists$,users$,UsersActions as USERS } from '@state';
-import { concat, debounceTime, distinctUntilChanged,filter,map, subscribeOn, tap } from 'rxjs';
+import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,52 +12,64 @@ export class AuthSignUpComponent {
   title = "auth-signup";
   loading = false;
   isSubmitted = false;
-  form:FormGroup;
-  constructor(
-    private app:AppService,
-    private auth:AuthService,
-    private fb:FormBuilder){
-    this.auth.loading$.subscribe(loading => this.loading = loading);
-    this.auth.userExists$.subscribe(exists => this.setErrorOnExistingUser(exists));
-    this.form = this.fb.group({
-      email:['',[
-        Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      emailExists:[""],
-    });
-    this.queryForExistingUser();
+  error:{type:string}|null = null;
+  editor:FormGroup;
+  formdata = {
+    email:['',[
+      Validators.required,
+      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+    phn:['',[Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+    emailExists:[""],
+    phnExists:[""],
+  };
+  constructor(private auth:AuthService,private fb:FormBuilder){
+    this.editor = this.fb.group(this.formdata);
+    this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
+    this.auth.userExists$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(exists => this.setErrorOnExistingUser(exists));
+    this.auth.queryForExistingUser("email",this.f["email"].valueChanges);
+    this.auth.queryForExistingUser("phn",this.f["phn"].valueChanges);
   }
-  get f(){return this.form.controls;}
-  hasValidationErrors(){return this.isSubmitted && this.form.invalid;}
-  hasExistingEmailError(){
-    return this.form.dirty && 
-    this.form.invalid && 
-    this.f['emailExists'].errors?.['emailExists'];
+  private ngUnsubscribe:Subject<boolean> = new Subject();
+  ngOnDestroy(){
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
   }
+  get f(){return this.editor.controls;}
+  reset(){this.editor.reset({email:"",phn:"",emailExists:"",phnExists:""});}
   submitForm(){
     this.isSubmitted = true;
-    if(this.form.valid){
-      const o = this.form.value;
+    this.hasErrors();
+    if(this.editor.valid){
+      const o = this.editor.value;
       delete o.emailExists;
+      delete o.phnExists;
       this.auth.send("signup",o);
-      this.isSubmitted = false;
     }
   }
-  queryForExistingUser(){
-    this.f["email"].valueChanges.pipe(
-      debounceTime(400),
-      distinctUntilChanged(),
-      filter(v => typeof v == "string"))
-    .subscribe((v:string) => this.app.do(USERS.exists({email:v})));
-  }
-  setErrorOnExistingUser(exists?:boolean){
-    if(exists){
-      this.f["emailExists"].setErrors({emailExists:true});
-      setTimeout(() => {
-        this.f["emailExists"].setErrors(null);
-        //this.verifyForm.reset({action:"verify",code:""});
-      },1500);
+  getErr(field:string,errname?:string){return this.f[field].errors?.[errname||field];}
+  setErrorOnExistingUser(exists?:Record<string,boolean>){
+    console.log(exists);
+    if(this.f && exists){
+      const key = Object.keys(exists)[0];
+      const val = Object.values(exists)[0];
+      const errname = key +"Exists";
+      if(val){
+        this.f[errname].setErrors({[errname]:true});
+        setTimeout(() => this.f[errname].setErrors(null),1800);
+      }
+      else this.f[errname].setErrors(null);
+      this.hasErrors();
     }
-    else this.f["emailExists"].setErrors(null);
+  }
+  hasErrors(){
+    this.error = null;
+    if(this.editor.invalid) switch(true){
+      case this.f['email'].dirty && this.getErr('emailExists'):this.error =  {type:"emailExists"};break;
+      case this.f['phn'].dirty && this.getErr('phnExists'):this.error =  {type:"phnExists"};break;
+      case this.isSubmitted && !!this.getErr('email','required'):this.error =  {type:"emailReq"};break;
+      case this.isSubmitted && !!this.getErr('email','pattern'):this.error =  {type:"emailInvalid"};break;
+      default:break;
+    }
+    this.isSubmitted = false;
   }
 }

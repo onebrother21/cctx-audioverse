@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { NavigationActions as NAV } from "../actions";
 import { NavigationState,initializeNavigation } from "../states";
-import { AppEntity, AppError } from "../types";
+import { AppEntity, AppError } from "../common";
 
 const initialState = initializeNavigation();
 const reducer = createReducer(

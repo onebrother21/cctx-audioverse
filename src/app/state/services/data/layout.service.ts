@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
 import { AppService } from '../app';
-import { Layout } from '../../models';
+import { LayoutContent } from '../../models';
 
 @Injectable({providedIn:'root'})
 
 export class LayoutService {
   ext = "/layout";
   constructor(private app:AppService){}
-  fetch(){return this.app.http.get<Layout>(this.ext);}
+  fetch(){return this.app.http.get<LayoutContent>(this.ext);}
 }

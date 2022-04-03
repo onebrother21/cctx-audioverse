@@ -1,4 +1,5 @@
 import { Component, Input, Renderer2 } from '@angular/core';
+import { Enum, NavItem } from '@state';
 import { LayoutService } from '../layout.service';
 
 @Component({
@@ -9,13 +10,11 @@ import { LayoutService } from '../layout.service';
 export class HeaderNavMenuComponent {
   title = "header-nav";
   isAuthed:boolean = false;
-  menus:any[] = [];
+  menus:Enum<NavItem[],string> = {};
   open:boolean = false;
   constructor(private layout:LayoutService){
     this.layout.isAuthed$.subscribe(auth => this.isAuthed = auth);
-    this.layout.headerNav$.subscribe(nav => {
-      this.menus = nav.menus||[];
-      this.open = nav.open||false;
-    });
+    this.layout.headerNav$.subscribe(nav => this.open = nav.open||false);
+    this.layout.content$.subscribe(content => this.menus = content?.menus||{});
   } 
 }

@@ -13,19 +13,19 @@ import { AppService } from '../services';
 
 @Injectable()
 export class AppEffects {
-  constructor(private action$:Actions,private app:AppService){}
-  OnInit$:Observable<Action> = createEffect(() => this.action$.pipe(
+  constructor(private actions$:Actions,private app:AppService){}
+  OnInit$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ROOT_EFFECTS_INIT),
     mergeMap(() => ([
       LAYOUT.fetch(),
       ME.populate(),
       //CONTENT.fetch(),
     ]))));
-  OnError$:Observable<Action> = createEffect(() => this.action$.pipe(
+  OnError$:Observable<Action> = createEffect(() => this.actions$.pipe(
     filter((action:any) => action.error && action.error instanceof Error),
     tap(({error}) => console.error(error))),
     {dispatch:false});
-  redirect401s$:Observable<Action> = createEffect(() => this.action$.pipe(
+  redirect401s$:Observable<Action> = createEffect(() => this.actions$.pipe(
     filter((action:any) => action.error && action.error instanceof Error),
     filter(({error}) => error.status === 401),
     tap(() => location.reload()),

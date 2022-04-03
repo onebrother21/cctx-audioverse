@@ -9,18 +9,17 @@ import {
 import { Observable,catchError,throwError, of } from 'rxjs';
 import { delay,mergeMap,materialize,dematerialize } from 'rxjs/operators';
 import { 
-  layoutController,
-  usersController,
-  authController,
-  contactUsController,
-  msgsController,
-  //sessionsController,
-  roomsController,
-  tasksController,
-  invitesController,
-} from "./controllers";
-import { errors as e} from './utils';
-import { MockBackendNotifier } from './api-notifier';
+  LayoutRouter,
+  UsersRouter,
+  AuthRouter,
+  ContactUsRouter,
+  ChatMessagesRouter,
+  SessionsRouter,
+  RoomsRouter,
+  TasksRouter,
+  InvitesRouter,
+} from "./routers";
+import { MockApiHandlers as Handlers,MockBackendNotifier } from './utils';
 
 @Injectable()
 export class MockBackendInterceptor implements HttpInterceptor {
@@ -29,20 +28,20 @@ export class MockBackendInterceptor implements HttpInterceptor {
     const {url} = req;
     const main = ():Observable<HttpEvent<any>> => {
       switch(true){
-        case /layout/.test(url):return layoutController(req);
-        case /auth/.test(url):return authController(req,this.notifier);
-        case /users/.test(url):return usersController(req);
-        //case /contact-us/.test(url):return contactUsController(req);
-        //case /msgs/.test(url):return msgsController(req);
-        //case /sessions/.test(url):return sessionsController(req);
-        //case /rooms/.test(url):return roomsController(req);
-        //case /tasks/.test(url):return tasksController(req);
-        //case /invites/.test(url):return invitesController(req);
-        //case /content/.test(url):return contentController(req,next);
-        //case /players/.test(url):return playersController(req,next);
-        //case /games/.test(url):return gamesController(req,next);
-        //case /posts/.test(url):return postsController(req,next);
-        default:return e["fourohfour"]();
+        case /layout/.test(url):return LayoutRouter(req,this.notifier);
+        case /auth/.test(url):return AuthRouter(req,this.notifier);
+        case /users/.test(url):return UsersRouter(req,this.notifier);
+        case /contact-us/.test(url):return ContactUsRouter(req,this.notifier);
+        case /chat-msgs/.test(url):return ChatMessagesRouter(req,this.notifier);
+        case /sessions/.test(url):return SessionsRouter(req,this.notifier);
+        case /rooms/.test(url):return RoomsRouter(req,this.notifier);
+        case /tasks/.test(url):return TasksRouter(req,this.notifier);
+        case /invites/.test(url):return InvitesRouter(req,this.notifier);
+        //case /content/.test(url):return ContentRouter(req,this.notifier);
+        //case /players/.test(url):return PlayersRouter(req,this.notifier);
+        //case /games/.test(url):return GamesRouter(req,this.notifier);
+        //case /posts/.test(url):return PostsRouter(req,this.notifier);
+        default:return Handlers.errors["fourohfour"]();
       }
     };
     return of(url)

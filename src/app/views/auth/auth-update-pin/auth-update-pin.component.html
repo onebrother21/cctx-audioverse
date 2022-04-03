@@ -10,11 +10,12 @@
       <div class="u-expanded-width u-form u-form-1">
         <form 
         class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" 
-        name="form">
+        name="editor">
           <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
-          <qs-numpad (num)="submitPin($event)" [config]="pinConfig"></qs-numpad>
+          <qs-numpad (value)="updatePin($event)" [config]="pinConfig" [clear]="isConfirm||isReset"></qs-numpad>
           <input type="hidden" id="siteId" name="siteId" value="745822">
           <input type="hidden" id="pageId" name="pageId" value="749340">
+          <qs-error-alert [duration]="1800" [alert]="error"></qs-error-alert>
           <input type="hidden" value="" name="recaptchaResponse">
         </form>
       </div>

@@ -1,4 +1,4 @@
-import { AppError,EntitySet } from "../types";
+import { AppError,EntitySet } from "../common";
 
 export interface CommonState{
   loading:boolean;

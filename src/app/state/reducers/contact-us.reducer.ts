@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { ContactUsActions as CONTACTUS } from "../actions";
 import { ContactUsState,initializeContactUs } from "../states";
-import { AppError } from "../types";
+import { AppError } from "../common";
 
 const initialState = initializeContactUs();
 const reducer = createReducer(

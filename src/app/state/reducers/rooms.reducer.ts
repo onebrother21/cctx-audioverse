@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { RoomsActions as ROOMS } from "../actions";
 import { RoomsState,initializeRooms } from "../states";
-import { AppError } from "../types";
+import { AppError } from "../common";
 
 const initialState = initializeRooms();
 const reducer = createReducer(

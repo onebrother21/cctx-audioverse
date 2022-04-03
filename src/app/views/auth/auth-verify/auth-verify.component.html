@@ -4,14 +4,14 @@
       <h2 class="u-text u-text-grey-70 u-text-1">Verify</h2>
       <a routerLink="/" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">
         Cancel Verification?</a>
-      <div *ngIf="alert"><strong><em>{{alert}}</em></strong></div>
+      <div *ngIf="alert"><strong>{{alert}}</strong></div>
     </div>
   </div>
   <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
     <div class="u-container-layout u-valign-middle u-container-layout-2">
       <div class="u-expanded-width u-form u-form-1">
-        <form [formGroup]="form" (ngSubmit)="submitForm()" 
-        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" name="form">
+        <form [formGroup]="editor" (ngSubmit)="submitForm()" 
+        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" name="editor">
           <input type="hidden" id="siteId" name="siteId" value="745822">
           <input type="hidden" id="pageId" name="pageId" value="749340">
           <div class="u-form-group u-form-name u-form-group-1">
@@ -23,15 +23,7 @@
             <input type="submit" value="submit" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">
             <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
           </div>
-          <div class="u-form-send-error u-form-send-message" [style.display]="hasBadCodeError()?'block':'none'">
-            <span> This code is invalid. </span>
-          </div>
-          <div *ngIf="!hasBadCodeError()" class="u-form-send-error u-form-send-message" 
-          [style.display]="hasValidationErrors()?'block':'none'">
-            <div *ngIf="f['code'].errors?.['required']"> Verification code is required. </div>
-            <div *ngIf="f['code'].errors?.['minlength']"> Please provide a valid verification code (min length is 8)</div>
-            <div *ngIf="f['code'].errors?.['pattern']"> Please provide a valid verification code. </div>
-          </div>
+          <qs-error-alert [duration]="1800" [alert]="error"></qs-error-alert>
           <input type="hidden" value="" name="recaptchaResponse">
         </form>
       </div>

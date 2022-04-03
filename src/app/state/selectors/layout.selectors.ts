@@ -9,4 +9,4 @@ export const header$ = createSelector(layout$,s => s.header);
 export const headerNav$ = createSelector(layout$,s => s.nav);
 export const footer$ = createSelector(layout$,s => s.footer);
 export const pagination$ = createSelector(layout$,s => s.pagination);
-export const copyright$ = createSelector(footer$,s => s.copy);
+export const content$ = createSelector(layout$,s => s.content);

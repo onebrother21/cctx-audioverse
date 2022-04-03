@@ -23,6 +23,6 @@ export class ContactUsEffects {
     ofType(CONTACTUS.send),
     map(o => o.payload),
     mergeMap(o => this.contactUs.send(o).pipe(
-      map((msg:ContactUsMsg) => CONTACTUS.loadOne(msg)),
+      map(msg => CONTACTUS.loadOne(msg)),
       catchError(error => of(CONTACTUS.error(error)))))));
 }

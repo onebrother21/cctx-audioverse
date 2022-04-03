@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError,filter } from "rxjs/operators";
 
-import { UserJson } from "../models";
 import { UsersActions as USERS } from "../actions";
 import { AppService,UsersService } from "../services";
 
@@ -17,26 +16,18 @@ export class UsersEffects {
   fetchUsers$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(USERS.fetch),
     mergeMap(() => this.users.fetch().pipe(
-      map((users:UserJson[]) => USERS.load(users)),
+      map(users => USERS.load(users)),
       catchError(error => of(USERS.error(error)))))));
   createUser$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(USERS.create),
     map(o => o.payload),
     mergeMap(o => this.users.create(o).pipe(
-      map((user:UserJson) => USERS.loadOne(user)),
+      map(user => USERS.loadOne(user)),
       catchError(error => of(USERS.error(error)))))));
-  queryUser$:Observable<Action> = createEffect(() => this.actions$.pipe(
+  queryUsers$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(USERS.query),
     map(o => o.payload),
     mergeMap(q => this.users.query(q).pipe(
-      filter((user:UserJson) => !!user),
-      map((user:UserJson) => USERS.loadOne(user)),
-      catchError(error => of(USERS.error(error)))))));
-  queryExistingUser$:Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(USERS.exists),
-    map(o => o.payload),
-    mergeMap(q => this.users.query(q).pipe(
-      map((user:UserJson) => !!user),
-      map(exists => USERS.existsLoad(exists)),
+      map(users => USERS.load(users)),
       catchError(error => of(USERS.error(error)))))));
 }

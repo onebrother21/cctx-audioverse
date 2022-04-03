@@ -7,6 +7,12 @@ import { of } from 'rxjs';
 export class AuthenticationService {
   ext = "/auth";
   constructor(private app:AppService){}
+  lookup(q:Partial<UserJson>){
+    const key = Object.keys(q)[0] as keyof UserJson;
+    const val = Object.values(q)[0];
+    const qstr = `${key}=${val}`;
+    return this.app.http.get<{results:{[key:string]:boolean;}}>(this.ext+"/lookup?"+qstr);
+  }
   signup(o:{email:string}){return this.app.http.post<UserJson>(this.ext+"/signup",o);}
   signin(o:{username:string}){return this.app.http.post<UserJson>(this.ext+"/signin",o);}
   verify(o:{email:string;code:string;phn?:string}){return this.app.http.post<UserJson>(this.ext+"/verify",o);}
@@ -14,7 +20,7 @@ export class AuthenticationService {
   registerExt(o:Partial<User>){return this.app.http.put<UserJson>(this.ext+"/register",o);}
   updatePin(o:{username:string;pin:string}){return this.app.http.put<UserJson>(this.ext+"/login",o);}
   login(o:{username:string;pin:string}){return this.app.http.post<UserJson>(this.ext+"/login",o);}
-  signout(){return this.app.http.del(this.ext+'/login');}
+  logout(o:{username?:string;}){return this.app.http.post(this.ext+'/logout',o);}
   forgotName(o:any){return this.app.http.post<UserJson>(this.ext+"/forgot",o);}
   forgotPin(o:{email:string}){return this.app.http.post<UserJson>(this.ext+"/forgot",o);}
   navigateUserentication(action:string){

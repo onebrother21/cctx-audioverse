@@ -36,5 +36,4 @@ export * from "./actions";
 export * from "./effects";
 export * from "./services";
 export * from "./reducers";
-export * from "./types";
-export * as AppUtils from "./utils";
+export * from "./common";

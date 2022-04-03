@@ -17,6 +17,6 @@ export class UsersService {
   remove(id:string){return this.app.http.del(this.ext+"/"+id);}
   query(q:{[k in keyof User]?:User[k]}){
     const qstr = `${Object.keys(q)[0]}=${Object.values(q)[0]}`;
-    return this.app.http.get<UserJson>(this.ext+"/q?"+qstr);
+    return this.app.http.get<UserJson[]>(this.ext+"/q?"+qstr);
   }
 }

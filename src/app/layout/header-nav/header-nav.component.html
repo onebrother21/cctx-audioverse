@@ -2,7 +2,7 @@
   <div class="u-clearfix u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl">
     <div class="u-accordion u-expanded-width-xs u-faq u-spacing-20 u-accordion-1" style="margin:auto;" >
       <div class="u-accordion-item">
-        <ng-container *ngFor="let o of menus[!isAuthed?0:1]">
+        <ng-container *ngFor="let o of menus['headerNav'+(isAuthed?'Auth':'')]">
           <a routerLink="{{o.link}}" class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 
           u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-white u-accordion-link-1" 
           id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">

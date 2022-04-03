@@ -1,11 +1,11 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import { MeState } from "../states";
 
-export const me$ = createFeatureSelector<MeState>("me");
-export const userLoading$ = createSelector(me$,s => s.loading);
-export const userErr$ = createSelector(me$,s => s.error);
+export const meState$ = createFeatureSelector<MeState>("me");
+export const userLoading$ = createSelector(meState$,s => s.loading);
+export const userErr$ = createSelector(meState$,s => s.error);
+export const me$ = createSelector(meState$,s => s.username||s.email);
 /*
-export const authid$ = createSelector(me$,s => s.username||s.email);
 export const username$ = createSelector(me$,s => s?s.username:null);
 export const name$ = createSelector(me$,s => s?s.fullname:null);
 export const status$ = createSelector(me$,s => s.status);

@@ -4,7 +4,6 @@ import { Action } from "@ngrx/store";
 import { Observable,of } from "rxjs";
 import { mergeMap,map,tap,catchError } from "rxjs/operators";
 
-import { Layout } from "../models";
 import { LayoutActions as LAYOUT } from "../actions";
 import { AppService,LayoutService } from "../services";
 import { ROUTER_NAVIGATION, RouterNavigationAction } from "@ngrx/router-store";
@@ -29,6 +28,6 @@ export class LayoutEffects {
     ofType(LAYOUT.fetch),
     mergeMap(() =>
       this.layout.fetch().pipe(
-        map((layout:Layout) => LAYOUT.load(layout)),
+        map(layoutContent => LAYOUT.load(layoutContent)),
         catchError(error => of(LAYOUT.error(error)))))));
 }

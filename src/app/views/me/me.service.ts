@@ -1,40 +1,40 @@
 import { Injectable } from "@angular/core";
 import { AppService, User } from "@state";
 import {
-  Icon,Ad,Room,
+  NavItem,Ad,Room,
   NavigationActions as Navigation,
-  userLoading$,me$,
+  userLoading$,meState$,
 } from "@state";
 import { Observable } from "rxjs";
 
 @Injectable()
 export class MeService {
-  menu:Icon[] = [
+  menu:NavItem[] = [
     {
       label:"Create New",
       text:"Types: Session, Room, Forum, Survey",
-      url:"/sessions/new",
+      link:"/sessions/new",
       type:`fa`,
       class:"fa fa-plus"
     },{
       label:"Recent Files",
       text:`Creamy Crack,\n Project Anywhere,\n 8 more`,
-      url:"/sessions",
+      link:"/sessions",
       type:`stack`,
     },{
       label:"Me Community",
       text:"See what's going on (eyeballs)...",
-      url:"/me/hm2",
+      link:"/me/hm2",
       type:"users",
     },{
       label:"Account and Settings",
       text:"View or update my account details.",
-      url:"/me/acct",
+      link:"/me/acct",
       type:"lock",
     },{
       label:"Help & Support",
       text:"We're here to help",
-      url:"/services",
+      link:"/services",
       type:`fa`,
       class:"fa fa-question"
     }
@@ -59,7 +59,7 @@ export class MeService {
   loading$:Observable<boolean> = new Observable();
   constructor(private app:AppService){
     this.loading$ = this.app.select(userLoading$);
-    this.me$ = this.app.select(me$);
+    this.me$ = this.app.select(meState$);
   }
   send(o:any){this.app.do(Navigation.go({url:this.getNextMePage(o.type)}));}
   getNextMePage(type:string){

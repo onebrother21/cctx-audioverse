@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { TasksActions as TASKS } from "../actions";
 import { TasksState,initializeTasks } from "../states";
-import { AppError } from "../types";
+import { AppError } from "../common";
 
 const initialState = initializeTasks();
 const reducer = createReducer(

@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { MeActions as ME } from "../actions";
 import { MeState,initializeMe } from "../states";
-import { AppError } from "../types";
+import { AppError } from "../common";
 
 const initialState = initializeMe();
 const reducer = createReducer(

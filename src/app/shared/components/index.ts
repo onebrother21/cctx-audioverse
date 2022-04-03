@@ -12,6 +12,7 @@ import { UploadListComponent } from './upload-list';
 import { UploadsComponent } from './uploads';
 import { PreviewListComponent } from './preview-list';
 import { PreviewRoomComponent } from './preview-room';
+import { ErrorAlertComponent } from './error-alert';
 
 export const COMPONENTS = [
   IconComponent,
@@ -27,4 +28,5 @@ export const COMPONENTS = [
   UploadDetailsComponent,
   UploadListComponent,
   UploadsComponent,
+  ErrorAlertComponent,
 ];

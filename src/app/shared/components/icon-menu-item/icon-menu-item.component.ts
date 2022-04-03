@@ -1,5 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
-import { Icon } from '@state';
+import { NavItem } from '@state';
 
 @Component({
   selector: 'qs-icon-menu-item',
@@ -9,6 +9,6 @@ import { Icon } from '@state';
 
 export class IconMenuItemComponent {
   title = "icon-menu-item";
-  @Input() item:Icon = {label:"",type:""};
+  @Input() item:NavItem = {label:"",type:""};
   @Output() select:EventEmitter<any> = new EventEmitter();
 }

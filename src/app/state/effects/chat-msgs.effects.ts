@@ -23,6 +23,6 @@ export class ChatMessagesEffects {
     ofType(CHAT.send),
     map(o => o.payload),
     mergeMap(o => this.msgs.send(o).pipe(
-      map((msg:ChatMsg) => CHAT.loadOne(msg)),
+      map(msg => CHAT.loadOne(msg)),
       catchError(error => of(CHAT.error(error)))))));
 }
