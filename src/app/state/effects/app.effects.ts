@@ -17,6 +17,7 @@ export class AppEffects {
   OnInit$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ROOT_EFFECTS_INIT),
     mergeMap(() => ([
+      LAYOUT.refresh(),
       LAYOUT.fetch(),
       ME.populate(),
       //CONTENT.fetch(),

@@ -6,7 +6,7 @@ import { environment as env } from "@env/environment.prod";
 
 export class AppWindowService {
   scroll:number = 0;
-  constructor(private local:AppLocalStorageService){this.refreshVersion();}
+  constructor(private local:AppLocalStorageService){}
   refreshVersion(){
     const version = this.local.get("appversion");
     if(!version || version !== env.version){

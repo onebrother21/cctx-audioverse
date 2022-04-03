@@ -14,20 +14,23 @@ export class LayoutEffects {
     private actions$:Actions,
     private layout:LayoutService,
     private app:AppService){}
-  PostNavigation$:Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(ROUTER_NAVIGATION),
-    map((action:RouterNavigationAction) => action.payload.routerState),
-    mergeMap(() => ([
-      LAYOUT.toggleNav(false),
-      LAYOUT.scrollTop(),
-    ]))));
-  ScrollToTop$:Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(LAYOUT.scrollTop),
-    tap(() => this.app.win.scrollUp())),{dispatch:false});
+  RefreshVersion$:Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(LAYOUT.refresh),
+    tap(() => this.app.win.refreshVersion())),{dispatch:false});
   FetchLayout$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(LAYOUT.fetch),
     mergeMap(() =>
       this.layout.fetch().pipe(
         map(layoutContent => LAYOUT.load(layoutContent)),
         catchError(error => of(LAYOUT.error(error)))))));
+  ScrollToTop$:Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(LAYOUT.scrollTop),
+    tap(() => this.app.win.scrollUp())),{dispatch:false});
+  ScrollUpOnNavigation$:Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(ROUTER_NAVIGATION),
+    map((action:RouterNavigationAction) => action.payload.routerState),
+    mergeMap(() => ([
+      LAYOUT.toggleNav(false),
+      LAYOUT.scrollTop(),
+    ]))));
 }
