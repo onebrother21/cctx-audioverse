@@ -11,7 +11,7 @@ export class AppWindowService {
     const version = this.local.get("appversion");
     if(!version || version !== env.version){
       this.local.set("appversion",env.version);
-      this.local.set("appuser",null);
+      this.local.set("appuser",{});
       location.reload();
     }
   }
