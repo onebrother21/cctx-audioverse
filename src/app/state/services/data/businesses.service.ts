@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { AppService } from '../app';
+import { AppService } from '../app/app.service';
 import { Business, BusinessJson } from '../../models';
 
 

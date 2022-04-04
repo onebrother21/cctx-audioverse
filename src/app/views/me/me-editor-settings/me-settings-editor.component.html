@@ -1,0 +1,60 @@
+<div class="u-layout-row">
+  <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-1">
+    <div class="u-container-layout u-container-layout-1">
+      <h2 class="u-text u-text-grey-70 u-text-1">Edit My Settings</h2>
+    </div>
+  </div>
+  <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
+    <div class="u-container-layout u-valign-middle u-container-layout-2">
+      <div class="u-expanded-width u-form u-form-1">
+        <form [formGroup]="editor" (ngSubmit)="submitForm()" 
+        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" name="editor">
+          <input type="hidden" id="siteId" name="siteId" value="745822">
+          <input type="hidden" id="pageId" name="pageId" value="749340">
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Max Sessions</label>
+            <input type="number" placeholder="Enter Max Sessions" id="name-3b9a" 
+            name="maxSessions" formControlName="maxSessions" min="1" max="10" step="1" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1">
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <p>Activate New Sessions?</p>
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Can Activate</label>
+            <input type="radio" value="true" formControlName="canActivate"> Yes &nbsp;
+            <input type="radio" value="false" formControlName="canActivate"> No &nbsp;
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <p>Share Sessions?</p>
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Can Share</label>
+            <input type="radio" value="true" formControlName="canShare"> Yes &nbsp;
+            <input type="radio" value="false" formControlName="canShare"> No &nbsp;
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <p>Accept Invites?</p>
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Can Activate</label>
+            <input type="radio" value="true" formControlName="acceptInvites"> Yes &nbsp;
+            <input type="radio" value="false" formControlName="acceptInvites"> No &nbsp;
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <p>Send Invites?</p>
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Send Invites</label>
+            <input type="radio" value="true" formControlName="sendInvites"> Yes &nbsp;
+            <input type="radio" value="false" formControlName="sendInvites"> No &nbsp;
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <p>Create Snippets?</p>
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Create Snippets</label>
+            <input type="radio" value="true" formControlName="createSnippets"> Yes &nbsp;
+            <input type="radio" value="false" formControlName="createSnippets"> No &nbsp;
+          </div>
+          <div class="u-align-left u-form-group u-form-submit u-form-group-4">
+            <input type="submit" value="submit" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">
+            <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
+          </div>
+          <qs-alert [duration]="2500" [alert]="error"></qs-alert>
+          <input type="hidden" value="" name="recaptchaResponse">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

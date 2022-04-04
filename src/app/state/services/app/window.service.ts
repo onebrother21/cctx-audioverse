@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AppLocalStorageService } from "./local-storage";
+import { AppLocalStorageService } from "./local-storage.service";
 import { environment as env } from "@env/environment.prod";
 
 @Injectable({providedIn:"root"})

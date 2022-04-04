@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
-import { AppService } from '../app';
+import { AppService } from '../app/app.service';
 import { LayoutContent } from '../../models';
 
 @Injectable({providedIn:'root'})
