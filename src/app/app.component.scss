@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+}
+html {
+  overflow: hidden;
+}
+body {
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
+}

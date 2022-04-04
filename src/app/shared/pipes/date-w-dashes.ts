@@ -8,5 +8,5 @@ export class DateWithDashesPipe implements PipeTransform {
     day = d.getDate(),
     month = d.getMonth() + 1,
     yr = d.getFullYear();
-    return `${day}-${month}-${yr}`;}
+    return `${month}-${day}-${yr}`;}
 }

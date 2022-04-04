@@ -11,7 +11,9 @@
         u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link 
         u-text-active-palette-1-base"
         style="cursor:pointer;">
-          <qs-icon *ngIf="menuOpen" [item]="{label:'',type:'fa',class:'fa fa-close'}"></qs-icon>
+          <div *ngIf="menuOpen" style="margin-top:-10px;">
+            <qs-icon [item]="{label:'',type:'fa',class:'fa fa-close'}"></qs-icon>
+          </div>
           <qs-icon *ngIf="!menuOpen" [item]="{label:'',type:'hamburger'}"></qs-icon>
         </span>
       </div>

@@ -15,7 +15,7 @@ export class AppWindowService {
       //location.reload();
     }
   }
-  scrollUp(){window.scrollTo({top:0});}
+  scrollUp(){document.body.scrollTo({top:0});}
   async pseudofier(){
     const {
       navigator:{appName,appVersion,doNotTrack,cookieEnabled,plugins,mimeTypes,userAgent,geolocation},

@@ -42,6 +42,7 @@ export class AuthLoginComponent {
   reset(){this.editor.reset({pin:"",badCode:""});}
   updatePin(pin:string){
     this.f["pin"].setValue(pin);
+    this.f["pin"].markAsDirty();
     this.isReset = true;
     this.submitForm();
   }

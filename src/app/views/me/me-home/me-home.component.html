@@ -1,7 +1,7 @@
 <section class="u-align-center u-clearfix u-grey-10 u-section-8" id="carousel_3837">
   <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <h2 class="u-text u-text-default u-text-1">
-      <font class="u-text-palette-1-base">Welcome back, <a routerLink="/me/acct">{{me.username}}</a></font>
+      <font class="u-text-palette-1-base">{{getMemberGreeting()}}, <a routerLink="/me/acct">{{me.username}}</a></font>
     </h2>
     <qs-me-notifications></qs-me-notifications>
     <a routerLink="/me/dash"
