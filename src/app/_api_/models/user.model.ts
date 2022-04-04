@@ -5,8 +5,9 @@ export type UserAppSettings = Partial<{
   canActivate:boolean;
   canShare:boolean;
   acceptInvites:boolean;
+  sendInvites:boolean;
+  createSnippets:boolean;
   maxSessions:number;
-  willCollab:boolean;
 }>;
 export type UserAcct = {
   email:string;
@@ -54,7 +55,7 @@ export type UserProfile = Partial<{
 export type UserObj = AppEntity & UserAcct & UserAuth & UserProfile;
 export type UserPublic = Extract<keyof UserObj,
 "qid"|"email"|"phn"|"username"|"hometown"|"loc"|"settings"|"role"|"acct"|"scopes"|"status"|"activity"|
-"info"|"desc"|"meta"|"img"|"motto"|"bio"|"mantles"|"tastes"|"uses"|"socials"|
+"info"|"desc"|"meta"|"img"|"motto"|"bio"|"mantles"|"tastes"|"uses"|"socials"|"yob"|
 "next"|"verified"|"lastlogin"|"lastreset"
 >;
 export type UserJson = Pick<UserObj,UserPublic> & {
@@ -113,6 +114,7 @@ export class User extends AppEntity {
       scopes:this.scopes,
       status:this.status,
       loc:this.loc,
+      yob:this.yob,
     };
     const authinfo = {
       info:this.info,

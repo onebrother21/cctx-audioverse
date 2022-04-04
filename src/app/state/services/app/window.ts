@@ -12,7 +12,7 @@ export class AppWindowService {
     if(!version || version !== env.version){
       this.local.set("appversion",env.version);
       this.local.set("appuser",{});
-      location.reload();
+      //location.reload();
     }
   }
   scrollUp(){window.scrollTo({top:0});}

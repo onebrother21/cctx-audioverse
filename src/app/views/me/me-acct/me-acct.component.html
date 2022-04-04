@@ -5,17 +5,17 @@
         <div class="u-layout-row">
           <div class="u-container-style u-layout-cell u-similar-fill u-size-30 u-layout-cell-1">
             <div class="u-container-layout u-valign-top u-container-layout-1">
-              <h2 class="u-text u-text-palette-1-base u-text-1">Jackswift</h2>
+              <h2 class="u-text u-text-palette-1-base u-text-1">{{me.username}}</h2>
               <div class="u-border-6 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
             </div>
           </div>
           <div class="u-align-left u-container-style u-layout-cell u-similar-fill u-size-30 u-layout-cell-2">
             <div class="u-container-layout u-valign-top u-container-layout-2">
               <p class="u-text u-text-font u-text-grey-50 u-text-2">
-                <strong>Email: </strong>service.onebrother@gmail.com<br>
-                <strong>Phone: </strong>832-444-5006<br>
-                <strong>Motto: </strong>Carpe Diem<br>
-                <strong>Bio: </strong>Im the man mayne<br>
+                <strong>Email: </strong>{{me.email}}<br>
+                <strong>Phone: </strong>{{me.phn || 'Not Provided'}}<br>
+                <strong>Motto: </strong>{{me.motto || 'Not Provided'}}<br>
+                <strong>Bio: </strong>{{me.bio || 'Not Provided'}}<br>
               </p>
               <a routerLink="/me/edit/acct" 
               class="u-active-grey-90 u-btn u-btn-round u-button-style u-custom u-hover-grey-90 u-palette-1-base u-radius-8 u-text-active-white u-text-body-alt-color u-text-hover-white u-btn-1">
@@ -25,10 +25,12 @@
           <div class="u-align-left u-container-style u-layout-cell u-similar-fill u-size-30 u-layout-cell-2">
             <div class="u-container-layout u-valign-top u-container-layout-2">
               <p class="u-text u-text-font u-text-grey-50 u-text-2">
-                <strong>Can Activate: </strong>Yes<br>
-                <strong>Can Share: </strong>No<br>
-                <strong>Invite Me to Collab: </strong>Yes<br>
-                <strong>Invite Me to Collab: </strong>Yes<br>
+                <strong>Can Activate: </strong>{{me?.settings?.app?.canActivate?'Yes':'No'}}<br>
+                <strong>Can Share: </strong>{{me?.settings?.app?.canShare?'Yes':'No'}}<br>
+                <strong>Can Accept Invites: </strong>{{me?.settings?.app?.acceptInvites?'Yes':'No'}}<br>
+                <strong>Can Send Invites: </strong>{{me?.settings?.app?.sendInvites?'Yes':'No'}}<br>
+                <strong>Can Create Snippets: </strong>{{me?.settings?.app?.createSnippets?'Yes':'No'}}<br>
+                <strong>Max No. of Sessions: </strong>{{me?.settings?.app?.maxSessions||0}}<br>
               </p>
               <a routerLink="/me/edit/settings" 
               class="u-active-grey-90 u-btn u-btn-round u-button-style u-custom u-hover-grey-90 u-palette-1-base u-radius-8 u-text-active-white u-text-body-alt-color u-text-hover-white u-btn-1">
@@ -44,12 +46,13 @@
           <div class="u-container-layout u-similar-container u-container-layout-3">
             <h5 class="u-custom-font u-font-roboto-condensed u-text u-text-default u-text-palette-1-base u-text-3">Account Info</h5>
             <p class="u-text u-text-4">
-              <strong>Type: </strong>GLD-2<br>
-              <strong>Member Since: </strong>12/4/2022<br>
-              <strong>Name: </strong>Jack Powers<br>
-              <strong>YOB: </strong>1980<br>
-              <strong>Hometown: </strong>Houston, TX<br>
-              <strong>Location: </strong>Houston, TX<br>
+              <strong>Type: </strong>{{me.acct || 'Not Provided'}}<br>
+              <strong>Member Since: </strong>{{me.memberSince || 'Not Provided' | dateWithDashes}}<br>
+              <strong>Name: </strong>{{me.fullname || 'Not Provided'}}<br>
+              <strong>YOB: </strong>{{me.yob || 'Not Provided'}}<br>
+              <strong>Age: </strong>{{me.age || 'Not Provided'}}<br>
+              <strong>Hometown: </strong>{{me.hometown || 'Not Provided'}}<br>
+              <strong>Location: </strong>{{me.loc || 'Not Provided'}}<br>
             </p>
           </div>
         </div>
@@ -57,19 +60,9 @@
           <div class="u-container-layout u-similar-container u-container-layout-5">
             <h5 class="u-custom-font u-font-roboto-condensed u-text u-text-default u-text-palette-1-base u-text-7">Stats</h5>
             <p class="u-text u-text-4">
-              <strong>Total Studio Hrs: </strong>19 hrs<br>
+              <strong>Total Studio Hrs: </strong>19.5 hrs<br>
               <strong>Total Views: </strong>799<br>
-              <strong>Total Spins: </strong>1188
-            </p>
-          </div>
-        </div>
-        <div class="u-align-left u-container-style u-grey-10 u-list-item u-repeater-item u-list-item-2">
-          <div class="u-container-layout u-similar-container u-container-layout-5">
-            <h5 class="u-custom-font u-font-roboto-condensed u-text u-text-default u-text-palette-1-base u-text-7">Stats</h5>
-            <p class="u-text u-text-4">
-              <strong>Total Studio Hrs: </strong>19 hrs<br>
-              <strong>Total Views: </strong>799<br>
-              <strong>Total Spins: </strong>1188
+              <strong>Total Links: </strong>1188
             </p>
           </div>
         </div>

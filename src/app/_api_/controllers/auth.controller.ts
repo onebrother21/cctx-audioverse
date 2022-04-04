@@ -27,9 +27,10 @@ export class AuthController {
       app:{
         canActivate:true,
         canShare:false,
-        acceptInvites:false,
+        acceptInvites:true,
+        sendInvites:false,
+        createSnippets:true,
         maxSessions:2,
-        willCollab:true,
       }
     };
     const o = new User({
@@ -75,6 +76,7 @@ export class AuthController {
     if(!o) return Handlers.e["userNotFound"]();
     o.username = body.username;
     o.role = "QS-USER";
+    o.acct = "SLV1";
     o.name = body.name;
     o.yob = body.yob;
     o.hometown = body.hometown;

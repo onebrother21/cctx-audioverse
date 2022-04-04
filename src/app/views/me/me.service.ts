@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { AppService, User } from "@state";
+import { AppService, User, UserJson } from "@state";
 import {
   NavItem,Ad,Room,
-  NavigationActions as Navigation,
-  userLoading$,meState$,
+  MeActions as ME,
+  meLoading$,meErr$,meState$,
 } from "@state";
 import { Observable } from "rxjs";
 
@@ -55,22 +55,13 @@ export class MeService {
       content:"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
     },
   ];
-  me$:Observable<Partial<User>> = new Observable();
   loading$:Observable<boolean> = new Observable();
+  error$:Observable<any> = new Observable();
+  me$:Observable<UserJson> = new Observable();
   constructor(private app:AppService){
-    this.loading$ = this.app.select(userLoading$);
-    this.me$ = this.app.select(meState$);
+    this.loading$ = this.app.select(meLoading$);
+    this.error$ = this.app.select(meErr$);
+    this.me$ = this.app.select(meState$) as Observable<UserJson>;
   }
-  send(o:any){this.app.do(Navigation.go({url:this.getNextMePage(o.type)}));}
-  getNextMePage(type:string){
-    switch(type){
-      case "signup":return "/secur01/verify";
-      case "verify":return "/secur01/register";
-      case "register":return "/secur01/update-pin";
-      case "signin":return "/secur01/login";
-      case "update-pin":
-      case "login":return "/user";
-      default:return "/";
-    }
-  }
+  send(o:Partial<User>){this.app.do(ME.update(o))}
 }
