@@ -1,5 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { NavItem } from '@state';
+import { AppNavItem } from '@state';
 
 @Component({
   selector: 'qs-icon',
@@ -8,5 +8,5 @@ import { NavItem } from '@state';
 })
 export class IconComponent {
   title = "icon";
-  @Input() item:NavItem = {type:"",label:"",class:""};
+  @Input() item:AppNavItem = {type:"",label:"",class:""};
 }

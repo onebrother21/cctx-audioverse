@@ -12,7 +12,7 @@ import { MockBackendNotifier } from "@api";
 })
 export class AuthVerifyComponent implements AfterViewInit {
   listenForMockVerificationCodeAlert(){
-    this.notifier.notification$.subscribe(notification => {
+    this.notifier.notification$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(notification => {
       if(notification) this.alert = {
         name:"codeSent",
         type:"success",

@@ -9,8 +9,8 @@ import { MeService } from '../me.service';
 })
 export class MeHomeAltComponent {
   title = "me-home-alt";
-  rooms:Room[] = this.me.rooms;
-  ads:Ad[] = this.me.ads;
+  //rooms:Room[] = this.me.rooms;
+  //ads:Ad[] = this.me.ads;
   constructor(private me:MeService){
 
   }

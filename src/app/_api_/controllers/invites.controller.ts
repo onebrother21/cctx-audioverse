@@ -1,56 +1,36 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { Invite } from '../models';
 
-export class InvitesController {
-  static notifier:MockBackendNotifier;
-  static create = (req:HttpRequest<any>) => {
+
+@Injectable({providedIn:"root"})
+export class InvitesController  extends MockBackendDB<Invite> {
+  constructor(
+    private handlers:MockBackendHandlers,
+    private notifier:MockBackendNotifier,
+    private logger:MockBackendLogger,
+  ){super();this.name = "invites";this.ctr = Invite;}
+  private getAllInvites = () => this._load();
+  private getInvite = (req:HttpRequest<any>,prop:keyof Invite) => this._find(prop,this.handlers.idFromUrl(req.url));
+  create = (req:HttpRequest<any>) => this.handlers.ok(this.add({...req?.body,settings:{lang:"en",app:{}}}));
+  fetchAll = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllInvites());
+  fetchRecent = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllInvites());
+  fetch = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getInvite(req,"id").o);
+  fetchBySender = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getInvite(req,"sender").o);
+  update = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._update(req.body,"id",this.handlers.idFromUrl(req.url)));
+  remove = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._remove("id",this.handlers.idFromUrl(req.url)));
+  query = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const o = new Invite({...body,settings:{lang:"en",app:{}},mates:[]});
-    DB.add("qs-invites",db.invites,o);
-    return Handlers.ok(o.json());
-  };
-  static fetch = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.invites.map(p => new Invite(p).json()));
-  };
-  static fetchRecent = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.invites.map(p => p.json()));
-  };
-  static fetchById = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.invites.find(x => x.id == Handlers.idFromUrl(url))?.json());
-  };
-  static update = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
-    const {o,i} = DB.findone(db.invites,"id",Handlers.idFromUrl(url));
-    for(const k in body) (o as any)[k] = body[k];
-    DB.save("qs-invites",db.invites,o,i);
-    return Handlers.ok(new Invite(o).json());
-  };
-  static remove = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      db.invites = db.invites.filter(x => x.id !== Handlers.idFromUrl(url));
-      DB.save("qs-invites",db.invites);
-      return Handlers.ok();
-    })();
+    const {field,val} = this.handlers.queryFromUrl(url);
+    this.logger.log({field,val})
+    const {o} = this._find(field as keyof Invite,val);
+    return this.handlers.ok(o?new Invite(o).json():null);
   };
 }

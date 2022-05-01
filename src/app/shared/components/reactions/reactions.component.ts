@@ -1,5 +1,5 @@
 import { Component,Output,EventEmitter } from '@angular/core';
-import { NavItem } from '@state';
+import { AppNavItem } from '@state';
 
 @Component({
   selector: 'qs-reactions',

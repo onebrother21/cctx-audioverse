@@ -1,6 +1,24 @@
-import { Entity,ErrorObj,ErrorConfig,LocaleDateOpts } from "./common.types";
+
+import { Params,Data } from "@angular/router";
+import { Strings,Enum,Entity,ErrorObj,ErrorConfig,LocaleDateOpts } from "./common.types";
 import { CommonUtils as Utils } from './common.utils';
 
+export type AppAlert = {
+  type:"error"|"success"|"warn"|"info";
+  name:string;
+  data?:Strings;
+};
+export type AppRoute = {url:string;} & Partial<{query:Params;params:Params;data:Data;}>;
+export type AppNavItem = Partial<{
+  label:string;
+  type:string;
+  link:string;
+  text:string;
+  class:string;
+  icon:string;
+  img:string;
+  menu:AppNavItem[];
+}>;
 export interface AppLocals {dateFormat: LocaleDateOpts;}
 export interface AppEntity extends Entity {}
 export class AppEntity {
@@ -15,13 +33,12 @@ export interface DocEntity extends Entity {
   published:Date;
   tags:string[];
   title?:string;
-  content?:string|string[];
+  content?:any;
 }
 export class DocEntity extends AppEntity {
   constructor(o:any){
     super(o);
     this.published = new Date();
-    this.content = o.content || "";
     this.tags = [];
   }
 }
@@ -36,7 +53,7 @@ export class AppError extends Error {
       _o = {...o};}
     if(Error.captureStackTrace){Error.captureStackTrace(this,AppError);}
     Object.assign(this,new AppEntity({}),{status:500,info:{}},_o);
-    console.log(this.json())
+    //console.log(this.json())
   }
   json(){
     const {id,name,message,status,code,errors,warning,info,stack,created} = this;

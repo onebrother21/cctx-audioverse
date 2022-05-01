@@ -1,4 +1,4 @@
 import { RouterReducerState } from "@ngrx/router-store";
-import { AppRoute } from "../models";
+import { AppRoute } from "../common";
 
 export type RouterState = RouterReducerState<AppRoute>;

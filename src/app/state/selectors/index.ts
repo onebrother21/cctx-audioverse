@@ -1,5 +1,5 @@
 export * from "./router.selectors";
-export * from "./layout.selectors";
+export * from "./layouts.selectors";
 export * from "./navigation.selectors";
 export * from "./auth.selectors";
 export * from "./me.selectors";
@@ -10,3 +10,4 @@ export * from "./chat-msgs.selectors";
 export * from "./contact-us.selectors";
 export * from "./tasks.selectors";
 export * from "./businesses.selectors";
+export * from "./payments.selectors";

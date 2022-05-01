@@ -9,21 +9,32 @@ export type UserAppSettings = Partial<{
   createSnippets:boolean;
   maxSessions:number;
 }>;
+export type UserMeta = Partial<{
+  registered:string|Date;
+  verified:string|Date;
+  loggedout:string|Date;
+  loggedin:string|Date;
+  reset:string|Date;
+}>;
 export type UserAcct = {
   email:string;
-  phn:`${number}`;
+  phn:`${number}-${number}-${number}`;
   username:string;
   name:{first:string;last:string;};
   yob:number;
   dob:Date;
   hometown:string;
   loc:string;
-  settings:{lang:string;app:UserAppSettings;data?:MiscInfo;};
+  settings:{
+    lang:string;
+    app:UserAppSettings;
+    data?:MiscInfo;
+  };
   role:"QS-GUEST"|"QS-USER"|"QS-PLAYER"|"QS-ADMIN"|"QS-SUPER";
   acct:"SLV1"|"GLD1"|"GLD2"|"PLT1";
   scopes:string[];
   status:Status<"new"|"locked"|"enabled"|"disabled"|"verified"|"offline"|"deleted">;
-  activity?:{val:string;time:Date;};
+  activity?:Status<string>[];
 };
 export type UserAuthToken = {
   id:string;
@@ -31,6 +42,7 @@ export type UserAuthToken = {
   user:string;
   role:string;
   issued:Date;
+  expires:Date;
 };
 export type UserAuth = {
   next:"verify"|"register"|"register-ext"|"update-pin"|"reset";
@@ -38,10 +50,7 @@ export type UserAuth = {
   code:string;
   reset?:string|null;
   verification?:string|null;
-  tokenData?:UserAuthToken|null;
-  verified?:string|Date;
-  lastlogin?:string|Date;
-  lastreset?:string|Date;
+  token?:UserAuthToken|null;
 };
 export type UserProfile = Partial<{
   img:string;
@@ -56,9 +65,9 @@ export type UserObj = AppEntity & UserAcct & UserAuth & UserProfile;
 export type UserPublic = Extract<keyof UserObj,
 "qid"|"email"|"phn"|"username"|"hometown"|"loc"|"settings"|"role"|"acct"|"scopes"|"status"|"activity"|
 "info"|"desc"|"meta"|"img"|"motto"|"bio"|"mantles"|"tastes"|"uses"|"socials"|"yob"|
-"next"|"verified"|"lastlogin"|"lastreset"
+"next"|"verified"|"loggedin"|"reset"
 >;
-export type UserJson = Pick<UserObj,UserPublic> & {
+export type UserJson = Pick<UserObj,UserPublic> & UserMeta &{
   memberSince:string|Date;
   fullname:string;
   age:number|null;
@@ -80,14 +89,17 @@ export class User extends AppEntity {
     else return null;
   }
   generateAuthTkn(auth?:boolean){
-    this.tokenData = {
+    const expiresIn = 1000 * 60 * 30;
+    this.token = {
       type:auth?"api":"req",
       id:Utils.longId(),
       issued:new Date(),
+      expires:new Date(Date.now() + expiresIn),
       user:this.id,
       role:this.role,
     };
   };
+  clearAuthTkn(){this.token = null;}
   json(me?:boolean,auth?:boolean):UserJson {
     const json = {
       qid:this.qid,
@@ -120,11 +132,7 @@ export class User extends AppEntity {
       info:this.info,
       meta:this.meta,
       next:this.next,
-      verified:this.verified,
-      lastlogin:this.lastlogin,
-      lastreset:this.lastreset,
-      token:{str:this.tokenData?.id||null,status:!!auth},
-      //activity:this.activity,
+      token:{str:this.token?.id||null,status:!!auth},
     };
     return {...json,...(me?mine:{}),...(auth?authinfo:{})} as UserJson; 
   }

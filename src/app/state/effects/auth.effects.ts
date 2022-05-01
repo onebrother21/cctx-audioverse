@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Actions,createEffect,ofType,OnInitEffects } from "@ngrx/effects";
+import { Actions,createEffect,ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
-import { userInfo } from "os";
 import { Observable,of,withLatestFrom } from "rxjs";
 import { mergeMap,map,tap,catchError,filter } from "rxjs/operators";
 
@@ -33,8 +32,8 @@ export class AuthenticationEffects {
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/secur01/verify"}),
       ])),
+      tap(() => this.app.go("/secur01/verify")),
       catchError(error => of(AUTH.error(error)))))));
   Signin$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.signin),
@@ -43,8 +42,8 @@ export class AuthenticationEffects {
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/secur01/login"}),
       ])),
+      tap(() => this.app.go("/secur01/login")),
       catchError(error => of(AUTH.error(error)))))));
   Signout$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.signout),
@@ -53,73 +52,73 @@ export class AuthenticationEffects {
   Verify$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.verify),
     map(o => o.payload),
-    withLatestFrom(this.app.select(authid$)),
+    withLatestFrom(this.app.load(authid$)),
     map(([{code},username]) => ({code,email:username||""})),
     mergeMap(o => this.auth.verify(o).pipe(
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/secur01/register"}),
       ])),
+      tap(() => this.app.go("/secur01/register")),
       catchError(e => of(AUTH.error(e)))))));
   Register$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.register),
     map(o => o.payload),
-    withLatestFrom(this.app.select(authid$)),
+    withLatestFrom(this.app.load(authid$)),
     map(([user,username]) => ({...user,email:username||""})),
     mergeMap(o => this.auth.register(o).pipe(
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/secur01/register-ext"}),
       ])),
+      tap(() => this.app.go("/secur01/register-ext")),
       catchError(error => of(AUTH.error(error)))))));
   RegisterExt$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.registerExt),
     map(o => o.payload),
-    withLatestFrom(this.app.select(authid$)),
+    withLatestFrom(this.app.load(authid$)),
     map(([user,username]) => ({...user,username:username||""})),
     mergeMap(o => this.auth.registerExt(o).pipe(
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/secur01/update-pin"}),
       ])),
+      tap(() => this.app.go("/secur01/update-pin")),
       catchError(error => of(AUTH.error(error)))))));
   UpdatePin$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.updatePin),
     map(o => o.payload),
-    withLatestFrom(this.app.select(authid$)),
+    withLatestFrom(this.app.load(authid$)),
     map(([{pin},username]) => ({pin,username:username||""})),
     mergeMap(o => this.auth.updatePin(o).pipe(
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/me"}),
       ])),
+      tap(() => this.app.go("/me")),
       catchError(error => of(AUTH.error(error)))))));
   Login$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.login),
     map(o => o.payload),
-    withLatestFrom(this.app.select(authid$)),
+    withLatestFrom(this.app.load(authid$)),
     map(([{pin},username]) => ({pin,username:username||""})),
     mergeMap(o => this.auth.login(o).pipe(
       mergeMap(user => ([
         AUTH.load(user),
         ME.load(user),
-        NAV.go({url:"/me"}),
       ])),
+      tap(() => this.app.go("/me")),
       catchError(error => of(AUTH.error(error)))))));
   Logout$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(AUTH.logout),
-    withLatestFrom(this.app.select(authid$)),
+    withLatestFrom(this.app.load(authid$)),
     map(([,username]) => ({username:username||""})),
     mergeMap(o => this.auth.logout(o).pipe(
       mergeMap(() => ([
         AUTH.load(),
         ME.load({}),
-        NAV.go({url:"/"}),
       ])),
+      tap(() => this.app.go("/")),
       catchError(error => of(AUTH.error(error)))))));
 }
 /*

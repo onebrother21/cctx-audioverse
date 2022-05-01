@@ -7,7 +7,7 @@ const initialState = initializeMe();
 const reducer = createReducer(
   initialState,
   on(ME.populate,s => ({...s,loading:true})),
-  on(ME.load,(s,{payload:user}) => ({...s,...user,loading:false})),
+  on(ME.load,(s,{payload:user}) => ({...s,user,loading:false})),
   on(ME.unload,s => initialState),
   //on(ME.active,s => ({...s,lastActivity:new Date(),loading:false})),
   on(ME.error,(s,{payload:error}) => ({ ...s,error:formetError(error),loading:false})),

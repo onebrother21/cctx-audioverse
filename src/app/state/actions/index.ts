@@ -1,4 +1,4 @@
-export * from "./layout.actions";
+export * from "./layouts.actions";
 export * from "./navigation.actions";
 export * from "./auth.actions";
 export * from "./me.actions";
@@ -10,3 +10,4 @@ export * from "./chat-msgs.actions";
 export * from "./contact-us.actions";
 export * from "./tasks.actions";
 export * from "./businesses.actions";
+export * from "./payments.actions";

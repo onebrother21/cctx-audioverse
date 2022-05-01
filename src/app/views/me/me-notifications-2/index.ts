@@ -1,1 +1,0 @@
-export * from "./me-notifications-2.component";

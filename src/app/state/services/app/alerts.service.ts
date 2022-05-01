@@ -5,13 +5,13 @@ import { Strings } from "../../common";
 @Injectable({providedIn:"root"})
 export class AppAlertsService {
   errors:Strings = {
+    emailReq:"Email is required.",
+    emailInvalid:"Email must be a valid email address.",
+    emailExists:"This email is already in use.",
     phnOrEmailReq:"Phone or email is required.",
     phnReq:"Phone is required.",
     phnInvalid:"Phone must be a valid US phone number.",
     phnExists:"This phone number is already in use.",
-    emailReq:"Email is required.",
-    emailInvalid:"Email must be a valid email address.",
-    emailExists:"This email is already in use.",
     codeReq:"Code is required.",
     codeInvalid:"Code is invalid.",
     codeIncorrect:"Code is incorrect.",

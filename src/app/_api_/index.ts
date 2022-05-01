@@ -1,4 +1,4 @@
-export * from "./api";
+export * from "./api.module";
 export * from "./common";
-export * from "./utils";
+export * from "./providers";
 export * from "./models";

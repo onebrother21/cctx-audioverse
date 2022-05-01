@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { AppAlert,UserJson } from '@state';
+import { AppAlert } from '@state';
 
 @Component({
   selector: 'qs-auth-login',
@@ -13,7 +13,7 @@ export class AuthLoginComponent {
   title = "auth-login";
   greeting = "Enter Your Pin";
   pinConfig = {min:4,max:4,masked:true};
-  isReset = false;
+  clear = new EventEmitter();
   loading = false;
   isSubmitted = false;
   error:AppAlert|null = null;
@@ -43,7 +43,7 @@ export class AuthLoginComponent {
   updatePin(pin:string){
     this.f["pin"].setValue(pin);
     this.f["pin"].markAsDirty();
-    this.isReset = true;
+    this.clear.emit();
     this.submitForm();
   }
   submitForm(){

@@ -1,19 +1,23 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { RoomsController as Rooms } from '../controllers';
-import { MockApiHandlers as Handlers,MockBackendNotifier } from '../utils';
+import { RoomsController } from '../controllers';
+import { MockBackendHandlers } from '../providers';
 
-export const RoomsRouter = (req:HttpRequest<any>,notifier:MockBackendNotifier) => {
-  Rooms.notifier = notifier;
-  const {url,method,headers,body} = req;
-  try{
-    switch(true){
-      case url.endsWith('/rooms') && method === 'POST':return Rooms.create(req);
-      case url.endsWith('/rooms') && method === 'GET':return Rooms.fetchRecent(req);
-      case url.match(/\/rooms\/\w+$/) && method === 'GET':return Rooms.fetchById(req);
-      case url.match(/\/rooms\/\w+$/) && method === 'PUT':return Rooms.update(req);
-      case url.match(/\/rooms\/\w+$/) && method === 'DELETE':return Rooms.remove(req);
-      default:return Handlers.e["fourohfour"]();
+@Injectable({providedIn:"root"})
+export class RoomsRouter {
+  constructor(private handlers:MockBackendHandlers,private rooms:RoomsController){}
+  route = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    try{
+      switch(true){
+        case url.endsWith('/rooms') && method === 'POST':return this.rooms.create(req);
+        case url.endsWith('/rooms') && method === 'GET':return this.rooms.fetchRecent(req);
+        case url.match(/\/rooms\/\w+$/) && method === 'GET':return this.rooms.fetch(req);
+        case url.match(/\/rooms\/\w+$/) && method === 'PUT':return this.rooms.update(req);
+        case url.match(/\/rooms\/\w+$/) && method === 'DELETE':return this.rooms.remove(req);
+        default:return this.handlers.e["fourohfour"]();
+      }
     }
-  }
-  catch(e_){return Handlers.e["someerror"](e_);}
-};
+    catch(e_){return this.handlers.e["someerror"](e_);}
+  };
+}

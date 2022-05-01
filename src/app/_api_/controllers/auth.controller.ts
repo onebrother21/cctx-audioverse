@@ -1,26 +1,31 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { User } from '../models';
 
-export class AuthController {
-  static notifier:MockBackendNotifier;
-  static lookup = (req:HttpRequest<any>) => {
+@Injectable({providedIn:"root"})
+export class AuthController extends MockBackendDB<User> {
+  constructor(private handlers:MockBackendHandlers,private notifier:MockBackendNotifier){
+    super();
+    this.name = "users";
+    this.ctr = User;
+  }
+  lookup = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {field,val} = Handlers.queryFromUrl(url);
-    const o = db.users.find(o => (o as any)[field] == val);
-    return Handlers.ok({results:{[field]:!!o}});
+    const {field,val} = this.handlers.queryFromUrl(url);
+    const o = this._find(field as keyof User,val);
+    return this.handlers.ok({results:{[field]:!!o}});
   };
-  static signup = (req:HttpRequest<any>) => {
+  signup = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o:eemail} = DB.findone(db.users,"email",body.email);
-    if(eemail) return Handlers.e["existingUser"]();
+    const {o:eemail} = this._find("email",body.email);
+    if(eemail) return this.handlers.e["existingUser"]();
     const verification = Utils.shortId().toLocaleUpperCase();
     const settings = {
       lang:"en",
@@ -41,114 +46,117 @@ export class AuthController {
       verification,
       settings,
       scopes:["view-room","send-invite"],
-      status:{name:"new",time:new Date()}
+      status:{name:"new",time:new Date()},
+      meta:{},
     });
     o.generateAuthTkn();
-    DB.add("qs-users",db.users,o);
+    this.add(o);
     setTimeout(() => this.notifier.send("verification",o.verification as string),500);
-    return Handlers.ok(o.json(true));
+    return this.handlers.ok(o.json(true));
   };
-  static signin = (req:HttpRequest<any>) => {
+  signin = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o,i} = DB.findone(db.users,"username",body.username);
-    if(!o) return Handlers.e["userNotFound"]();
+    const {o,i} = this._find("username",body.username);
+    if(!o) return this.handlers.e["userNotFound"]();
     o.generateAuthTkn();
-    DB.save('qs-users',db.users,o,i);
-    return Handlers.ok(o.json(true));
+    this._save(o,i);
+    return this.handlers.ok(o.json(true));
   };
-  static verify = (req:HttpRequest<any>) => {
+  verify = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o,i} = DB.findone(db.users,body.phn?"phn":"email",body.phn||body.email);
-    if(!o) return Handlers.e["userNotFound"]();
-    if(![o.verification,"55555555"].includes(body.code)) return Handlers.e["invalidCode"]();
+    const {o,i} = this._find(body.phn?"phn":"email",body.phn||body.email);
+    if(!o) return this.handlers.e["userNotFound"]();
+    if(![o.verification,"55555555"].includes(body.code)) return this.handlers.e["invalidCode"]();
     o.phn = body.phn;
     o.verification = null;
-    o.verified = new Date();
-    o.updated = new Date();
+    o.meta = {...o.meta,verified:new Date()};
     o.status = {name:"verified",time:new Date()};
+    o.updated = new Date();
     o.generateAuthTkn();
-    DB.save('qs-users',db.users,o,i);
-    return Handlers.ok(o.json(true));
+    this._save(o,i);
+    return this.handlers.ok(o.json(true));
   };
-  static register = (req:HttpRequest<any>) => {
+  register = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o,i} = DB.findone(db.users,"email",body.email);
-    if(!o) return Handlers.e["userNotFound"]();
+    const {o,i} = this._find("email",body.email);
+    if(!o) return this.handlers.e["userNotFound"]();
     o.username = body.username;
     o.role = "QS-USER";
     o.acct = "SLV1";
     o.name = body.name;
     o.yob = body.yob;
     o.hometown = body.hometown;
+    o.meta = {...o.meta,registered:new Date()};
     o.updated = new Date();
     o.generateAuthTkn();
-    DB.save('qs-users',db.users,o,i);
-    return Handlers.ok(o.json(true));
+    this._save(o,i);
+    return this.handlers.ok(o.json(true));
   };
-  static registerExt = (req:HttpRequest<any>) => {
+  registerExt = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o,i} = DB.findone(db.users,"username",body.username);
-    if(!o) return Handlers.e["userNotFound"]();
+    const {o,i} = this._find("username",body.username);
+    if(!o) return this.handlers.e["userNotFound"]();
     o.tastes = body.tastes;
     o.mantles = body.mantles;
     o.uses = body.uses;
     o.updated = new Date();
     o.generateAuthTkn();
-    DB.save('qs-users',db.users,o,i);
-    return Handlers.ok(o.json(true));
+    this._save(o,i);
+    return this.handlers.ok(o.json(true));
   };
-  static updatePin = (req:HttpRequest<any>) => {
+  updatePin = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o,i} = DB.findone(db.users,"username",body.username);
-    if(!o) return Handlers.e["userNotFound"]();
-    o.pin = body.pin;
-    o.updated = new Date();
-    o.lastreset = new Date();
+    const {o,i} = this._find("username",body.username);
+    if(!o) return this.handlers.e["userNotFound"]();
+    const isNew = !o.pin;
+    o.pin = body.pin;    
+    o.meta = {...o.meta,[isNew?"activated":"reset"]:new Date()};
     o.status = {name:"enabled",time:new Date()};
+    o.updated = new Date();
     o.generateAuthTkn(true);
-    DB.save('qs-users',db.users,o,i);
-    return Handlers.ok(o.json(true,true));
+    this._save(o,i);
+    return this.handlers.ok(o.json(true,true));
   };
-  static login = (req:HttpRequest<any>) => {
+  login = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    let {o,i} = DB.findone(db.users,["username","email"],body.username);
-    if(!o) return Handlers.e["userNotFound"]();
-    if(o.pin !== body.pin) return Handlers.e["invalidAuth"]();
-    o.lastlogin = new Date();
+    let {o,i} = this._find(["username","email"],body.username);
+    if(!o) return this.handlers.e["userNotFound"]();
+    if(o.pin !== body.pin) return this.handlers.e["invalidAuth"]();
+    o.meta = {...o.meta,loggedin:new Date()};
     o.generateAuthTkn(true);
-    DB.save("qs-users",db.users,o,i);
-    return Handlers.ok(o.json(true,true));
+    this._save(o,i);
+    return this.handlers.ok(o.json(true,true));
   };
-  static logout = (req:HttpRequest<any>) => {
+  logout = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const {o,i} = DB.findone(db.users,"username",body.username);
-    o.meta = {...(o.meta||{}),loggedout:new Date()};
-    o.tokenData = null;
-    DB.save("qs-users",db.users,o,i);
-    return Handlers.ok();
+    const {o,i} = this._find("username",body.username);
+    o.meta = {...o.meta,loggedout:new Date()};
+    o.clearAuthTkn();
+    this._save(o,i);
+    return this.handlers.ok();
   };
+}
 /*
   resetPin:() => {
     if (!isLoggedIn(headers)) return e["unauthorized"]();
     const updates = body as AuthCreds;
-    let {o,i} = findone(db.auth,"id",idFromUrl(url));
+    let {o,i} = _find(auth,"id",idFromUrl(url));
     o.pin = updates.pin;
     o.reset = null;
     o.updated = new Date();
-    save('qs-users',db.auth,o,i);
+    _save('qs-users',auth,o,i);
     return ok(new AuthAcct(o).json(true));
   },
   forgotName:() => {
     const acctDetails = body as AuthCreds;
-    //let {o} = findone(db.auth,"username",username);
+    //let {o} = _find(auth,"username",username);
     //if(!o) return e["userNotFound"]();
     return ok();//new AuthAcct(o).json());
   },
   forgotPin:() => {
     const {email} = body as AuthCreds;
-    let {o} = findone(db.auth,"email",email);
+    let {o} = _find(auth,"email",email);
     if(!o) return e["userNotFound"]();
     return ok();//new AuthAcct(o).json());
   },
 */
-}

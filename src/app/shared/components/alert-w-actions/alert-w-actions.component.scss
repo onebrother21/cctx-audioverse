@@ -1,0 +1,13 @@
+.cctx-alert {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  padding: 20px 0px 20px 0px;
+  border: none;  
+  z-index: 1;
+}
+.cctx-alert-error {background: #F95D51;}
+.cctx-alert-success {background: #62C584;}

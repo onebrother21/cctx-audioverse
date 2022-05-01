@@ -1,5 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
-import { NavItem } from '@state';
+import { AppNavItem } from '@state';
 
 @Component({
   selector: 'qs-icon-menu',
@@ -8,6 +8,6 @@ import { NavItem } from '@state';
 })
 export class IconMenuComponent {
   title = "icon-menu";
-  @Input() items:NavItem[] = [];
-  @Output() select:EventEmitter<NavItem> = new EventEmitter();
+  @Input() items:AppNavItem[] = [];
+  @Output() select:EventEmitter<AppNavItem> = new EventEmitter();
 }

@@ -1,0 +1,9 @@
+<div *ngIf="!!(message && isShowing)" class="cctx-alert" [ngClass]="messageType?'cctx-alert-'+messageType:''">
+  <div> {{message}} </div>
+  <a routerLink="/secur01" class="u-active-grey-90 u-border-none u-btn u-btn-round 
+  u-button-style u-hover-grey-90 u-palette-1-base u-radius-8 u-text-active-white 
+  u-text-body-alt-color u-text-hover-white u-btn-2"> Action One</a>
+  <a routerLink="/secur01" class="u-active-grey-90 u-border-none u-btn u-btn-round 
+  u-button-style u-hover-grey-90 u-palette-1-base u-radius-8 u-text-active-white 
+  u-text-body-alt-color u-text-hover-white u-btn-2"> Action Two</a> 
+</div>

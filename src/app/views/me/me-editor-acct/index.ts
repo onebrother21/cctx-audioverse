@@ -1,1 +1,1 @@
-export * from "./me-acct-editor.component";
+export * from "./me-editor-acct.component";

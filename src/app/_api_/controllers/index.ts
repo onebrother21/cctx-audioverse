@@ -1,4 +1,4 @@
-export * from "./layout-content.controller";
+export * from "./layouts.controller";
 export * from "./auth.controller";
 export * from "./users.controller";
 export * from "./uploads.controller";
@@ -9,3 +9,4 @@ export * from "./contact-us.controller";
 export * from "./chat-msgs.controller";
 export * from "./invites.controller";
 export * from "./businesses.controller";
+export * from "./payments.controller";

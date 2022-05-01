@@ -1,11 +1,13 @@
 <div class="numpad">
   <div class="num-container">
     <div style="display:flex;justify-content:center;">
-      <ng-container *ngFor="let c of mask">
-        <div *ngIf="config_.masked" class="masked u-palette-1-base u-shape u-shape-circle"></div>
-        <div *ngIf="!config_.masked" class="masked u-text u-text-1">{{c}}</div>
+      <ng-container *ngFor="let char of mask">
+        <div *ngIf="config.masked" class="masked u-palette-1-base u-shape u-shape-circle"></div>
+        <div *ngIf="!config.masked" class="masked u-text u-text-1">{{char}}</div>
       </ng-container>
     </div>
-    <ul><li *ngFor="let o of nums" (click)="update(o)">{{o}}</li></ul>
+    <div numKeypress (numKeyup)="update($event)">
+      <ul><li *ngFor="let num of nums" (click)="!isSet?update(num):null">{{num}}</li></ul>
+    </div>
   </div>
 </div>

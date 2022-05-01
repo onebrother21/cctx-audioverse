@@ -1,66 +1,36 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { Business } from '../models';
 
-export class BusinessesController {
-  static notifier:MockBackendNotifier;
-  static create = (req:HttpRequest<any>) => {
+
+@Injectable({providedIn:"root"})
+export class BusinessesController extends MockBackendDB<Business> {
+  constructor(
+    private handlers:MockBackendHandlers,
+    private notifier:MockBackendNotifier,
+    private logger:MockBackendLogger,
+  ){super();this.ctr = Business;}
+  private getAllBusinesses = () => this._load();
+  private getBusiness = (req:HttpRequest<any>,prop:keyof Business) => this._find(prop,this.handlers.idFromUrl(req.url));
+  create = (req:HttpRequest<any>) => this.handlers.ok(this.add({...req?.body,settings:{lang:"en",app:{}}}));
+  fetchAll = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllBusinesses());
+  fetchRecent = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllBusinesses());
+  fetch = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getBusiness(req,"id").o);
+  fetchByName = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getBusiness(req,"name").o);
+  update = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._update(req.body,"id",this.handlers.idFromUrl(req.url)));
+  remove = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._remove("id",this.handlers.idFromUrl(req.url)));
+  query = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const o = new Business({...body,settings:{lang:"en",app:{}},mates:[]});
-    DB.add("qs-businesses",db.businesses,o);
-    return Handlers.ok(o.json(true));
-  };
-  static fetch = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.businesses.map(p => new Business(p).json()));
-  };
-  static fetchRecent = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.businesses.map(p => p.json()));
-  };
-  static fetchById = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.businesses.find(x => x.id == Handlers.idFromUrl(url))?.json());
-  };
-  static fetchByBusinessName = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      const mine = /mine=1/.test(url);
-      const o = db.businesses.find(o => o.name == Handlers.idFromUrl(url));
-      return Handlers.ok(new Business(o).json(mine));
-    })();
-  };
-  static update = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
-    const {o,i} = DB.findone(db.businesses,"id",Handlers.idFromUrl(url));
-    for(const k in body) (o as any)[k] = body[k];
-    DB.save("qs-businesses",db.businesses,o,i);
-    return Handlers.ok(new Business(o).json(true));
-  };
-  static remove = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      db.businesses = db.businesses.filter(x => x.id !== Handlers.idFromUrl(url));
-      DB.save("qs-businesses",db.businesses);
-      return Handlers.ok();
-    })();
+    const {field,val} = this.handlers.queryFromUrl(url);
+    this.logger.log({field,val})
+    const {o} = this._find(field as keyof Business,val);
+    return this.handlers.ok(o?new Business(o).json():null);
   };
 }

@@ -12,7 +12,7 @@
         class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" 
         name="editor">
           <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
-          <qs-numpad (value)="updatePin($event)" [config]="pinConfig" [clear]="isConfirm||isReset"></qs-numpad>
+          <qs-numpad [config]="pinConfig" [clear]="clear" (select)="updatePin($event)"></qs-numpad>
           <input type="hidden" id="siteId" name="siteId" value="745822">
           <input type="hidden" id="pageId" name="pageId" value="749340">
           <qs-alert [duration]="1800" [alert]="error"></qs-alert>

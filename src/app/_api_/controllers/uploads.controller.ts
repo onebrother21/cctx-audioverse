@@ -1,56 +1,35 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { Upload } from '../models';
 
-export class UploadsController {
-  static notifier:MockBackendNotifier;
-  static create = (req:HttpRequest<any>) => {
+@Injectable({providedIn:"root"})
+export class UploadsController  extends MockBackendDB<Upload> {
+  constructor(
+    private handlers:MockBackendHandlers,
+    private notifier:MockBackendNotifier,
+    private logger:MockBackendLogger,
+  ){super();this.ctr = Upload;}
+  private getAllUploads = () => this._load();
+  private getUpload = (req:HttpRequest<any>,prop:keyof Upload) => this._find(prop,this.handlers.idFromUrl(req.url));
+  create = (req:HttpRequest<any>) => this.handlers.ok(this.add({...req?.body,settings:{lang:"en",app:{}}}));
+  fetchAll = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllUploads());
+  fetchRecent = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllUploads());
+  fetch = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getUpload(req,"id").o);
+  fetchBySlug = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getUpload(req,"title").o);
+  update = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._update(req.body,"id",this.handlers.idFromUrl(req.url)));
+  remove = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._remove("id",this.handlers.idFromUrl(req.url)));
+  query = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const o = new Upload({...body,settings:{lang:"en",app:{}},mates:[]});
-    DB.add("qs-uploads",db.uploads,o);
-    return Handlers.ok(o.json());
-  };
-  static fetch = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.uploads.map(p => new Upload(p).json()));
-  };
-  static fetchRecent = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.uploads.map(p => p.json()));
-  };
-  static fetchById = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.uploads.find(x => x.id == Handlers.idFromUrl(url))?.json());
-  };
-  static update = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
-    const {o,i} = DB.findone(db.uploads,"id",Handlers.idFromUrl(url));
-    for(const k in body) (o as any)[k] = body[k];
-    DB.save("qs-uploads",db.uploads,o,i);
-    return Handlers.ok(new Upload(o).json());
-  };
-  static remove = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      db.uploads = db.uploads.filter(x => x.id !== Handlers.idFromUrl(url));
-      DB.save("qs-uploads",db.uploads);
-      return Handlers.ok();
-    })();
+    const {field,val} = this.handlers.queryFromUrl(url);
+    this.logger.log({field,val})
+    const {o} = this._find(field as keyof Upload,val);
+    return this.handlers.ok(o?new Upload(o).json():null);
   };
 }

@@ -4,17 +4,17 @@
       <img src="/assets/images/default-logo.png" class="u-logo-image u-logo-image-1">
     </a>
     <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1 u-enable-responsive" data-responsive-from="XL">
-      <div outsideClick (outsideClick)="toggleMenu($event)" class="menu-collapse" 
+      <div outsideClick (outsideClick)="toggleNav($event)" class="menu-collapse" 
       style="font-size: 1rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase;">
         <span class="u-button-style u-custom-active-border-color u-custom-border u-custom-border-color 
         u-custom-borders u-custom-hover-border-color u-custom-left-right-menu-spacing u-custom-padding-bottom 
         u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link 
         u-text-active-palette-1-base"
         style="cursor:pointer;">
-          <div *ngIf="menuOpen" style="margin-top:-10px;">
+          <div *ngIf="navOpen" style="margin-top:-10px;">
             <qs-icon [item]="{label:'',type:'fa',class:'fa fa-close'}"></qs-icon>
           </div>
-          <qs-icon *ngIf="!menuOpen" [item]="{label:'',type:'hamburger'}"></qs-icon>
+          <qs-icon *ngIf="!navOpen" [item]="{label:'',type:'hamburger'}"></qs-icon>
         </span>
       </div>
     </nav>

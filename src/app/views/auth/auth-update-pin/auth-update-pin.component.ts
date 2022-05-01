@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { takeUntil,Subject } from 'rxjs';
 import { AuthService } from '../auth.service';
@@ -13,8 +13,7 @@ export class AuthUpdatePinComponent {
   title = "auth-update-pin";
   greeting = "Create A Pin";
   pinConfig = {min:4,max:4,masked:true};
-  isConfirm = false;
-  isReset = false;
+  clear = new EventEmitter();
   loading = false;
   isSubmitted = false;
   error:AppAlert|null = null;
@@ -51,12 +50,12 @@ export class AuthUpdatePinComponent {
       this.f["pin"].setValue(pin);
       this.f["pin"].markAsDirty();
       this.greeting = "Now Confirm Your Pin";
-      this.isConfirm = true;
+      this.clear.emit();
     }
     else{
       this.f["confirm"].setValue(pin);
       this.f["confirm"].markAsDirty();
-      this.isReset = true;
+      this.clear.emit();
       this.f["pin"].value !== this.f["confirm"].value?
       this.setErrorOnBadConfirmPin({message:"nope"}):
       this.submitForm();

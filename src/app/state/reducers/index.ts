@@ -1,7 +1,7 @@
 import { ActionReducerMap } from "@ngrx/store";
 import { AppState } from "../states";
 import { routerReducer } from "@ngrx/router-store";
-import { LayoutReducer } from "./layout.reducer";
+import { LayoutsReducer } from "./layouts.reducer";
 import { NavigationReducer } from "./navigation.reducer";
 import { ContactUsReducer } from "./contact-us.reducer";
 import { TasksReducer } from "./tasks.reducer";
@@ -12,11 +12,12 @@ import { SessionsReducer } from './sessions.reducer';
 import { RoomsReducer } from './rooms.reducer';
 import { UsersReducer } from './users.reducer';
 import { BusinessesReducer } from "./businesses.reducer";
+import { PaymentsReducer } from "./payments.reducer";
 
 
 export const REDUCERS = {
   router:routerReducer,
-  layout:LayoutReducer,
+  layouts:LayoutsReducer,
   navigation:NavigationReducer,
   auth:AuthenticationReducer,
   me:MeReducer,
@@ -28,4 +29,5 @@ export const REDUCERS = {
   contactUs:ContactUsReducer,
   tasks:TasksReducer,
   businesses:BusinessesReducer,
+  payments:PaymentsReducer,
 } as ActionReducerMap<AppState>;

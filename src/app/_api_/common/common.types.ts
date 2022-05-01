@@ -4,6 +4,7 @@ export type Constructor<T> = new (...args:any[]) => T;
 export type DeepPartial<T> = {[P in keyof T]?:DeepPartial<T[P]>;};
 export type DeepPartialExcept<T,K extends keyof T> = DeepPartial<T> & Pick<T,K>;
 export type Nullable<T> = T|null;
+export type Newable<T> = { new (...args: any[]): T; };
 export type Keys<T> = keyof T;
 export type Values<T> = {[k in keyof T]:T[k]}[keyof T];
 export type Primitive = string|number|boolean|Date|Error;

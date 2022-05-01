@@ -7,27 +7,30 @@ import {
   DefaultUrlSerializer,
   UrlTree,
 } from "@angular/router";
-import { AppRoute } from "../../models";
+import { AppRoute } from "../../common";
 
-export const mergeRouteParams = (route:ActivatedRouteSnapshot|null,getter:(r:ActivatedRouteSnapshot) => Params):Params => {
-  if (!route) {return {};}
+export const mergeRouteParams = (route:ActivatedRouteSnapshot|null,getter:(r:ActivatedRouteSnapshot) => Params):Params|null => {
+  if (!route) {return null;}
   const currentParams = getter(route);
   const primaryChild = route.children.find(c => c.outlet === "primary") || route.firstChild;
   return {...currentParams, ...mergeRouteParams(primaryChild, getter)};
 };
-export const mergeRouteData = (route:ActivatedRouteSnapshot|null):Data => {
-  if (!route) {return {};}
+export const mergeRouteData = (route:ActivatedRouteSnapshot|null):Data|null => {
+  if (!route) {return null;}
   const currentData = route.data;
   const primaryChild = route.children.find(c => c.outlet === "primary") || route.firstChild;
   return {...currentData, ...mergeRouteData(primaryChild)};
 };
 export class AppRouterStateSerializer implements RouterStateSerializer<AppRoute> {
   serialize(routerState:RouterStateSnapshot):AppRoute {
+    const params = mergeRouteParams(routerState.root,r => r.params);
+    const query = mergeRouteParams(routerState.root,r => r.queryParams);
+    const data = mergeRouteData(routerState.root);
     return {
       url:routerState.url||"/",
-      params:mergeRouteParams(routerState.root,r => r.params),
-      query:mergeRouteParams(routerState.root,r => r.queryParams),
-      data:mergeRouteData(routerState.root),
+      ...data?{data}:null,
+      ...query?{query}:null,
+      ...params?{params}:null,
     };
   }
 }

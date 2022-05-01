@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable({providedIn:"root"})
 export class AppLocalStorageService {
   _get(){
-    const o = localStorage.getItem("qs");
+    const o = localStorage.getItem("qs-");
     return JSON.parse(o||"{}");}
   _set<T>(o?:T){localStorage.setItem("qs",JSON.stringify(o));}
   del(k?:string){k?localStorage.removeItem(k):localStorage.clear();}

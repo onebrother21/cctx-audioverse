@@ -7,7 +7,7 @@ import { ErrorService } from './error.service';
   declarations: [...COMPONENTS],
   imports: [
     SharedModule,
-    ErrorRoutingModule
+    ErrorRoutingModule,
   ],
   exports:[...COMPONENTS],
   providers:[ErrorService],

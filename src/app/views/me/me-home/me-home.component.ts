@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Ad, Room, User, UserJson } from '@state';
+import { Ad, Room, UserJson } from '@state';
 import { MeService } from '../me.service';
 
 @Component({
@@ -9,12 +9,10 @@ import { MeService } from '../me.service';
 })
 export class MeHomeComponent {
   title = "me-home";
-  rooms:Room[] = this.user.rooms;
-  ads:Ad[] = this.user.ads;
+  rooms:Room[] = []//this.user.rooms;
+  ads:Ad[] = []//this.user.ads;
   me:Partial<UserJson> = {};
-  constructor(private user:MeService){
-    this.user.me$.subscribe(me => this.me = me);
-  }
+  constructor(private user:MeService){this.user.me$.subscribe(me => this.me = me);}
   getMemberGreeting(){return 'Welcome'+(this.isNewMember()?'':' back');}
   isNewMember(){
     if(!(this.me && this.me.memberSince)) return true;

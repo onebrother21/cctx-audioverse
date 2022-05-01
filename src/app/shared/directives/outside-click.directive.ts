@@ -12,7 +12,7 @@ export class OutsideClickDirective implements OnInit, OnDestroy {
   constructor(private element: ElementRef, @Optional() @Inject(DOCUMENT) private document: any) {}
   ngOnInit() {
     setTimeout(() => {
-      this.subscription = fromEvent<MouseEvent>(this.document, 'click')
+      this.subscription = fromEvent<MouseEvent>(this.document,'click')
         .pipe(
           map(event => {
             const clickTarget = event.target as HTMLElement;
@@ -20,9 +20,9 @@ export class OutsideClickDirective implements OnInit, OnDestroy {
           }),
         )
         .subscribe(outside => this.outsideClick.emit(outside));
-    }, 0);
+    },0);
   }
-  private isOrContainsClickTarget(element: HTMLElement, clickTarget: HTMLElement) {
+  private isOrContainsClickTarget(element:HTMLElement,clickTarget:HTMLElement) {
     return element == clickTarget || element.contains(clickTarget);
   }
   ngOnDestroy() {

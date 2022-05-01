@@ -9,12 +9,12 @@ import { NavigationActions as NAV} from "../actions";
 export class AuthGuard implements CanActivate {
   constructor(private app:AppService){}
   canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot){
-    return this.app.select(authed$).pipe(
+    return this.app.load(authed$).pipe(
       take(1),
-      //tap(auth => console.log("auth guard is good to go",auth)),
+      //tap(auth => console.log("auth only",auth)),
       map(auth => {
         if(auth) return true;
-        this.app.do(NAV.go({url:'/secur01/signin',query:{returnUrl:state.url}}));
+        this.app.go('/secur01/signin',{queryParams:{returnUrl:state.url}});
         return false;
       }));
   }

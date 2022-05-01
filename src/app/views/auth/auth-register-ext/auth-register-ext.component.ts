@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { minSelectedCheckboxes } from '@shared';
 import { AppAlert,UserJson } from '@state';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class AuthRegisterExtComponent {
     {label:"Socialize with others",value:"socialize"},
   ];
   constructor(private auth:AuthService,private fb:FormBuilder){
-    this.auth.loading$.subscribe(loading => this.loading = loading);
+    this.auth.loading$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loading => this.loading = loading);
     this.editor = this.fb.group({
       mantles:new FormArray([],minSelectedCheckboxes(1)),
       tastes:new FormArray([],minSelectedCheckboxes(1)),
@@ -38,6 +39,11 @@ export class AuthRegisterExtComponent {
     });
     
     this.addCheckboxes();
+  }
+  private ngUnsubscribe:Subject<boolean> = new Subject();
+  ngOnDestroy(){
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
   }
   private addCheckboxes() {
     this.tastes.forEach(() => this.tastesFormArray.push(new FormControl(false)));

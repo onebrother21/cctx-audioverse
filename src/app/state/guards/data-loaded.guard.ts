@@ -9,7 +9,7 @@ import { sessions$ } from '../selectors';
 export class DataLoadedGuard implements CanActivate {
   constructor(private app:AppService) { }
   waitForData():Observable<boolean> {
-    return this.app.select(sessions$).pipe(
+    return this.app.load(sessions$).pipe(
       map(sessionList => !!sessionList),
       filter(loaded => loaded),
       take(1),

@@ -1,0 +1,79 @@
+<div class="u-layout-row">
+  <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-1">
+    <div class="u-container-layout u-container-layout-1">
+      <h2 class="u-text u-text-grey-70 u-text-1">Enter Your Payment Info</h2>
+    </div>
+  </div>
+  <div class="u-align-left u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
+    <div class="u-container-layout u-valign-middle u-container-layout-2">
+      <div class="u-expanded-width u-form u-form-1">
+        <form [formGroup]="editor" (ngSubmit)="submitForm()" 
+        class="u-clearfix u-form-spacing-24 u-form-vertical u-inner-form" style="padding: 24px;" name="editor">
+          <input type="hidden" id="siteId" name="siteId" value="745822">
+          <input type="hidden" id="pageId" name="pageId" value="749340">
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Card Number</label>
+            <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+            <input type="text" placeholder="Credit Card #" id="name-3b9a" name="cardNumber" formControlName="cardNumber" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required>
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Expiration Month</label>
+            <!--input type="text" placeholder="Expiration Month" id="name-3b9a" name="expMonth" formControlName="expMonth" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required-->
+            <select name="expMonth" formControlName="expMonth" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required>
+              <option value="">Expiration Month</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Expiration Year</label>
+            <select placeholder="Expiration Year" id="name-3b9a" name="expYear" formControlName="expYear" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required>
+              <option value="">Expiration Year</option>
+              <option value="20">2020</option>
+              <option value="21">2021</option>
+              <option value="22">2022</option>
+              <option value="23">2023</option>
+              <option value="24">2024</option>
+              <option value="25">2025</option>
+              <option value="26">2026</option>
+              <option value="27">2027</option>
+              <option value="28">2028</option>
+              <option value="29">2029</option>
+              <option value="30">2030</option>
+            </select>
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">CVV</label>
+            <input type="text" placeholder="CVV" id="name-3b9a" name="cvv" formControlName="cvv"
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required>
+          </div>
+          <div class="u-form-group u-form-name u-form-group-1">
+            <label for="name-3b9a" class="u-form-control-hidden u-label">Zip Code</label>
+            <input type="text" placeholder="Enter Zip" id="name-3b9a" name="zip" formControlName="zip" 
+            class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-input u-input-rectangle u-input-1" required>
+          </div>
+          <div class="u-align-left u-form-group u-form-submit u-form-group-4">
+            <input type="submit" value="submit" class="u-black u-btn u-btn-submit u-button-style u-hover-grey-60 u-btn-2">
+            <qs-loading-indicator [loading]="loading"></qs-loading-indicator>
+          </div>
+          <qs-alert [duration]="2500" [alert]="error"></qs-alert>
+          <input type="hidden" value="" name="recaptchaResponse">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

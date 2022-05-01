@@ -1,56 +1,38 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { Room } from '../models';
 
-export class RoomsController {
-  static notifier:MockBackendNotifier;
-  static create = (req:HttpRequest<any>) => {
+@Injectable({providedIn:"root"})
+export class RoomsController extends MockBackendDB<Room> {
+  constructor(
+    private handlers:MockBackendHandlers,
+    private notifier:MockBackendNotifier,
+    private logger:MockBackendLogger,
+  ){
+    super();
+    this.name = "rooms";
+    this.ctr = Room;}
+  private getAllRooms = () => this._load();
+  private getRoom = (req:HttpRequest<any>,prop:keyof Room) => this._find(prop,this.handlers.idFromUrl(req.url));
+  create = (req:HttpRequest<any>) => this.handlers.ok(this.add({...req?.body,settings:{lang:"en",app:{}}}));
+  fetchAll = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllRooms());
+  fetchRecent = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllRooms());
+  fetch = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getRoom(req,"id").o);
+  fetchBySlug = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getRoom(req,"title").o);
+  update = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._update(req.body,"id",this.handlers.idFromUrl(req.url)));
+  remove = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._remove("id",this.handlers.idFromUrl(req.url)));
+  query = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const o = new Room({...body,settings:{lang:"en",app:{}},mates:[]});
-    DB.add("qs-rooms",db.rooms,o);
-    return Handlers.ok(o.json());
-  };
-  static fetch = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.rooms.map(p => new Room(p).json()));
-  };
-  static fetchRecent = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.rooms.map(p => p.json()));
-  };
-  static fetchById = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.rooms.find(x => x.id == Handlers.idFromUrl(url))?.json());
-  };
-  static update = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
-    const {o,i} = DB.findone(db.rooms,"id",Handlers.idFromUrl(url));
-    for(const k in body) (o as any)[k] = body[k];
-    DB.save("qs-rooms",db.rooms,o,i);
-    return Handlers.ok(new Room(o).json());
-  };
-  static remove = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      db.rooms = db.rooms.filter(x => x.id !== Handlers.idFromUrl(url));
-      DB.save("qs-rooms",db.rooms);
-      return Handlers.ok();
-    })();
+    const {field,val} = this.handlers.queryFromUrl(url);
+    this.logger.log({field,val})
+    const {o} = this._find(field as keyof Room,val);
+    return this.handlers.ok(o?new Room(o).json():null);
   };
 }

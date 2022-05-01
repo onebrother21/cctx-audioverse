@@ -8,7 +8,7 @@ import { LayoutService } from '../layout.service';
 })
 export class HeaderComponent {
   title = "header";
-  menuOpen?:boolean = false;
-  constructor(private layout:LayoutService){this.layout.headerNav$.subscribe(nav => this.menuOpen = nav.open);}
-  toggleMenu(outside?:boolean){this.layout.toggleMenu(outside);}
+  navOpen?:boolean = false;
+  constructor(private layout:LayoutService){this.layout.headerNav$.subscribe(nav => this.navOpen = nav?.open);}
+  toggleNav(outside?:boolean){outside && !this.navOpen?null:this.layout.toggleMenu(outside);}
 }

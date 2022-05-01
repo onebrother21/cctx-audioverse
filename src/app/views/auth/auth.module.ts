@@ -8,7 +8,6 @@ import { COMPONENTS,AuthRoutingModule } from './auth-routing.module';
   imports: [
     SharedModule,
     AuthRoutingModule,
-    SharedModule,
   ],
   exports:[...COMPONENTS],
   providers:[AuthService],

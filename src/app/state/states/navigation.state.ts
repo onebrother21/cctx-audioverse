@@ -1,5 +1,5 @@
 import { CommonStateWithHistory,initializeCommonStateWithHistory } from "./common.state";
-import { AppRoute } from "../models";
+import { AppRoute } from "../common";
 
 export interface NavigationState extends CommonStateWithHistory<AppRoute> {
   page:string;

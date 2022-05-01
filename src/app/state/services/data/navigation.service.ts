@@ -5,7 +5,7 @@ import { filter,withLatestFrom,tap } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 
 import { AppState } from '../../states';
-import { AppRoute } from '../../models';
+import { AppRoute } from '../../common';
 import { route$ } from '../../selectors';
 
 @Injectable({providedIn:"root"})

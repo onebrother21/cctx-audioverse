@@ -1,1 +1,1 @@
-export * from "./me-settings-editor.component";
+export * from "./me-editor-settings.component";

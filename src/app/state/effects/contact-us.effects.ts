@@ -19,7 +19,7 @@ export class ContactUsEffects {
     mergeMap(() => this.contactUs.fetch().pipe(
       map((msgs:ContactUsMsg[]) => CONTACTUS.load(msgs)),
       catchError(error => of(CONTACTUS.error(error)))))));
-  SendContactUsMsg$:Observable<Action> = createEffect(() => this.actions$.pipe(
+  sendContactUsMsg$:Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(CONTACTUS.send),
     map(o => o.payload),
     mergeMap(o => this.contactUs.send(o).pipe(

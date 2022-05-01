@@ -1,0 +1,28 @@
+<section class="u-align-center u-clearfix u-section-7" id="sec-bc23">
+  <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
+    <h2 class="u-text u-text-default u-text-1">faq</h2>
+    <!--p class="u-text u-text-2">Sample text. Click to select the text box. Click again or double click to start editing the text.</p-->
+    <div class="u-accordion u-expanded-width-xs u-faq u-spacing-20 u-accordion-1">
+      <ng-container *ngFor="let o of faqs">
+        <div class="u-accordion-item">
+          <a class="active u-accordion-link u-border-1 u-border-active-grey-75 u-border-grey-15 u-border-hover-grey-75 
+          u-border-no-left u-border-no-right u-border-no-top u-button-style u-text-black u-accordion-link-1" 
+          id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true"
+          (click)="o.open = !o.open">
+            <span class="u-accordion-link-text">{{o.q}}</span>
+            <span class="u-accordion-link-icon u-icon u-text-black u-icon-1">
+              <qs-icon [item]="{label:'',type:'caret-down'}"></qs-icon>
+            </span>
+          </a>
+          <div class="u-accordion-pane u-container-style u-accordion-pane-1" 
+          id="accordion-6327" aria-labelledby="link-accordion-6327" wfd-invisible="true"
+          [ngClass]="o.open?'u-accordion-active':''">
+            <div class="u-container-layout u-container-layout-1">
+              <div class="fr-view u-clearfix u-rich-text u-text"><p>{{o.a}}</p></div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

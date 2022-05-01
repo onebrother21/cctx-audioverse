@@ -8,3 +8,4 @@ export * from "./contact-us.model";
 export * from "./task.model";
 export * from "./invite.model";
 export * from "./business.model";
+export * from "./payment.model";

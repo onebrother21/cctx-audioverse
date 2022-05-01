@@ -1,19 +1,23 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { TasksController as Tasks } from '../controllers';
-import { MockApiHandlers as Handlers,MockBackendNotifier } from '../utils';
+import { TasksController } from '../controllers';
+import { MockBackendHandlers } from '../providers';
 
-export const TasksRouter = (req:HttpRequest<any>,notifier:MockBackendNotifier) => {
-  Tasks.notifier = notifier;
-  const {url,method,headers,body} = req;
-  try{
-    switch(true){
-      case url.endsWith('/tasks') && method === 'POST':return Tasks.create(req);
-      case url.endsWith('/tasks') && method === 'GET':return Tasks.fetchRecent(req);
-      case url.match(/\/tasks\/\w+$/) && method === 'GET':return Tasks.fetchById(req);
-      case url.match(/\/tasks\/\w+$/) && method === 'PUT':return Tasks.update(req);
-      case url.match(/\/tasks\/\w+$/) && method === 'DELETE':return Tasks.remove(req);
-      default:return Handlers.e["fourohfour"]();
+@Injectable({providedIn:"root"})
+export class TasksRouter {
+  constructor(private handlers:MockBackendHandlers,private tasks:TasksController){}
+  route = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    try{
+      switch(true){
+        case url.endsWith('/tasks') && method === 'POST':return this.tasks.create(req);
+        case url.endsWith('/tasks') && method === 'GET':return this.tasks.fetchRecent(req);
+        case url.match(/\/tasks\/\w+$/) && method === 'GET':return this.tasks.fetch(req);
+        case url.match(/\/tasks\/\w+$/) && method === 'PUT':return this.tasks.update(req);
+        case url.match(/\/tasks\/\w+$/) && method === 'DELETE':return this.tasks.remove(req);
+        default:return this.handlers.e["fourohfour"]();
+      }
     }
-  }
-  catch(e_){return Handlers.e["someerror"](e_);}
-};
+    catch(e_){return this.handlers.e["someerror"](e_);}
+  };
+}

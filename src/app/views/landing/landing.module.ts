@@ -8,7 +8,6 @@ import { LandingService } from './landing.service';
   imports: [
     SharedModule,
     LandingRoutingModule,
-    SharedModule,
   ],
   exports:[...COMPONENTS],
   providers:[LandingService],

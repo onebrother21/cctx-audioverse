@@ -18,14 +18,11 @@ export const metaReducers:MetaReducer<AppState>[] = !env.prod?[storeFreeze]:[];
 @NgModule({
   imports: [
     StoreModule.forRoot(REDUCERS,{metaReducers}),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({serializer:AppRouterStateSerializer}),
     EffectsModule.forRoot(EFFECTS),
     !env.prod?StoreDevtoolsModule.instrument({maxAge:25}):[],
   ],
-  providers: [
-    {provide:UrlSerializer,useClass:AppRouterUrlSerializer},
-    {provide:RouterStateSerializer,useClass:AppRouterStateSerializer},
-  ]
+  providers: [{provide:UrlSerializer,useClass:AppRouterUrlSerializer}]
 })
 
 export class AppStateModule { }

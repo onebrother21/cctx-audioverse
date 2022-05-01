@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AppLocalStorageService } from "./local-storage.service";
-import { environment as env } from "@env/environment.prod";
+import { AppVars } from "@env/vars";
 
 @Injectable({providedIn:"root"})
 
@@ -9,8 +9,8 @@ export class AppWindowService {
   constructor(private local:AppLocalStorageService){}
   refreshVersion(){
     const version = this.local.get("appversion");
-    if(!version || version !== env.version){
-      this.local.set("appversion",env.version);
+    if(!version || version !== AppVars.version){
+      this.local.set("appversion",AppVars.version);
       this.local.set("appuser",{});
       //location.reload();
     }
@@ -21,8 +21,6 @@ export class AppWindowService {
       navigator:{appName,appVersion,doNotTrack,cookieEnabled,plugins,mimeTypes,userAgent,geolocation},
       screen:{width,height,pixelDepth},
     } = window;
-    const location = await new Promise((done,reject) => geolocation.getCurrentPosition(done,reject))
-    .catch(e => console.error(e));
     return {
       appName,
       appVersion,
@@ -34,7 +32,11 @@ export class AppWindowService {
       width,
       height,
       pixelDepth,
-      location
     };
+  };
+  geolocate = async () => {
+    const location = await new Promise((done,reject) => window.navigator.geolocation.getCurrentPosition(done,reject))
+    .catch((e:Error) => console.error(e));
+    return {location};
   }
 }

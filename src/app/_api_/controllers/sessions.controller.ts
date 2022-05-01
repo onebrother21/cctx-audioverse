@@ -1,56 +1,35 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { Session } from '../models';
 
-export class SessionsController {
-  static notifier:MockBackendNotifier;
-  static create = (req:HttpRequest<any>) => {
+@Injectable({providedIn:"root"})
+export class SessionsController  extends MockBackendDB<Session> {
+  constructor(
+    private handlers:MockBackendHandlers,
+    private notifier:MockBackendNotifier,
+    private logger:MockBackendLogger,
+  ){super();this.name = "sessions";this.ctr = Session;}
+  private getAllSessions = () => this._load();
+  private getSession = (req:HttpRequest<any>,prop:keyof Session) => this._find(prop,this.handlers.idFromUrl(req.url));
+  create = (req:HttpRequest<any>) => this.handlers.ok(this.add({...req?.body,settings:{lang:"en",app:{}}}));
+  fetchAll = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllSessions());
+  fetchRecent = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllSessions());
+  fetch = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getSession(req,"id").o);
+  fetchBySlug = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getSession(req,"title").o);
+  update = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._update(req.body,"id",this.handlers.idFromUrl(req.url)));
+  remove = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._remove("id",this.handlers.idFromUrl(req.url)));
+  query = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const o = new Session({...body,settings:{lang:"en",app:{}},mates:[]});
-    DB.add("qs-sessions",db.sessions,o);
-    return Handlers.ok(o.json());
-  };
-  static fetch = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.sessions.map(p => new Session(p).json()));
-  };
-  static fetchRecent = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.sessions.map(p => p.json()));
-  };
-  static fetchById = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.sessions.find(x => x.id == Handlers.idFromUrl(url))?.json());
-  };
-  static update = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
-    const {o,i} = DB.findone(db.sessions,"id",Handlers.idFromUrl(url));
-    for(const k in body) (o as any)[k] = body[k];
-    DB.save("qs-sessions",db.sessions,o,i);
-    return Handlers.ok(new Session(o).json());
-  };
-  static remove = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      db.sessions = db.sessions.filter(x => x.id !== Handlers.idFromUrl(url));
-      DB.save("qs-sessions",db.sessions);
-      return Handlers.ok();
-    })();
+    const {field,val} = this.handlers.queryFromUrl(url);
+    this.logger.log({field,val})
+    const {o} = this._find(field as keyof Session,val);
+    return this.handlers.ok(o?new Session(o).json():null);
   };
 }

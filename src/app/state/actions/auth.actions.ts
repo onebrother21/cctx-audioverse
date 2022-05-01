@@ -1,11 +1,11 @@
 import { createAction } from "@ngrx/store";
 import { AppError } from "../common";
-import { User, UserJson } from '../models';
+import { User,UserJson } from '../models';
 
 export const AuthenticationActions = {
   load:createAction("@qs/auth/load",(o?:Pick<UserJson,"token"|"username">) => ({payload:o})),
   error:createAction("@qs/auth/error",(o:Error|AppError) => ({payload:o})),
-  lookup:createAction("@qs/auth/lookup",(o:Partial<User>) => ({payload:o})),
+  lookup:createAction("@qs/auth/lookup",(o:Partial<UserJson>) => ({payload:o})),
   exists:createAction("@qs/auth/exists",(o:Record<string,boolean>) => ({payload:o})),
   signup:createAction("@qs/auth/signup",(o:Pick<User,"email"|"phn">) => ({payload:o})),
   signin:createAction("@qs/auth/signin",(o:Pick<User,"username">) => ({payload:o})),

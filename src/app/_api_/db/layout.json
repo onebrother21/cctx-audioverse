@@ -1,0 +1,103 @@
+[
+  {
+    "id":"qs-123456-layout-001",
+    "created":"04-11-2022",
+    "header":{"open":true},
+    "footer":{"open":true},
+    "main":{"open":true},
+    "nav":{"open":false},
+    "content":{
+      "text":{
+        "banner":"Real people. Real sounds. Realtime.",
+        "copyright":"&copy; 2020 Houston Chess League",
+        "aboutUs":"This is about us."
+      },
+      "menus":{
+        "headerNav":[
+          {"link":"/secur01/signup","icon":"fa fa-user","label":"Sign Up"},
+          {"link":"/secur01/signin","icon":"fa fa-user","label":"Sign In"}
+        ],
+        "headerNavAuth":[
+          {"link":"/new","icon":"fa fa-plus","label":"Create New"},
+          {"link":"/recent","icon":"fa fa-folder","label":"Recent Projects"},
+          {"link":"/me/hm","icon":"fa fa-users","label":"User Community"},
+          {"link":"/me/acct","icon":"fa fa-user-circle","label":"Account & Settings"},
+          {"link":"/services","icon":"fa fa-question","label":"Help & Services"},
+          {"link":"/secur01/signout","icon":"fa fa-arrow-circle-right","label":"Signout"}
+        ],
+        "userDash":[
+          {
+            "label":"Create New",
+            "text":"Types: Session, Room, Forum, Survey",
+            "link":"/sessions/new",
+            "type":"fa",
+            "class":"fa fa-plus"
+          },{
+            "label":"Recent Files",
+            "text":"Creamy Crack,\n Project Anywhere,\n 8 more",
+            "link":"/sessions",
+            "type":"stack"
+          },{
+            "label":"Me Community",
+            "text":"See what's going on (eyeballs)...",
+            "link":"/me/hm2",
+            "type":"users"
+          },{
+            "label":"Account and Settings",
+            "text":"View or update my account details.",
+            "link":"/me/acct",
+            "type":"lock"
+          },{
+            "label":"Help & Support",
+            "text":"We're here to help",
+            "link":"/services",
+            "type":"fa",
+            "class":"fa fa-question"
+          },{
+            "label":"Make A Payment",
+            "link":"/payments",
+            "type":"fa",
+            "class":"fa fa-question"
+          }
+        ],
+        "servicesDash":[
+          {
+            "label":"FAQ",
+            "text":"Got a question? Check here first.",
+            "link":"/services/faq",
+            "type":"fa",
+            "class":"fa fa-question-circle"
+          },{
+            "label":"Live Chat",
+            "text":"Chat with our support team now.",
+            "link":"/services/chat",
+            "type":"fa",
+            "class":"fa fa-comment-dots"
+          },{
+            "label":"Contact Us",
+            "text":"Our customer support is here for you.",
+            "link":"/services/contact",
+            "type":"fa",
+            "class":"fa fa-envelope"
+          }
+        ]
+      },
+      "ads":[
+        {
+          "header":"I am an ad, please accidentally click me.",
+          "content":"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
+        },{
+          "header":"I am an ad, please accidentally click me.",
+          "content":"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
+        },{
+          "header":"I am an ad, please accidentally click me.",
+          "content":"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
+        },{
+          "header":"I am an ad, please accidentally click me.",
+          "content":"Fames ac turpis egestas integer. Viverra orci sagittis eu volutpat odio. "
+        }
+      ]
+    },
+    "pagination":{"current":0,"total":0}
+  }
+]

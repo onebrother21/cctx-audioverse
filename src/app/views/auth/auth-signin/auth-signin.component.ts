@@ -36,7 +36,6 @@ export class AuthSignInComponent {
     this.ngUnsubscribe.complete();
   }
   get f(){return this.editor.controls;}
-  getErr(field:string,errname?:string){return this.f[field].errors?.[errname||field];}
   reset(){
     this.editor.reset({
       username:"",
@@ -71,7 +70,8 @@ export class AuthSignInComponent {
       }
       this.hasErrors();
     }
-  }
+  }                                                       
+  getErr(field:string,errname?:string){return this.f[field].errors?.[errname||field];}
   hasErrors(){
     this.error = null;
     if(this.editor.invalid) switch(true){

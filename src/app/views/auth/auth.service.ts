@@ -3,7 +3,7 @@ import { AppService,authErr$,authExists$ } from "@state";
 import {
   AuthenticationActions as AUTH,
   authLoading$,
-  meState$,UserJson,
+  me$,UserJson,
 } from "@state";
 import {
   debounceTime,
@@ -19,16 +19,16 @@ export class AuthService {
   me$:Observable<UserJson> = new Observable();
   userExists$:Observable<Record<string,boolean>|undefined> = new Observable();
   constructor(private app:AppService){
-    this.loading$ = this.app.select(authLoading$);
-    this.error$ = this.app.select(authErr$);
-    this.me$ = this.app.select(meState$) as Observable<UserJson>;
-    this.userExists$ = this.app.select(authExists$);
+    this.loading$ = this.app.load(authLoading$);
+    this.error$ = this.app.load(authErr$);
+    this.me$ = this.app.load(me$) as Observable<UserJson>;
+    this.userExists$ = this.app.load(authExists$);
   }
   queryForExistingUser(prop:string,source:Observable<any>){
     source.pipe(
       debounceTime(400),
       distinctUntilChanged(),
-      filter(v => typeof v == "string"))
+      filter(v => !!v && typeof v == "string"))
     .subscribe(v => this.app.do(AUTH.lookup({[prop]:v})));
   }
   send(action:string,o:any){

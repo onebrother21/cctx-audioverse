@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './me-editor.component.html',
   styleUrls: ['./me-editor.component.scss'],
 })
-export class MeEdtiorComponent {
+export class MeEditorComponent {
   title = "me-edtior";
 }

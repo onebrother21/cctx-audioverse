@@ -1,56 +1,36 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { CommonUtils as Utils } from '../common';
 import {
-  MockApiDBHelpers as DB,
-  MockApiHandlers as Handlers,
-  MockApiLogger as Logger,
+  MockBackendDB,
+  MockBackendHandlers,
+  MockBackendLogger,
   MockBackendNotifier
-} from '../utils';
-import { db } from '../db';
+} from '../providers';
 import { ContactUsMsg } from '../models';
 
-export class ContactUsController {
-  static notifier:MockBackendNotifier;
-  static create = (req:HttpRequest<any>) => {
+
+@Injectable({providedIn:"root"})
+export class ContactUsController  extends MockBackendDB<ContactUsMsg> {
+  constructor(
+    private handlers:MockBackendHandlers,
+    private notifier:MockBackendNotifier,
+    private logger:MockBackendLogger,
+  ){super();this.name = "contactUs";this.ctr = ContactUsMsg;}
+  private getAllContactUsMsgs = () => this._load();
+  private getContactUsMsg = (req:HttpRequest<any>,prop:keyof ContactUsMsg) => this._find(prop,this.handlers.idFromUrl(req.url));
+  create = (req:HttpRequest<any>) => this.handlers.ok(this.add({...req?.body,settings:{lang:"en",app:{}}}));
+  fetchAll = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllContactUsMsgs());
+  fetchRecent = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getAllContactUsMsgs());
+  fetch = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getContactUsMsg(req,"id").o);
+  fetchBySubject = (req:HttpRequest<any>) => this.handlers.authGuard(req,this.getContactUsMsg(req,"subject").o);
+  update = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._update(req.body,"id",this.handlers.idFromUrl(req.url)));
+  remove = (req:HttpRequest<any>) => this.handlers.authGuard(req,this._remove("id",this.handlers.idFromUrl(req.url)));
+  query = (req:HttpRequest<any>) => {
     const {url,method,headers,body} = req;
-    const o = new ContactUsMsg({...body,settings:{lang:"en",app:{}},mates:[]});
-    DB.add("qs-contact-us",db.contactUs,o);
-    return Handlers.ok(o.json());
-  };
-  static fetch = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.contactUs.map(p => new ContactUsMsg(p).json()));
-  };
-  static fetchRecent = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.contactUs.map(p => p.json()));
-  };
-  static fetchById = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    Handlers.ok(db.contactUs.find(x => x.id == Handlers.idFromUrl(url))?.json());
-  };
-  static update = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    if(!Handlers.isLoggedIn(headers)) return Handlers.e["unauthorized"]();
-    const {o,i} = DB.findone(db.contactUs,"id",Handlers.idFromUrl(url));
-    for(const k in body) (o as any)[k] = body[k];
-    DB.save("qs-contact-us",db.contactUs,o,i);
-    return Handlers.ok(new ContactUsMsg(o).json());
-  };
-  static remove = (req:HttpRequest<any>) => {
-    const {url,method,headers,body} = req;
-    return !Handlers.isLoggedIn(headers)?
-    Handlers.e["unauthorized"]():
-    (() => {
-      db.contactUs = db.contactUs.filter(x => x.id !== Handlers.idFromUrl(url));
-      DB.save("qs-contact-us",db.contactUs);
-      return Handlers.ok();
-    })();
+    const {field,val} = this.handlers.queryFromUrl(url);
+    this.logger.log({field,val})
+    const {o} = this._find(field as keyof ContactUsMsg,val);
+    return this.handlers.ok(o?new ContactUsMsg(o).json():null);
   };
 }

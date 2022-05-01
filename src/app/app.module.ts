@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { SharedModule } from './shared';
 import { LayoutModule } from "./layout";
 import { AppStateModule } from './state';
@@ -8,16 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { LandingModule } from './views/landing';
 import { AppComponent } from './app.component';
 
-import { MockBackendProvider } from './_api_';
-
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '@env/environment.prod';
+import { MockBackendModule } from './_api_';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    MockBackendModule,
     BrowserModule,
     SharedModule,
     AppRoutingModule,
@@ -28,7 +27,6 @@ import { environment } from '@env/environment.prod';
     AngularFireStorageModule,
     LandingModule,
   ],
-  providers: [MockBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

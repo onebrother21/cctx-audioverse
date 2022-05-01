@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppService } from '../app/app.service';
+import { AppService } from '../app';
 import { User,UserJson } from '../../models';
 import { of } from 'rxjs';
 
@@ -23,24 +23,9 @@ export class AuthenticationService {
   logout(o:{username?:string;}){return this.app.http.post(this.ext+'/logout',o);}
   forgotName(o:any){return this.app.http.post<UserJson>(this.ext+"/forgot",o);}
   forgotPin(o:{email:string}){return this.app.http.post<UserJson>(this.ext+"/forgot",o);}
-  navigateUserentication(action:string){
-    const navigator = () => {
-      switch(true){
-        case /signup/.test(action):return "/secur01/verify";
-        case /verify/.test(action):return "/secur01/register";
-        case /register-ext/.test(action):return "/secur01/update-pin";
-        case /register/.test(action):return "/secur01/register-ext";
-        case /update-pin/.test(action):return "/me";
-        case /signin/.test(action):return "/secur01/login";
-        case /login/.test(action):return "/me";
-        default:return "/";
-      }
-    };
-    return of(navigator());
-  }
   getUserStatus(o:Partial<UserJson>){
     const sessionTime = 1000 * 60 * 3;
-    const activity = o.activity?o.activity.time:new Date();
+    const activity = o.activity && o.activity.length?o.activity[o.activity.length-1].time:new Date();
     const idleTime = activity.getTime() - Date.now();
     return o.username && o.token && sessionTime >= idleTime?"authok":
     o.username && o.token?"signedin":

@@ -1,5 +1,5 @@
 import { RouterState } from './router.state';
-import { LayoutState } from './layout.state';
+import { LayoutsState } from './layouts.state';
 import { NavigationState } from './navigation.state';
 import { AuthenticationState } from './auth.state';
 import { MeState } from './me.state';
@@ -10,10 +10,11 @@ import { ChatMessagesState } from './chat-msgs.state';
 import { ContactUsState } from './contact-us.state';
 import { TasksState } from "./tasks.state";
 import { BusinessesState } from './businesses.state';
+import { PaymentsState } from './payments.state';
 
 export interface AppState {
   router:RouterState;
-  layout:LayoutState;
+  layouts:LayoutsState;
   navigation:NavigationState;
   auth:AuthenticationState;
   me:MeState;
@@ -24,11 +25,12 @@ export interface AppState {
   contactUs:ContactUsState;
   tasks:TasksState;
   businesses:BusinessesState;
+  payments:PaymentsState;
 }
 
 export * from "./common.state";
 export * from "./router.state";
-export * from "./layout.state";
+export * from "./layouts.state";
 export * from "./navigation.state";
 export * from "./auth.state";
 export * from "./me.state";
@@ -39,4 +41,5 @@ export * from "./chat-msgs.state";
 export * from "./contact-us.state";
 export * from "./tasks.state";
 export * from "./businesses.state";
+export * from "./payments.state";
 //add some stat type, exp pts for clients taking classes, show on leaderboard

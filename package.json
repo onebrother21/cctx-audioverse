@@ -7,8 +7,9 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
-    "start-dev": "ng serve --host 0.0.0.0",
+    "start": "npm run get-vars && node server.js",
+    "start-dev": "npm run get-vars && ng serve --host 0.0.0.0",
+    "get-vars":"node vars.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

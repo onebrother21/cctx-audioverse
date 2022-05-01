@@ -8,7 +8,6 @@ import { MeService } from './me.service';
   imports: [
     SharedModule,
     MeRoutingModule,
-    SharedModule,
   ],
   exports:[...COMPONENTS],
   providers:[MeService],

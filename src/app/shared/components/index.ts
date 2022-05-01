@@ -13,6 +13,7 @@ import { UploadsComponent } from './uploads';
 import { PreviewListComponent } from './preview-list';
 import { PreviewRoomComponent } from './preview-room';
 import { AlertComponent } from './alert';
+import { AlertWActionsComponent } from './alert-w-actions';
 
 export const COMPONENTS = [
   IconComponent,
@@ -29,4 +30,5 @@ export const COMPONENTS = [
   UploadListComponent,
   UploadsComponent,
   AlertComponent,
+  AlertWActionsComponent,
 ];

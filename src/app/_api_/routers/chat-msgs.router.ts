@@ -1,19 +1,23 @@
+import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { ChatMessagesController as ChatMsgs } from '../controllers';
-import { MockApiHandlers as Handlers,MockBackendNotifier } from '../utils';
+import { ChatMessagesController } from '../controllers';
+import { MockBackendHandlers } from '../providers';
 
-export const ChatMessagesRouter = (req:HttpRequest<any>,notifier:MockBackendNotifier) => {
-  ChatMsgs.notifier = notifier;
-  const {url,method,headers,body} = req;
-  try{
-    switch(true){
-      case url.endsWith('/chat-msgs') && method === 'POST':return ChatMsgs.create(req);
-      case url.endsWith('/chat-msgs') && method === 'GET':return ChatMsgs.fetchRecent(req);
-      case url.match(/\/chat-msgs\/\w+$/) && method === 'GET':return ChatMsgs.fetchById(req);
-      case url.match(/\/chat-msgs\/\w+$/) && method === 'PUT':return ChatMsgs.update(req);
-      case url.match(/\/chat-msgs\/\w+$/) && method === 'DELETE':return ChatMsgs.remove(req);
-      default:return Handlers.e["fourohfour"]();
+@Injectable({providedIn:"root"})
+export class ChatMessagesRouter {
+  constructor(private handlers:MockBackendHandlers,private msgs:ChatMessagesController){}
+  route = (req:HttpRequest<any>) => {
+    const {url,method,headers,body} = req;
+    try{
+      switch(true){
+        case url.endsWith('/chat-msgs') && method === 'POST':return this.msgs.create(req);
+        case url.endsWith('/chat-msgs') && method === 'GET':return this.msgs.fetchRecent(req);
+        case url.match(/\/chat-msgs\/\w+$/) && method === 'GET':return this.msgs.fetch(req);
+        case url.match(/\/chat-msgs\/\w+$/) && method === 'PUT':return this.msgs.update(req);
+        case url.match(/\/chat-msgs\/\w+$/) && method === 'DELETE':return this.msgs.remove(req);
+        default:return this.handlers.e["fourohfour"]();
+      }
     }
-  }
-  catch(e_){return Handlers.e["someerror"](e_);}
-};
+    catch(e_){return this.handlers.e["someerror"](e_);}
+  };
+}
