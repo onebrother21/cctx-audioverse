@@ -1,6 +1,6 @@
 {
   "name": "@onebro/cctx-audioverse",
-  "version": "1.3.19",
+  "version": "1.4.0",
   "engines": {
     "node": "16.14.0",
     "npm": "8.3.1"
@@ -9,7 +9,7 @@
     "ng": "ng",
     "start": "npm run get-vars && node server.js",
     "start-dev": "npm run get-vars && ng serve --host 0.0.0.0",
-    "get-vars":"node vars.js",
+    "get-vars": "node vars.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
